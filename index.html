@@ -2,800 +2,460 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>شکارچی واژه‌ها - نسخه ۲</title>
+<title>شکارچی واژه‌ها - نسخه ۲.۱</title>
 
 <style>
 
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-
-margin:0;
-
-font-family:
-Tahoma,
-Arial,
-sans-serif;
-
-background:
-linear-gradient(
-135deg,
-#dbeafe,
-#fef3c7
-);
-
-min-height:100vh;
-
-color:#1e293b;
-
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:linear-gradient(135deg,#dbeafe,#fef3c7);
+    min-height:100vh;
+    color:#1e293b;
 }
 
 .container{
-
-width:95%;
-
-max-width:1000px;
-
-margin:20px auto;
-
-background:white;
-
-border-radius:25px;
-
-padding:25px;
-
-box-shadow:
-0 10px 35px
-rgba(0,0,0,.15);
-
+    width:95%;
+    max-width:1000px;
+    margin:20px auto;
+    background:white;
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
 }
 
 h1{
-
-text-align:center;
-
-color:#2563eb;
-
-margin-bottom:5px;
-
-font-size:32px;
-
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:5px;
+    font-size:32px;
 }
 
 .subtitle{
-
-text-align:center;
-
-color:#64748b;
-
-margin-bottom:25px;
-
+    text-align:center;
+    color:#64748b;
+    margin-bottom:25px;
 }
 
 .stats{
-
-display:flex;
-
-justify-content:center;
-
-gap:12px;
-
-flex-wrap:wrap;
-
-margin-bottom:20px;
-
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
 }
 
 .stat{
-
-background:#eff6ff;
-
-border-radius:15px;
-
-padding:12px 25px;
-
-min-width:125px;
-
-text-align:center;
-
-font-weight:bold;
-
+    background:#eff6ff;
+    border-radius:15px;
+    padding:12px 25px;
+    min-width:125px;
+    text-align:center;
+    font-weight:bold;
 }
 
 .stat span{
-
-display:block;
-
-font-size:25px;
-
-color:#2563eb;
-
-margin-top:5px;
-
+    display:block;
+    font-size:25px;
+    color:#2563eb;
+    margin-top:5px;
 }
 
 .game{
-
-background:#f8fafc;
-
-border-radius:20px;
-
-padding:25px;
-
-text-align:center;
-
+    background:#f8fafc;
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
 }
 
 .level{
-
-font-size:18px;
-
-font-weight:bold;
-
-margin-bottom:15px;
-
-color:#7c3aed;
-
-}
-
-.listen{
-
-border:none;
-
-border-radius:18px;
-
-padding:16px 28px;
-
-background:#2563eb;
-
-color:white;
-
-font-size:20px;
-
-font-family:inherit;
-
-cursor:pointer;
-
-box-shadow:
-0 4px 0 #1d4ed8;
-
-margin-bottom:15px;
-
-}
-
-.listen:hover{
-
-transform:translateY(-2px);
-
-}
-
-.repeat{
-
-font-size:14px;
-
-color:#64748b;
-
-margin-bottom:15px;
-
-}
-
-.hint{
-
-background:#fef9c3;
-
-color:#854d0e;
-
-padding:12px;
-
-border-radius:12px;
-
-margin:10px auto 20px;
-
-max-width:650px;
-
-}
-
-.answer{
-
-min-height:70px;
-
-background:white;
-
-border:
-3px dashed #93c5fd;
-
-border-radius:15px;
-
-padding:10px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-gap:7px;
-
-flex-wrap:wrap;
-
-max-width:700px;
-
-margin:20px auto;
-
-}
-
-.answer-letter{
-
-width:52px;
-
-height:52px;
-
-border-radius:12px;
-
-background:#2563eb;
-
-color:white;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:27px;
-
-font-weight:bold;
-
-}
-
-.letters-title{
-
-font-size:19px;
-
-font-weight:bold;
-
-margin:20px 0 12px;
-
-}
-
-.letters{
-
-display:flex;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-max-width:750px;
-
-margin:auto;
-
-}
-
-.letter{
-
-width:58px;
-
-height:58px;
-
-border:none;
-
-border-radius:14px;
-
-background:#f59e0b;
-
-color:white;
-
-font-size:26px;
-
-font-weight:bold;
-
-font-family:inherit;
-
-cursor:pointer;
-
-box-shadow:
-0 4px 0 #d97706;
-
-transition:.15s;
-
-}
-
-.letter:hover{
-
-transform:translateY(-3px);
-
-}
-
-.letter.used{
-
-opacity:.3;
-
-cursor:not-allowed;
-
-}
-
-.controls{
-
-display:flex;
-
-justify-content:center;
-
-gap:10px;
-
-flex-wrap:wrap;
-
-margin-top:25px;
-
-}
-
-button.control{
-
-border:none;
-
-border-radius:12px;
-
-padding:13px 22px;
-
-font-size:17px;
-
-font-family:inherit;
-
-color:white;
-
-cursor:pointer;
-
-}
-
-.check{
-
-background:#16a34a;
-
-}
-
-.clear{
-
-background:#ef4444;
-
-}
-
-.next{
-
-background:#7c3aed;
-
-}
-
-.message{
-
-min-height:45px;
-
-margin-top:20px;
-
-font-size:20px;
-
-font-weight:bold;
-
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:15px;
+    color:#7c3aed;
 }
 
 .hearts{
+    font-size:25px;
+    letter-spacing:5px;
+    margin:10px;
+}
 
-font-size:25px;
+.listen{
+    border:none;
+    border-radius:18px;
+    padding:17px 30px;
+    background:#2563eb;
+    color:white;
+    font-size:20px;
+    font-family:inherit;
+    cursor:pointer;
+    box-shadow:0 4px 0 #1d4ed8;
+    margin:8px;
+}
 
-letter-spacing:5px;
+.listen:hover{
+    transform:translateY(-2px);
+}
 
-margin:10px;
+.listen:active{
+    transform:translateY(2px);
+    box-shadow:0 1px 0 #1d4ed8;
+}
 
+.repeat{
+    font-size:14px;
+    color:#64748b;
+    margin-bottom:15px;
+}
+
+.hint{
+    background:#fef9c3;
+    color:#854d0e;
+    padding:12px;
+    border-radius:12px;
+    margin:10px auto 20px;
+    max-width:650px;
 }
 
 .progress{
-
-height:12px;
-
-background:#e2e8f0;
-
-border-radius:10px;
-
-overflow:hidden;
-
-margin:20px auto;
-
-max-width:650px;
-
+    height:12px;
+    background:#e2e8f0;
+    border-radius:10px;
+    overflow:hidden;
+    margin:20px auto;
+    max-width:650px;
 }
 
 .progress-bar{
+    height:100%;
+    width:0%;
+    background:#22c55e;
+    transition:.4s;
+}
 
-height:100%;
+.answer{
+    min-height:75px;
+    background:white;
+    border:3px dashed #93c5fd;
+    border-radius:15px;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+    max-width:700px;
+    margin:20px auto;
+}
 
-width:0%;
+.empty-answer{
+    color:#94a3b8;
+    font-size:16px;
+}
 
-background:#22c55e;
+.answer-letter{
+    width:52px;
+    height:52px;
+    border-radius:12px;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:27px;
+    font-weight:bold;
+}
 
-transition:.4s;
+.letters-title{
+    font-size:19px;
+    font-weight:bold;
+    margin:20px 0 12px;
+}
 
+.letters{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    max-width:750px;
+    margin:auto;
+}
+
+.letter{
+    width:58px;
+    height:58px;
+    border:none;
+    border-radius:14px;
+    background:#f59e0b;
+    color:white;
+    font-size:26px;
+    font-weight:bold;
+    font-family:inherit;
+    cursor:pointer;
+    box-shadow:0 4px 0 #d97706;
+    transition:.15s;
+}
+
+.letter:hover{
+    transform:translateY(-3px);
+}
+
+.letter.used{
+    opacity:.3;
+    cursor:not-allowed;
+}
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.control{
+    border:none;
+    border-radius:12px;
+    padding:13px 22px;
+    font-size:17px;
+    font-family:inherit;
+    color:white;
+    cursor:pointer;
+}
+
+.check{
+    background:#16a34a;
+}
+
+.clear{
+    background:#ef4444;
+}
+
+.next{
+    background:#7c3aed;
+}
+
+.message{
+    min-height:45px;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .report{
-
-display:none;
-
-background:#eff6ff;
-
-border-radius:20px;
-
-padding:25px;
-
-margin-top:20px;
-
-text-align:center;
-
+    display:none;
+    background:#eff6ff;
+    border-radius:20px;
+    padding:25px;
+    margin-top:20px;
+    text-align:center;
 }
 
 .report h2{
-
-color:#2563eb;
-
+    color:#2563eb;
 }
 
 .report-number{
-
-font-size:35px;
-
-font-weight:bold;
-
-color:#16a34a;
-
-margin:10px;
-
+    font-size:35px;
+    font-weight:bold;
+    color:#16a34a;
+    margin:10px;
 }
 
 .restart{
-
-border:none;
-
-background:#2563eb;
-
-color:white;
-
-padding:14px 25px;
-
-border-radius:12px;
-
-font-family:inherit;
-
-font-size:17px;
-
-cursor:pointer;
-
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:14px 25px;
+    border-radius:12px;
+    font-family:inherit;
+    font-size:17px;
+    cursor:pointer;
 }
 
 .footer{
-
-text-align:center;
-
-color:#64748b;
-
-font-size:14px;
-
-margin-top:20px;
-
+    text-align:center;
+    color:#64748b;
+    font-size:14px;
+    margin-top:20px;
 }
 
 @media(max-width:600px){
 
-.container{
+    .container{
+        padding:15px;
+    }
 
-padding:15px;
+    h1{
+        font-size:26px;
+    }
 
-}
+    .letter{
+        width:48px;
+        height:48px;
+        font-size:23px;
+    }
 
-h1{
+    .answer-letter{
+        width:43px;
+        height:43px;
+        font-size:22px;
+    }
 
-font-size:26px;
-
-}
-
-.letter{
-
-width:48px;
-
-height:48px;
-
-font-size:23px;
-
-}
-
-.answer-letter{
-
-width:43px;
-
-height:43px;
-
-font-size:22px;
-
-}
-
-.stat{
-
-min-width:105px;
-
-padding:10px;
-
-}
-
+    .stat{
+        min-width:105px;
+        padding:10px;
+    }
 }
 
 </style>
 
 </head>
 
-
 <body>
 
-
 <div class="container">
-
 
 <h1>🎯 شکارچی واژه‌ها</h1>
 
 <div class="subtitle">
-
-نسخه ۲ | بازی تقویت املا و شنیداری
-
+نسخه ۲.۱ | تمرین شنیداری و املا
 </div>
-
 
 <div class="stats">
 
-
 <div class="stat">
-
 ⭐ امتیاز
-
 <span id="score">0</span>
-
 </div>
 
-
 <div class="stat">
-
 🏆 رکورد
-
 <span id="record">0</span>
-
 </div>
-
 
 <div class="stat">
-
 📚 کلمه
-
 <span id="wordNumber">1</span>
+</div>
 
 </div>
 
+<div class="game" id="gameArea">
 
-</div>
-
-
-<div class="game"
-id="gameArea">
-
-
-<div class="level"
-id="level">
-
+<div class="level" id="level">
 سطح ۱ | آسان
-
 </div>
 
-
-<div class="hearts"
-id="hearts">
-
+<div class="hearts" id="hearts">
 ❤️❤️❤️
-
 </div>
 
-
-<button
-class="listen"
-onclick="speakWord()">
-
-🔊 پخش کلمه
-
+<button class="listen" onclick="speakWord()">
+🔊 گوش کن
 </button>
 
-
 <div class="repeat">
-
-برای شنیدن دوباره روی دکمه بالا بزن.
-
+برای شنیدن دوباره، دوباره روی دکمه بزن.
 </div>
 
-
-<div
-class="hint"
-id="hint">
-
+<div class="hint" id="hint">
 💡 راهنما
-
 </div>
 
-
-<div
-class="progress">
-
-<div
-class="progress-bar"
-id="progressBar">
-
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
 </div>
 
+<div class="answer" id="answer">
+<div class="empty-answer">
+حروف انتخاب‌شده اینجا نمایش داده می‌شوند
 </div>
-
-
-<div
-class="answer"
-id="answer">
-
 </div>
-
 
 <div class="letters-title">
-
-🧩 حروف را به ترتیب انتخاب کن
-
+🧩 حروف کلمه را به ترتیب انتخاب کن
 </div>
 
-
-<div
-class="letters"
-id="letters">
-
+<div class="letters" id="letters">
 </div>
-
 
 <div class="controls">
 
-
-<button
-class="control clear"
-onclick="clearAnswer()">
-
+<button class="control clear" onclick="clearAnswer()">
 پاک کردن
-
 </button>
 
-
-<button
-class="control check"
-onclick="checkAnswer()">
-
+<button class="control check" onclick="checkAnswer()">
 بررسی پاسخ ✓
-
 </button>
 
-
-<button
-class="control next"
-onclick="nextWord()">
-
+<button class="control next" onclick="nextWord()">
 کلمه بعدی ➜
-
 </button>
 
+</div>
+
+<div class="message" id="message"></div>
 
 </div>
 
-
-<div
-class="message"
-id="message">
-
-</div>
-
-
-</div>
-
-
-<div
-class="report"
-id="report">
-
+<div class="report" id="report">
 
 <h2>🎉 مرحله تمام شد!</h2>
 
+<div>امتیاز شما</div>
+
+<div class="report-number" id="finalScore">
+0
+</div>
 
 <div>
-
-امتیاز شما
-
+تعداد پاسخ‌های درست:
+<strong id="finalCorrect">0</strong>
 </div>
-
-
-<div
-class="report-number"
-id="finalScore">
-
-0
-
-</div>
-
 
 <div>
-
-پاسخ‌های درست:
-
-<strong id="finalCorrect">
-
-0
-
-</strong>
-
+درصد موفقیت:
+<strong id="finalPercent">0%</strong>
 </div>
-
 
 <div>
-
-رکورد شما:
-
-<strong id="finalRecord">
-
-0
-
-</strong>
-
+🏆 رکورد:
+<strong id="finalRecord">0</strong>
 </div>
-
 
 <br>
 
-
-<button
-class="restart"
-onclick="restartGame()">
-
+<button class="restart" onclick="restartGame()">
 🔄 شروع دوباره
-
 </button>
 
-
 </div>
-
 
 <div class="footer">
-
 🌟 گوش کن، فکر کن، بساز، یاد بگیر!
-
 </div>
 
-
 </div>
-
 
 <script>
-
 
 /* =========================
    بانک کلمات
 ========================= */
 
-
 const levels = [
 
 {
-
 name:"سطح ۱ | آسان",
 
 words:[
@@ -826,7 +486,6 @@ hint:"کسی که با او رابطه خوبی داریم."
 }
 
 ]
-
 },
 
 {
@@ -861,7 +520,6 @@ hint:"در روز به ما نور و گرما می‌دهد."
 }
 
 ]
-
 },
 
 {
@@ -896,7 +554,6 @@ hint:"وظیفه‌ای که انجام آن بر عهده ماست."
 }
 
 ]
-
 }
 
 ];
@@ -906,96 +563,195 @@ hint:"وظیفه‌ای که انجام آن بر عهده ماست."
    متغیرهای بازی
 ========================= */
 
-
 let levelIndex = 0;
-
 let wordIndex = 0;
-
 let score = 0;
-
 let correct = 0;
-
 let lives = 3;
-
 let selected = [];
-
 let answered = false;
 
 let totalWords =
 levels.reduce(
-(sum,level)=>sum+level.words.length,
+(sum,level) => sum + level.words.length,
 0
 );
 
-let currentLevel =
-levels[levelIndex];
-
-let currentWord =
-currentLevel.words[wordIndex];
-
+let currentLevel;
+let currentWord;
 
 let record =
 parseInt(
 localStorage.getItem("amlaRecord")
 ) || 0;
 
-
-document.getElementById(
-"record"
-).innerText = record;
+document.getElementById("record").innerText = record;
 
 
 /* =========================
-   شروع بازی
+   آماده‌سازی صدا
 ========================= */
 
+let voices = [];
+
+function loadVoices(){
+
+    if(!("speechSynthesis" in window)){
+        return;
+    }
+
+    voices =
+    window.speechSynthesis.getVoices();
+}
+
+loadVoices();
+
+if("speechSynthesis" in window){
+
+    window.speechSynthesis.onvoiceschanged =
+    loadVoices;
+
+}
+
+
+/* =========================
+   پیدا کردن صدای فارسی
+========================= */
+
+function getPersianVoice(){
+
+    if(!voices || voices.length === 0){
+        voices =
+        window.speechSynthesis.getVoices();
+    }
+
+    let voice =
+    voices.find(
+        v =>
+        v.lang &&
+        v.lang.toLowerCase() === "fa-ir"
+    );
+
+    if(voice){
+        return voice;
+    }
+
+    voice =
+    voices.find(
+        v =>
+        v.lang &&
+        v.lang.toLowerCase().startsWith("fa")
+    );
+
+    return voice || null;
+}
+
+
+/* =========================
+   پخش کلمه
+========================= */
+
+function speakWord(){
+
+    if(!("speechSynthesis" in window)){
+
+        showMessage(
+            "⚠️ مرورگر شما از صدای مصنوعی پشتیبانی نمی‌کند.",
+            "#dc2626"
+        );
+
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const text =
+    currentWord.word;
+
+    const utterance =
+    new SpeechSynthesisUtterance(text);
+
+    const persianVoice =
+    getPersianVoice();
+
+    if(persianVoice){
+
+        utterance.voice =
+        persianVoice;
+
+        utterance.lang =
+        persianVoice.lang;
+
+    }else{
+
+        utterance.lang =
+        "fa-IR";
+
+    }
+
+    /*
+       سرعت کمتر برای وضوح بیشتر
+       مناسب‌تر برای کودکان
+    */
+
+    utterance.rate = 0.65;
+
+    utterance.pitch = 1;
+
+    utterance.volume = 1;
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =========================
+   شروع / نمایش کلمه
+========================= */
 
 function loadWord(){
 
-currentLevel =
-levels[levelIndex];
+    currentLevel =
+    levels[levelIndex];
 
-currentWord =
-currentLevel.words[wordIndex];
+    currentWord =
+    currentLevel.words[wordIndex];
 
-selected=[];
+    selected = [];
 
-lives=3;
+    lives = 3;
 
-answered=false;
+    answered = false;
 
+    document.getElementById(
+        "level"
+    ).innerText =
+    currentLevel.name;
 
-document.getElementById(
-"level"
-).innerText =
-currentLevel.name;
+    document.getElementById(
+        "wordNumber"
+    ).innerText =
+    wordIndex + 1;
 
+    document.getElementById(
+        "hint"
+    ).innerText =
+    "💡 راهنما: " +
+    currentWord.hint;
 
-document.getElementById(
-"wordNumber"
-).innerText =
-wordIndex+1;
+    document.getElementById(
+        "message"
+    ).innerText = "";
 
+    updateHearts();
 
-document.getElementById(
-"hint"
-).innerText =
-"💡 راهنما: "+
-currentWord.hint;
+    updateProgress();
 
+    createLetters();
 
-document.getElementById(
-"message"
-).innerText="";
-
-
-updateHearts();
-
-updateProgress();
-
-createLetters();
-
-updateAnswer();
+    updateAnswer();
 
 }
 
@@ -1004,156 +760,179 @@ updateAnswer();
    ساخت حروف
 ========================= */
 
-
 function createLetters(){
 
-const container =
-document.getElementById("letters");
+    const container =
+    document.getElementById("letters");
 
-container.innerHTML="";
+    container.innerHTML = "";
 
+    let letters =
+    currentWord.word.split("");
 
-let letters =
-currentWord.word.split("");
+    const extra = [
+        "ا",
+        "ب",
+        "د",
+        "ر",
+        "س",
+        "م",
+        "ن",
+        "ک",
+        "ت",
+        "ل"
+    ];
 
+    for(let i=0;i<4;i++){
 
-const extra=[
+        letters.push(
+            extra[
+                Math.floor(
+                    Math.random() *
+                    extra.length
+                )
+            ]
+        );
 
-"ا","ب","د",
-"ر","س","م",
-"ن","ک","ت",
-"ل"
+    }
 
-];
+    letters.sort(
+        () =>
+        Math.random() - .5
+    );
 
+    letters.forEach(
+    (letter,index) => {
 
-for(let i=0;i<4;i++){
+        const button =
+        document.createElement(
+            "button"
+        );
 
-letters.push(
-extra[
-Math.floor(
-Math.random()*extra.length
-)
-]
-);
+        button.className =
+        "letter";
 
-}
+        button.innerText =
+        letter;
 
+        button.onclick =
+        function(){
 
-letters.sort(
-()=>Math.random()-.5
-);
+            if(
+                button.classList.contains(
+                    "used"
+                )
+                ||
+                answered
+                ||
+                lives <= 0
+            ){
+                return;
+            }
 
+            selected.push({
 
-letters.forEach(
-(letter,index)=>{
+                letter:letter,
 
-const button =
-document.createElement("button");
+                button:button
 
+            });
 
-button.className="letter";
+            button.classList.add(
+                "used"
+            );
 
-button.innerText=letter;
+            updateAnswer();
 
+        };
 
-button.onclick=function(){
+        container.appendChild(
+            button
+        );
 
-if(
-button.classList.contains("used")
-||
-answered
-||
-lives<=0
-){
-return;
-}
-
-
-selected.push({
-
-letter:letter,
-
-button:button
-
-});
-
-
-button.classList.add("used");
-
-updateAnswer();
-
-};
-
-
-container.appendChild(button);
-
-}
-
-);
+    });
 
 }
 
 
 /* =========================
-   نمایش پاسخ
+   نمایش حروف انتخاب‌شده
 ========================= */
-
 
 function updateAnswer(){
 
-const answer =
-document.getElementById("answer");
+    const answer =
+    document.getElementById(
+        "answer"
+    );
 
-answer.innerHTML="";
+    answer.innerHTML = "";
 
+    if(selected.length === 0){
 
-selected.forEach(
-item=>{
+        const empty =
+        document.createElement(
+            "div"
+        );
 
-const div =
-document.createElement("div");
+        empty.className =
+        "empty-answer";
 
-div.className=
-"answer-letter";
+        empty.innerText =
+        "حروف انتخاب‌شده اینجا نمایش داده می‌شوند";
 
-div.innerText=
-item.letter;
+        answer.appendChild(
+            empty
+        );
 
-answer.appendChild(div);
+        return;
+    }
 
-}
+    selected.forEach(
+    item => {
 
-);
+        const div =
+        document.createElement(
+            "div"
+        );
+
+        div.className =
+        "answer-letter";
+
+        div.innerText =
+        item.letter;
+
+        answer.appendChild(
+            div
+        );
+
+    });
 
 }
 
 
 /* =========================
-   پاک کردن
+   پاک کردن پاسخ
 ========================= */
-
 
 function clearAnswer(){
 
-if(answered)
-return;
+    if(answered){
+        return;
+    }
 
+    selected.forEach(
+    item => {
 
-selected.forEach(
-item=>{
+        item.button.classList.remove(
+            "used"
+        );
 
-item.button.classList.remove(
-"used"
-);
+    });
 
-}
-);
+    selected = [];
 
-
-selected=[];
-
-updateAnswer();
+    updateAnswer();
 
 }
 
@@ -1162,140 +941,118 @@ updateAnswer();
    بررسی پاسخ
 ========================= */
 
-
 function checkAnswer(){
 
-if(answered)
-return;
+    if(answered){
+        return;
+    }
 
+    if(selected.length === 0){
 
-if(selected.length===0){
+        showMessage(
+            "⚠️ ابتدا حروف را انتخاب کن.",
+            "#d97706"
+        );
 
-showMessage(
-"⚠️ ابتدا حروف را انتخاب کن.",
-"#d97706"
-);
+        return;
+    }
 
-return;
+    const answer =
+    selected
+    .map(
+        item => item.letter
+    )
+    .join("");
 
-}
+    if(answer === currentWord.word){
 
+        answered = true;
 
-const answer =
-selected
-.map(
-item=>item.letter
-)
-.join("");
+        correct++;
 
+        score +=
+        10 * lives;
 
-if(answer===currentWord.word){
+        if(score > record){
 
-answered=true;
+            record = score;
 
-correct++;
+            localStorage.setItem(
+                "amlaRecord",
+                record
+            );
 
-score +=
-10*lives;
+        }
 
+        document.getElementById(
+            "score"
+        ).innerText = score;
 
-if(score>record){
+        document.getElementById(
+            "record"
+        ).innerText = record;
 
-record=score;
+        showMessage(
+            "🎉 آفرین! پاسخ درست است: " +
+            currentWord.word,
+            "#16a34a"
+        );
 
-localStorage.setItem(
-"amlaRecord",
-record
-);
+    }else{
 
-}
+        lives--;
 
+        updateHearts();
 
-document.getElementById(
-"score"
-).innerText=score;
+        if(lives <= 0){
 
+            answered = true;
 
-document.getElementById(
-"record"
-).innerText=record;
+            showMessage(
+                "❌ فرصت‌ها تمام شد. پاسخ درست: " +
+                currentWord.word,
+                "#dc2626"
+            );
 
+        }else{
 
-showMessage(
-"🎉 آفرین! پاسخ درست است.",
-"#16a34a"
-);
+            showMessage(
+                "❌ پاسخ درست نیست. دوباره تلاش کن.",
+                "#dc2626"
+            );
 
+        }
 
-}
-
-else{
-
-lives--;
-
-updateHearts();
-
-
-if(lives<=0){
-
-answered=true;
-
-
-showMessage(
-"❌ فرصت‌ها تمام شد. پاسخ: "+
-currentWord.word,
-"#dc2626"
-);
-
-}
-
-else{
-
-showMessage(
-"❌ پاسخ درست نیست. دوباره تلاش کن.",
-"#dc2626"
-);
-
-}
-
-}
+    }
 
 }
 
 
 /* =========================
-   جان‌ها
+   نمایش جان‌ها
 ========================= */
-
 
 function updateHearts(){
 
-let result="";
+    let result = "";
 
-for(
-let i=0;
-i<3;
-i++
-){
+    for(let i=0;i<3;i++){
 
-if(i<lives){
+        if(i < lives){
 
-result+="❤️";
+            result += "❤️";
 
-}
+        }else{
 
-else{
+            result += "🖤";
 
-result+="🖤";
+        }
 
-}
+    }
 
-}
-
-
-document.getElementById(
-"hearts"
-).innerText=result;
+    document.getElementById(
+        "hearts"
+    ).innerText = result;
 
 }
 
@@ -1304,20 +1061,19 @@ document.getElementById(
    پیام
 ========================= */
 
-
 function showMessage(
 text,
 color
 ){
 
-const message =
-document.getElementById(
-"message"
-);
+    const message =
+    document.getElementById(
+        "message"
+    );
 
-message.innerText=text;
+    message.innerText = text;
 
-message.style.color=color;
+    message.style.color = color;
 
 }
 
@@ -1326,143 +1082,77 @@ message.style.color=color;
    کلمه بعدی
 ========================= */
 
-
 function nextWord(){
 
-if(!answered){
+    if(!answered){
 
-showMessage(
-"⚠️ ابتدا پاسخ را بررسی کن.",
-"#d97706"
-);
-
-return;
-
-}
-
-
-wordIndex++;
-
-
-if(
-wordIndex >=
-currentLevel.words.length
-){
-
-wordIndex=0;
-
-levelIndex++;
-
-
-if(
-levelIndex >=
-levels.length
-){
-
-finishGame();
-
-return;
-
-}
-
-}
-
-
-loadWord();
-
-}
-
-
-/* =========================
-   پخش صوت
-========================= */
-
-
-function speakWord() {
-
-    if (!("speechSynthesis" in window)) {
         showMessage(
-            "⚠️ مرورگر شما از قابلیت پخش صوت پشتیبانی نمی‌کند.",
-            "#dc2626"
+            "⚠️ ابتدا پاسخ را بررسی کن.",
+            "#d97706"
         );
+
         return;
     }
 
-    const text = currentWord.word;
+    wordIndex++;
 
-    window.speechSynthesis.cancel();
+    if(
+        wordIndex >=
+        currentLevel.words.length
+    ){
 
-    const voices = window.speechSynthesis.getVoices();
+        wordIndex = 0;
 
-    let persianVoice = voices.find(
-        voice =>
-            voice.lang &&
-            (
-                voice.lang.toLowerCase() === "fa-ir" ||
-                voice.lang.toLowerCase().startsWith("fa")
-            )
-    );
+        levelIndex++;
 
-    const utterance =
-        new SpeechSynthesisUtterance(text);
+        if(
+            levelIndex >=
+            levels.length
+        ){
 
-    if (persianVoice) {
-        utterance.voice = persianVoice;
-        utterance.lang = persianVoice.lang;
-    } else {
-        utterance.lang = "fa-IR";
+            finishGame();
+
+            return;
+        }
+
     }
 
-    utterance.rate = 0.7;
-    utterance.pitch = 1;
-    utterance.volume = 1;
+    loadWord();
 
-    window.speechSynthesis.speak(utterance);
-
-    if (!persianVoice) {
-        showMessage(
-            "🔊 کلمه پخش شد؛ اگر صدا شنیده نمی‌شود، صدای فارسی روی دستگاه فعال نیست.",
-            "#2563eb"
-        );
-    }
 }
 
-/* =========================
-   پیشرفت
-========================= */
 
+/* =========================
+   نوار پیشرفت
+========================= */
 
 function updateProgress(){
 
-let completed=0;
+    let completed = 0;
 
+    for(
+        let i=0;
+        i<levelIndex;
+        i++
+    ){
 
-for(
-let i=0;
-i<levelIndex;
-i++
-){
+        completed +=
+        levels[i].words.length;
 
-completed +=
-levels[i].words.length;
+    }
 
-}
+    completed += wordIndex;
 
+    const percent =
+    (
+        completed /
+        totalWords
+    ) * 100;
 
-completed += wordIndex;
-
-
-const percent =
-(
-completed/
-totalWords
-)*100;
-
-
-document.getElementById(
-"progressBar"
-).style.width =
-percent+"%";
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+    percent + "%";
 
 }
 
@@ -1471,32 +1161,42 @@ percent+"%";
    پایان بازی
 ========================= */
 
-
 function finishGame(){
 
-document.getElementById(
-"gameArea"
-).style.display="none";
+    document.getElementById(
+        "gameArea"
+    ).style.display =
+    "none";
 
+    document.getElementById(
+        "report"
+    ).style.display =
+    "block";
 
-document.getElementById(
-"report"
-).style.display="block";
+    document.getElementById(
+        "finalScore"
+    ).innerText =
+    score;
 
+    document.getElementById(
+        "finalCorrect"
+    ).innerText =
+    correct;
 
-document.getElementById(
-"finalScore"
-).innerText=score;
+    const percent =
+    Math.round(
+        (correct / totalWords) * 100
+    );
 
+    document.getElementById(
+        "finalPercent"
+    ).innerText =
+    percent + "%";
 
-document.getElementById(
-"finalCorrect"
-).innerText=correct;
-
-
-document.getElementById(
-"finalRecord"
-).innerText=record;
+    document.getElementById(
+        "finalRecord"
+    ).innerText =
+    record;
 
 }
 
@@ -1505,36 +1205,35 @@ document.getElementById(
    شروع دوباره
 ========================= */
 
-
 function restartGame(){
 
-levelIndex=0;
+    window.speechSynthesis.cancel();
 
-wordIndex=0;
+    levelIndex = 0;
 
-score=0;
+    wordIndex = 0;
 
-correct=0;
+    score = 0;
 
-lives=3;
+    correct = 0;
 
+    lives = 3;
 
-document.getElementById(
-"score"
-).innerText="0";
+    document.getElementById(
+        "score"
+    ).innerText = "0";
 
+    document.getElementById(
+        "report"
+    ).style.display =
+    "none";
 
-document.getElementById(
-"report"
-).style.display="none";
+    document.getElementById(
+        "gameArea"
+    ).style.display =
+    "block";
 
-
-document.getElementById(
-"gameArea"
-).style.display="block";
-
-
-loadWord();
+    loadWord();
 
 }
 
@@ -1543,12 +1242,9 @@ loadWord();
    شروع اولیه
 ========================= */
 
-
 loadWord();
-
 
 </script>
 
 </body>
-
 </html>
