@@ -1,0 +1,2009 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>سرزمین زاویه‌ها</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+
+margin:0;
+
+font-family:
+Tahoma,
+Arial,
+sans-serif;
+
+min-height:100vh;
+
+background:
+linear-gradient(
+135deg,
+#312e81,
+#7c3aed,
+#ec4899
+);
+
+color:#fff;
+
+overflow-x:hidden;
+}
+
+
+/* ستاره های پس زمینه */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+background-image:
+radial-gradient(
+white 1px,
+transparent 1px
+);
+
+background-size:35px 35px;
+
+opacity:.25;
+
+pointer-events:none;
+}
+
+
+.container{
+
+width:95%;
+
+max-width:1050px;
+
+margin:20px auto;
+
+background:
+rgba(255,255,255,.12);
+
+backdrop-filter:
+blur(10px);
+
+border:
+2px solid
+rgba(255,255,255,.3);
+
+border-radius:30px;
+
+padding:25px;
+
+box-shadow:
+0 15px 40px
+rgba(0,0,0,.3);
+}
+
+
+/* عنوان */
+
+.title{
+
+text-align:center;
+
+font-size:38px;
+
+margin:5px 0;
+
+color:#fde68a;
+
+text-shadow:
+0 3px 10px
+rgba(0,0,0,.4);
+}
+
+.subtitle{
+
+text-align:center;
+
+font-size:17px;
+
+margin-bottom:25px;
+
+color:#f5f3ff;
+}
+
+
+/* آمار */
+
+.stats{
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+flex-wrap:wrap;
+
+margin-bottom:20px;
+}
+
+.stat{
+
+background:
+rgba(255,255,255,.15);
+
+border-radius:18px;
+
+padding:10px 25px;
+
+min-width:130px;
+
+text-align:center;
+
+font-weight:bold;
+}
+
+.stat span{
+
+display:block;
+
+font-size:25px;
+
+color:#fde68a;
+
+margin-top:5px;
+}
+
+
+/* محیط بازی */
+
+.game{
+
+background:
+rgba(255,255,255,.96);
+
+color:#334155;
+
+border-radius:25px;
+
+padding:25px;
+
+text-align:center;
+}
+
+
+/* نوع مرحله */
+
+.badge{
+
+display:inline-block;
+
+background:#ede9fe;
+
+color:#7c3aed;
+
+padding:8px 20px;
+
+border-radius:20px;
+
+font-weight:bold;
+
+margin-bottom:10px;
+}
+
+
+/* سطح */
+
+.level{
+
+font-size:19px;
+
+font-weight:bold;
+
+color:#db2777;
+
+margin:8px;
+}
+
+
+/* جان */
+
+.hearts{
+
+font-size:27px;
+
+letter-spacing:5px;
+
+margin:8px;
+}
+
+
+/* سؤال */
+
+.question{
+
+font-size:22px;
+
+font-weight:bold;
+
+line-height:2;
+
+margin:20px auto;
+
+max-width:800px;
+}
+
+
+/* بوم زاویه */
+
+.canvas-box{
+
+width:100%;
+
+max-width:700px;
+
+height:350px;
+
+margin:20px auto;
+
+background:
+linear-gradient(
+135deg,
+#fef3c7,
+#e0f2fe
+);
+
+border:
+4px solid #fbbf24;
+
+border-radius:25px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+box-shadow:
+0 8px 20px
+rgba(0,0,0,.15);
+}
+
+canvas{
+
+max-width:100%;
+
+height:auto;
+}
+
+
+/* گزینه ها */
+
+.options{
+
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:15px;
+
+max-width:700px;
+
+margin:20px auto;
+}
+
+.option{
+
+border:none;
+
+background:#6366f1;
+
+color:#fff;
+
+border-radius:17px;
+
+padding:17px;
+
+font-family:Tahoma;
+
+font-size:20px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+0 5px 0 #4338ca;
+
+transition:.15s;
+}
+
+.option:hover{
+
+transform:
+translateY(-3px);
+}
+
+.option.correct{
+
+background:#22c55e;
+
+box-shadow:
+0 5px 0 #15803d;
+}
+
+.option.wrong{
+
+background:#ef4444;
+
+box-shadow:
+0 5px 0 #b91c1c;
+}
+
+
+/* پیام */
+
+.message{
+
+min-height:50px;
+
+font-size:20px;
+
+font-weight:bold;
+
+margin:20px;
+}
+
+
+/* مرحله بعد */
+
+.next{
+
+display:none;
+
+border:none;
+
+background:#f59e0b;
+
+color:white;
+
+padding:15px 30px;
+
+border-radius:15px;
+
+font-family:Tahoma;
+
+font-size:18px;
+
+cursor:pointer;
+
+box-shadow:
+0 5px 0 #b45309;
+}
+
+
+/* پیشرفت */
+
+.progress{
+
+height:13px;
+
+background:#e2e8f0;
+
+border-radius:15px;
+
+overflow:hidden;
+
+max-width:750px;
+
+margin:25px auto 5px;
+}
+
+.progress-bar{
+
+height:100%;
+
+width:0%;
+
+background:
+linear-gradient(
+90deg,
+#22c55e,
+#facc15,
+#f97316
+);
+
+transition:.5s;
+}
+
+
+/* گزارش */
+
+.report{
+
+display:none;
+
+background:#fff;
+
+color:#334155;
+
+border-radius:25px;
+
+padding:35px;
+
+text-align:center;
+}
+
+.report h2{
+
+color:#7c3aed;
+
+font-size:30px;
+}
+
+.final-score{
+
+font-size:50px;
+
+font-weight:bold;
+
+color:#16a34a;
+
+margin:15px;
+}
+
+.performance{
+
+font-size:20px;
+
+font-weight:bold;
+
+margin:20px;
+}
+
+.restart{
+
+border:none;
+
+background:#7c3aed;
+
+color:white;
+
+padding:15px 30px;
+
+border-radius:15px;
+
+font-family:Tahoma;
+
+font-size:18px;
+
+cursor:pointer;
+}
+
+
+/* راهنما */
+
+.guide{
+
+background:#f8fafc;
+
+border-radius:15px;
+
+padding:12px;
+
+margin:15px auto;
+
+max-width:700px;
+
+font-size:16px;
+
+color:#475569;
+}
+
+
+/* موبایل */
+
+@media(max-width:650px){
+
+.title{
+
+font-size:28px;
+}
+
+.options{
+
+grid-template-columns:1fr;
+}
+
+.canvas-box{
+
+height:280px;
+}
+
+.question{
+
+font-size:19px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="title">
+
+🏰 سرزمین زاویه‌ها 📐
+
+</div>
+
+
+<div class="subtitle">
+
+به سرزمین جادویی زاویه‌ها خوش آمدی!
+برای رسیدن به قلعه باید ۲۰ مرحله را پشت سر بگذاری.
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+⭐ امتیاز
+
+<span id="score">0</span>
+
+</div>
+
+
+<div class="stat">
+
+🏆 رکورد
+
+<span id="record">0</span>
+
+</div>
+
+
+<div class="stat">
+
+🚀 مرحله
+
+<span id="stage">1</span>
+
+</div>
+
+
+</div>
+
+
+<div class="game" id="gameArea">
+
+
+<div class="badge"
+id="badge">
+
+📐 نوع زاویه
+
+</div>
+
+
+<div class="level"
+id="level">
+
+سطح ۱
+
+</div>
+
+
+<div class="hearts"
+id="hearts">
+
+❤️❤️❤️
+
+</div>
+
+
+<div class="question"
+id="question">
+
+</div>
+
+
+<div class="canvas-box">
+
+<canvas
+id="angleCanvas"
+width="650"
+height="330">
+</canvas>
+
+</div>
+
+
+<div class="guide"
+id="guide">
+
+به شکل زاویه دقت کن.
+
+</div>
+
+
+<div class="options"
+id="options">
+</div>
+
+
+<div class="message"
+id="message">
+</div>
+
+
+<button
+class="next"
+id="nextButton"
+onclick="nextStage()">
+
+🚪 رفتن به مرحله بعد
+
+</button>
+
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+
+</div>
+
+
+<div
+class="report"
+id="report">
+
+<h2>
+
+🎉 قهرمان سرزمین زاویه‌ها شدی!
+
+</h2>
+
+
+<div>
+
+امتیاز نهایی
+
+</div>
+
+
+<div
+class="final-score"
+id="finalScore">
+
+0
+
+</div>
+
+
+<div>
+
+پاسخ‌های درست:
+
+<strong id="finalCorrect">
+
+0
+
+</strong>
+
+از ۲۰
+
+</div>
+
+
+<br>
+
+
+<div>
+
+درصد موفقیت:
+
+<strong id="finalPercent">
+
+0%
+
+</strong>
+
+</div>
+
+
+<div
+class="performance"
+id="performance">
+
+</div>
+
+
+<div>
+
+🏆 رکورد:
+
+<strong id="finalRecord">
+
+0
+
+</strong>
+
+</div>
+
+
+<br>
+
+
+<button
+class="restart"
+onclick="restartGame()">
+
+🔄 دوباره بازی کن
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   داده مراحل
+========================= */
+
+
+const stages = [
+
+/* 1 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این زاویه چه نوع زاویه‌ای است؟",
+
+angle:45,
+
+answer:"تند",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 2 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این زاویه چه نوع زاویه‌ای است؟",
+
+angle:90,
+
+answer:"قائم",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 3 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این زاویه چه نوع زاویه‌ای است؟",
+
+angle:120,
+
+answer:"باز",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 4 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این زاویه چه نوع زاویه‌ای است؟",
+
+angle:180,
+
+answer:"نیم‌صفحه",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 5 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این زاویه را شناسایی کن.",
+
+angle:30,
+
+answer:"تند",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 6 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۲ | اندازه‌گیری",
+
+question:"اندازه این زاویه چند درجه است؟",
+
+angle:60,
+
+answer:"۶۰°",
+
+options:[
+"۳۰°",
+"۴۵°",
+"۶۰°",
+"۹۰°"
+]
+
+},
+
+
+/* 7 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۲ | اندازه‌گیری",
+
+question:"اندازه این زاویه چند درجه است؟",
+
+angle:90,
+
+answer:"۹۰°",
+
+options:[
+"۶۰°",
+"۹۰°",
+"۱۲۰°",
+"۱۸۰°"
+]
+
+},
+
+
+/* 8 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۲ | اندازه‌گیری",
+
+question:"اندازه این زاویه چند درجه است؟",
+
+angle:120,
+
+answer:"۱۲۰°",
+
+options:[
+"۹۰°",
+"۱۰۰°",
+"۱۲۰°",
+"۱۵۰°"
+]
+
+},
+
+
+/* 9 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۲ | اندازه‌گیری",
+
+question:"اندازه این زاویه چند درجه است؟",
+
+angle:45,
+
+answer:"۴۵°",
+
+options:[
+"۳۰°",
+"۴۵°",
+"۶۰°",
+"۷۵°"
+]
+
+},
+
+
+/* 10 */
+
+{
+type:"اندازه زاویه",
+
+level:"۲ | اندازه‌گیری",
+
+question:"اندازه این زاویه چند درجه است؟",
+
+angle:150,
+
+answer:"۱۵۰°",
+
+options:[
+"۱۲۰°",
+"۱۳۵°",
+"۱۵۰°",
+"۱۸۰°"
+]
+
+},
+
+
+/* 11 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۳ | ماجراجویی",
+
+question:"اگر اندازه زاویه ۷۰ درجه باشد، نوع آن چیست؟",
+
+angle:70,
+
+answer:"تند",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 12 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۳ | ماجراجویی",
+
+question:"اگر اندازه زاویه ۱۱۰ درجه باشد، نوع آن چیست؟",
+
+angle:110,
+
+answer:"باز",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 13 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۳ | ماجراجویی",
+
+question:"کدام اندازه مربوط به یک زاویه قائم است؟",
+
+angle:90,
+
+answer:"۹۰°",
+
+options:[
+"۴۵°",
+"۹۰°",
+"۱۲۰°",
+"۱۸۰°"
+]
+
+},
+
+
+/* 14 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۳ | ماجراجویی",
+
+question:"کدام اندازه مربوط به یک زاویه نیم‌صفحه است؟",
+
+angle:180,
+
+answer:"۱۸۰°",
+
+options:[
+"۹۰°",
+"۱۲۰°",
+"۱۵۰°",
+"۱۸۰°"
+]
+
+},
+
+
+/* 15 */
+
+{
+type:"نوع زاویه",
+
+level:"سطح ۳ | ماجراجویی",
+
+question:"زاویه ۱۵۰ درجه چه نوع زاویه‌ای است؟",
+
+angle:150,
+
+answer:"باز",
+
+options:[
+"تند",
+"قائم",
+"باز",
+"نیم‌صفحه"
+]
+
+},
+
+
+/* 16 */
+
+{
+type:"مقایسه",
+
+level:"سطح ۴ | جادوگر زاویه‌ها",
+
+question:"کدام زاویه بزرگ‌تر است؟",
+
+angle:120,
+
+compare:true,
+
+answer:"۱۲۰°",
+
+options:[
+"۶۰°",
+"۹۰°",
+"۱۲۰°",
+"۴۵°"
+]
+
+},
+
+
+/* 17 */
+
+{
+type:"مقایسه",
+
+level:"سطح ۴ | جادوگر زاویه‌ها",
+
+question:"کدام زاویه کوچک‌تر است؟",
+
+angle:40,
+
+compare:true,
+
+answer:"۴۰°",
+
+options:[
+"۴۰°",
+"۸۰°",
+"۹۰°",
+"۱۳۰°"
+]
+
+},
+
+
+/* 18 */
+
+{
+type:"مقایسه",
+
+level:"سطح ۴ | جادوگر زاویه‌ها",
+
+question:"کدام زاویه به زاویه قائم نزدیک‌تر است؟",
+
+angle:80,
+
+compare:true,
+
+answer:"۸۰°",
+
+options:[
+"۳۰°",
+"۵۰°",
+"۸۰°",
+"۱۵۰°"
+]
+
+},
+
+
+/* 19 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۴ | جادوگر زاویه‌ها",
+
+question:"اگر یک زاویه ۳۰ درجه باشد، برای رسیدن به ۹۰ درجه چند درجه دیگر لازم دارد؟",
+
+angle:30,
+
+answer:"۶۰°",
+
+options:[
+"۳۰°",
+"۴۵°",
+"۶۰°",
+"۹۰°"
+]
+
+},
+
+
+/* 20 */
+
+{
+type:"اندازه زاویه",
+
+level:"سطح ۵ | قهرمان زاویه‌ها",
+
+question:"اگر دو زاویه ۴۰ و ۵۰ درجه را کنار هم قرار دهیم، زاویه حاصل چند درجه است؟",
+
+angle:90,
+
+answer:"۹۰°",
+
+options:[
+"۷۰°",
+"۸۰°",
+"۹۰°",
+"۱۰۰°"
+]
+
+}
+
+];
+
+
+/* =========================
+   متغیرها
+========================= */
+
+
+let current=0;
+
+let score=0;
+
+let correct=0;
+
+let lives=3;
+
+let answered=false;
+
+
+let record=
+parseInt(
+localStorage.getItem(
+"angleGameRecord"
+)
+)||0;
+
+
+document.getElementById(
+"record"
+).innerText=
+record;
+
+
+/* =========================
+   تبدیل درجه به رادیان
+========================= */
+
+
+function rad(deg){
+
+return deg *
+Math.PI /
+180;
+
+}
+
+
+/* =========================
+   رسم زاویه
+========================= */
+
+
+function drawAngle(angle){
+
+const canvas=
+document.getElementById(
+"angleCanvas"
+);
+
+const ctx=
+canvas.getContext("2d");
+
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+/* پس زمینه */
+
+ctx.fillStyle=
+"#fefce8";
+
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+/* مرکز */
+
+const cx=325;
+
+const cy=240;
+
+const length=170;
+
+
+/* زاویه اصلی */
+
+const startAngle=
+-rad(180);
+
+const endAngle=
+startAngle+
+rad(angle);
+
+
+/* خط اول */
+
+ctx.beginPath();
+
+ctx.moveTo(
+cx,
+cy
+);
+
+ctx.lineTo(
+cx-length,
+cy
+);
+
+ctx.strokeStyle=
+"#7c3aed";
+
+ctx.lineWidth=8;
+
+ctx.lineCap="round";
+
+ctx.stroke();
+
+
+/* خط دوم */
+
+ctx.beginPath();
+
+ctx.moveTo(
+cx,
+cy
+);
+
+ctx.lineTo(
+cx+
+length*
+Math.cos(endAngle),
+cy+
+length*
+Math.sin(endAngle)
+);
+
+ctx.strokeStyle=
+"#ec4899";
+
+ctx.lineWidth=8;
+
+ctx.stroke();
+
+
+/* کمان */
+
+ctx.beginPath();
+
+ctx.arc(
+cx,
+cy,
+70,
+startAngle,
+endAngle,
+false
+);
+
+ctx.strokeStyle=
+"#f59e0b";
+
+ctx.lineWidth=6;
+
+ctx.stroke();
+
+
+/* نقطه مرکز */
+
+ctx.beginPath();
+
+ctx.arc(
+cx,
+cy,
+10,
+0,
+Math.PI*2
+);
+
+ctx.fillStyle=
+"#f59e0b";
+
+ctx.fill();
+
+
+/* عدد زاویه */
+
+ctx.font=
+"bold 28px Tahoma";
+
+ctx.fillStyle=
+"#334155";
+
+ctx.textAlign=
+"center";
+
+ctx.fillText(
+angle+"°",
+cx-30,
+cy-35
+);
+
+}
+
+
+/* =========================
+   بارگذاری مرحله
+========================= */
+
+
+function loadStage(){
+
+const s=
+stages[current];
+
+
+lives=3;
+
+answered=false;
+
+
+document.getElementById(
+"stage"
+).innerText=
+current+1;
+
+
+document.getElementById(
+"badge"
+).innerText=
+"📐 "+s.type;
+
+
+document.getElementById(
+"level"
+).innerText=
+s.level;
+
+
+document.getElementById(
+"question"
+).innerText=
+s.question;
+
+
+document.getElementById(
+"message"
+).innerText=
+"";
+
+
+document.getElementById(
+"nextButton"
+).style.display=
+"none";
+
+
+updateHearts();
+
+drawAngle(s.angle);
+
+createOptions(s.options);
+
+updateProgress();
+
+}
+
+
+/* =========================
+   ساخت گزینه ها
+========================= */
+
+
+function createOptions(options){
+
+const container=
+document.getElementById(
+"options"
+);
+
+container.innerHTML="";
+
+
+let shuffled=
+[...options];
+
+
+shuffled.sort(
+()=>Math.random()-.5
+);
+
+
+shuffled.forEach(
+option=>{
+
+const button=
+document.createElement(
+"button"
+);
+
+button.className=
+"option";
+
+button.innerText=
+option;
+
+
+button.onclick=
+function(){
+
+checkAnswer(
+button,
+option
+);
+
+};
+
+
+container.appendChild(
+button
+);
+
+});
+
+}
+
+
+/* =========================
+   بررسی پاسخ
+========================= */
+
+
+function checkAnswer(
+button,
+answer
+){
+
+if(answered)
+return;
+
+
+const s=
+stages[current];
+
+
+if(answer===s.answer){
+
+answered=true;
+
+correct++;
+
+score+=
+10*lives;
+
+
+button.classList.add(
+"correct"
+);
+
+
+if(score>record){
+
+record=score;
+
+localStorage.setItem(
+"angleGameRecord",
+record
+);
+
+}
+
+
+document.getElementById(
+"score"
+).innerText=
+score;
+
+
+document.getElementById(
+"record"
+).innerText=
+record;
+
+
+disableButtons();
+
+
+showMessage(
+"🎉 آفرین! پاسخ درست است.",
+"#16a34a"
+);
+
+
+document.getElementById(
+"nextButton"
+).style.display=
+"inline-block";
+
+
+}else{
+
+lives--;
+
+button.classList.add(
+"wrong"
+);
+
+button.disabled=true;
+
+
+updateHearts();
+
+
+if(lives>0){
+
+showMessage(
+"❌ اشتباه شد! دوباره فکر کن.",
+"#dc2626"
+);
+
+}else{
+
+answered=true;
+
+showCorrect();
+
+disableButtons();
+
+
+document.getElementById(
+"nextButton"
+).style.display=
+"inline-block";
+
+}
+
+}
+
+}
+
+
+/* =========================
+   نمایش جواب
+========================= */
+
+
+function showCorrect(){
+
+const answer=
+stages[current].answer;
+
+
+const buttons=
+document.querySelectorAll(
+".option"
+);
+
+
+buttons.forEach(
+button=>{
+
+if(
+button.innerText===
+answer
+){
+
+button.classList.add(
+"correct"
+);
+
+}
+
+});
+
+
+showMessage(
+"💡 پاسخ درست: "+
+answer,
+"#dc2626"
+);
+
+}
+
+
+/* =========================
+   غیرفعال کردن
+========================= */
+
+
+function disableButtons(){
+
+document
+.querySelectorAll(
+".option"
+)
+.forEach(
+button=>{
+button.disabled=true;
+}
+);
+
+}
+
+
+/* =========================
+   جان
+========================= */
+
+
+function updateHearts(){
+
+let text="";
+
+
+for(
+let i=0;
+i<3;
+i++
+){
+
+text+=
+i<lives
+?"❤️"
+:"🖤";
+
+}
+
+
+document.getElementById(
+"hearts"
+).innerText=
+text;
+
+}
+
+
+/* =========================
+   پیام
+========================= */
+
+
+function showMessage(
+text,
+color
+){
+
+const m=
+document.getElementById(
+"message"
+);
+
+m.innerText=
+text;
+
+m.style.color=
+color;
+
+}
+
+
+/* =========================
+   مرحله بعد
+========================= */
+
+
+function nextStage(){
+
+current++;
+
+
+if(
+current>=
+stages.length
+){
+
+finishGame();
+
+return;
+
+}
+
+
+loadStage();
+
+}
+
+
+/* =========================
+   پیشرفت
+========================= */
+
+
+function updateProgress(){
+
+const percent=
+(
+current/
+stages.length
+)*100;
+
+
+document.getElementById(
+"progressBar"
+).style.width=
+percent+"%";
+
+}
+
+
+/* =========================
+   پایان
+========================= */
+
+
+function finishGame(){
+
+document.getElementById(
+"gameArea"
+).style.display=
+"none";
+
+
+document.getElementById(
+"report"
+).style.display=
+"block";
+
+
+document.getElementById(
+"finalScore"
+).innerText=
+score;
+
+
+document.getElementById(
+"finalCorrect"
+).innerText=
+correct;
+
+
+document.getElementById(
+"finalPercent"
+).innerText=
+Math.round(
+(correct/
+stages.length)*100
+)+"%";
+
+
+document.getElementById(
+"finalRecord"
+).innerText=
+record;
+
+
+let text="";
+
+
+if(correct>=18){
+
+text=
+"🏆 فوق‌العاده! تو قهرمان سرزمین زاویه‌ها شدی!";
+
+}
+else if(correct>=15){
+
+text=
+"🌟 عالی بود! تو زاویه‌ها را خیلی خوب می‌شناسی.";
+
+}
+else if(correct>=10){
+
+text=
+"👍 خوب بود! با کمی تمرین بهتر می‌شوی.";
+
+}
+else{
+
+text=
+"💪 دوباره بازی کن تا جادوگر زاویه‌ها شوی!";
+
+}
+
+
+document.getElementById(
+"performance"
+).innerText=
+text;
+
+}
+
+
+/* =========================
+   شروع دوباره
+========================= */
+
+
+function restartGame(){
+
+current=0;
+
+score=0;
+
+correct=0;
+
+lives=3;
+
+answered=false;
+
+
+document.getElementById(
+"score"
+).innerText=
+"0";
+
+
+document.getElementById(
+"report"
+).style.display=
+"none";
+
+
+document.getElementById(
+"gameArea"
+).style.display=
+"block";
+
+
+loadStage();
+
+}
+
+
+/* =========================
+   شروع
+========================= */
+
+
+loadStage();
+
+</script>
+
+</body>
+
+</html>
