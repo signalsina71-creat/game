@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>جنگل اسرارآمیز بی‌مهرگان</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:
+        linear-gradient(rgba(16,55,35,.72),rgba(8,35,25,.88)),
+        radial-gradient(circle at top,#5d9b58,#183b2b 65%,#081d15);
+    color:#fff;
+    min-height:100vh;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.18;
+    background-image:
+        radial-gradient(circle,#fff 1px,transparent 1px);
+    background-size:45px 45px;
+}
+
+.container{
+    width:94%;
+    max-width:1050px;
+    margin:20px auto;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    padding:25px;
+    border-radius:30px;
+    background:
+        linear-gradient(135deg,
+        rgba(42,91,48,.96),
+        rgba(19,58,39,.96));
+    border:3px solid #9acb75;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.4),
+        inset 0 0 25px rgba(180,230,130,.08);
+}
+
+.header h1{
+    margin:0;
+    font-size:36px;
+    color:#d9f99d;
+    text-shadow:0 3px 8px #000;
+}
+
+.header p{
+    font-size:17px;
+    margin:10px 0 0;
+    color:#e5f5d5;
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:18px 0;
+}
+
+.stat{
+    background:#173d2c;
+    border:2px solid #5d9158;
+    border-radius:18px;
+    padding:10px 25px;
+    min-width:145px;
+    text-align:center;
+    box-shadow:0 6px 15px rgba(0,0,0,.3);
+}
+
+.stat strong{
+    display:block;
+    font-size:23px;
+    color:#d9f99d;
+    margin-top:5px;
+}
+
+/* GAME */
+
+.game{
+    background:
+        linear-gradient(
+            rgba(23,64,42,.94),
+            rgba(11,43,30,.96)
+        );
+    border:3px solid #6f9d5e;
+    border-radius:30px;
+    padding:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+    text-align:center;
+}
+
+.level{
+    display:inline-block;
+    background:#315f42;
+    border:2px solid #8abf6b;
+    color:#e8f8c9;
+    border-radius:20px;
+    padding:8px 20px;
+    font-weight:bold;
+}
+
+.question{
+    font-size:23px;
+    font-weight:bold;
+    line-height:2;
+    margin:20px auto;
+    max-width:850px;
+    color:#f3f8e7;
+}
+
+.story{
+    background:rgba(72,111,64,.5);
+    border:1px solid #719861;
+    border-radius:20px;
+    padding:15px;
+    margin:15px auto;
+    max-width:850px;
+    font-size:17px;
+    line-height:2;
+}
+
+/* VISUAL */
+
+.visual{
+    min-height:160px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    background:
+        radial-gradient(circle at 30% 20%,#487a4a,#183f2d);
+    border:3px solid #5d8953;
+    border-radius:25px;
+    padding:25px;
+    margin:20px auto;
+    max-width:850px;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.35);
+}
+
+.item{
+    font-size:55px;
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+    filter:drop-shadow(0 4px 3px rgba(0,0,0,.5));
+}
+
+.item:hover{
+    transform:scale(1.2) rotate(-3deg);
+}
+
+/* OPTIONS */
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    max-width:750px;
+    margin:20px auto;
+}
+
+.option{
+    border:2px solid #79a965;
+    border-radius:18px;
+    padding:16px;
+    font-family:Tahoma;
+    font-size:19px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#315f42;
+    color:#f3f8e7;
+    box-shadow:0 5px 0 #193b2b;
+    transition:.15s;
+}
+
+.option:hover{
+    transform:translateY(-3px);
+    background:#407653;
+}
+
+.option.correct{
+    background:#387b47 !important;
+    border-color:#a7df82 !important;
+    box-shadow:0 5px 0 #225a31 !important;
+}
+
+.option.wrong{
+    background:#813d3d !important;
+    border-color:#e58b7b !important;
+    box-shadow:0 5px 0 #5b2929 !important;
+}
+
+/* MESSAGE */
+
+.message{
+    min-height:45px;
+    font-size:20px;
+    font-weight:bold;
+    margin:15px;
+    color:#e8f8c9;
+}
+
+/* BUTTON */
+
+.next{
+    display:none;
+    border:2px solid #b5dd82;
+    background:#527f42;
+    color:#fff;
+    padding:14px 30px;
+    border-radius:18px;
+    font-family:Tahoma;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 5px 0 #2c5126;
+}
+
+.next:hover{
+    background:#659d50;
+}
+
+/* PROGRESS */
+
+.progress-title{
+    margin-top:25px;
+    color:#d8efbc;
+}
+
+.progress{
+    height:14px;
+    background:#102c20;
+    border-radius:20px;
+    overflow:hidden;
+    max-width:850px;
+    margin:7px auto;
+    border:1px solid #5c8051;
+}
+
+.progress-bar{
+    width:0;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #78a85d,
+        #b4d878,
+        #e1f59b
+    );
+    transition:.5s;
+}
+
+/* REPORT */
+
+.report{
+    display:none;
+    background:#163d2c;
+    border:3px solid #7fae65;
+    border-radius:30px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+}
+
+.report h2{
+    color:#dff6a8;
+}
+
+.final-score{
+    font-size:50px;
+    color:#d9f99d;
+    font-weight:bold;
+    margin:15px;
+}
+
+.restart{
+    border:2px solid #a8d27c;
+    background:#4c7b3e;
+    color:#fff;
+    padding:15px 30px;
+    border-radius:18px;
+    font-family:Tahoma;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:650px){
+
+    .header h1{
+        font-size:27px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .question{
+        font-size:19px;
+    }
+
+    .item{
+        font-size:42px;
+    }
+
+    .stat{
+        min-width:120px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<div class="header">
+
+<h1>🌳 جنگل اسرارآمیز بی‌مهرگان 🐞</h1>
+
+<p>
+🔎 کوله‌پشتی کاوشگری‌ات را بردار و وارد جنگل شو!
+جانوران بی‌مهره منتظر کشف شدن هستند.
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+🔎 کشف‌ها
+<strong id="score">0</strong>
+</div>
+
+<div class="stat">
+🔦 انرژی چراغ
+<strong id="lives">3</strong>
+</div>
+
+<div class="stat">
+🗺️ مرحله
+<strong id="stage">1</strong>
+</div>
+
+</div>
+
+
+<div class="game" id="game">
+
+<div class="level" id="level">
+مرحله ۱
+</div>
+
+<div class="question" id="question"></div>
+
+<div class="story" id="story"></div>
+
+<div class="visual" id="visual"></div>
+
+<div class="options" id="options"></div>
+
+<div class="message" id="message"></div>
+
+<button class="next" id="next" onclick="nextStage()">
+🌿 ادامه اکتشاف
+</button>
+
+<div class="progress-title">
+🗺️ مسیر اکتشاف جنگل
+</div>
+
+<div class="progress">
+
+<div class="progress-bar" id="progress"></div>
+
+</div>
+
+</div>
+
+
+<div class="report" id="report">
+
+<h2>
+🏆 تبریک کاوشگر جوان!
+</h2>
+
+<p>
+تو توانستی اسرار جنگل بی‌مهرگان را کشف کنی.
+</p>
+
+<div class="final-score" id="finalScore">
+0
+</div>
+
+<p>
+🔎 تعداد کشف‌های موفق:
+<strong id="finalCorrect">0</strong>
+از ۲۰
+</p>
+
+<p>
+📊 درصد موفقیت:
+<strong id="finalPercent">0%</strong>
+</p>
+
+<h3 id="performance"></h3>
+
+<p>
+🌳 جنگل اسرارآمیز از تو یک کاوشگر واقعی ساخته است!
+</p>
+
+<button class="restart" onclick="restartGame()">
+🔄 شروع دوباره ماجراجویی
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   مراحل بازی
+========================================= */
+
+const stages=[
+
+
+/* 1 */
+
+{
+type:"آشنایی",
+question:"جانور بی‌مهره به چه جانوری گفته می‌شود؟",
+story:"🌳 پروفسور جنگل می‌گوید: قبل از شروع ماجراجویی باید معنی «بی‌مهره» را کشف کنیم.",
+visual:["🐌","🦋","🕷️","🐙"],
+answer:"جانوری که ستون مهره ندارد",
+options:[
+"جانوری که ستون مهره ندارد",
+"جانوری که همیشه در آب زندگی می‌کند",
+"جانوری که فقط پرواز می‌کند",
+"جانوری که گیاه می‌خورد"
+]
+},
+
+
+/* 2 */
+
+{
+type:"تشخیص",
+question:"کدام جانور در تصویر یک بی‌مهره است؟",
+story:"🔎 یکی از این جانوران در گروه بی‌مهرگان قرار دارد. با دقت نگاه کن.",
+visual:["🐟","🐦","🐌","🐱"],
+answer:"🐌",
+options:["🐟","🐦","🐌","🐱"]
+},
+
+
+/* 3 */
+
+{
+type:"تشخیص",
+question:"کدام گزینه فقط شامل جانوران بی‌مهره است؟",
+story:"🧭 مسیر جنگل را با انتخاب گروه درست پیدا کن.",
+visual:["🐌 🦋 🕷️"],
+answer:"حلزون، پروانه، عنکبوت",
+options:[
+"حلزون، پروانه، عنکبوت",
+"گربه، ماهی، پرنده",
+"مار، گربه، پروانه",
+"ماهی، خرگوش، حلزون"
+]
+},
+
+
+/* 4 */
+
+{
+type:"جای خالی",
+question:"جمله را کامل کن: جانوران بی‌مهره ________ ندارند.",
+story:"🌿 یک کلمه مهم از دفترچه پروفسور پاک شده است.",
+visual:["🪱","🐌","🦋"],
+answer:"ستون مهره",
+options:[
+"ستون مهره",
+"بال",
+"پا",
+"چشم"
+]
+},
+
+
+/* 5 */
+
+{
+type:"ویژگی",
+question:"کدام جانور یک حشره است؟",
+story:"🦋 در این قسمت جنگل، حشرات زیادی زندگی می‌کنند. حشره درست را پیدا کن.",
+visual:["🕷️","🦋","🐌","🪱"],
+answer:"🦋",
+options:["🕷️","🦋","🐌","🪱"]
+},
+
+
+/* 6 */
+
+{
+type:"ویژگی",
+question:"کدام گزینه درباره حشرات درست است؟",
+story:"🔎 حشرات ویژگی‌های خاصی دارند. یکی از جمله‌ها درست است.",
+visual:["🐝","🐞","🦋"],
+answer:"حشرات سه جفت پا دارند",
+options:[
+"حشرات سه جفت پا دارند",
+"حشرات همیشه در آب زندگی می‌کنند",
+"حشرات ستون مهره دارند",
+"همه حشرات هشت پا دارند"
+]
+},
+
+
+/* 7 */
+
+{
+type:"عنکبوتیان",
+question:"کدام جانور در گروه عنکبوتیان قرار دارد؟",
+story:"🕷️ به تارهای درخت نگاه کن! یک جانور هشت‌پا آنجاست.",
+visual:["🕷️","🦋","🐌","🐝"],
+answer:"🕷️",
+options:["🕷️","🦋","🐌","🐝"]
+},
+
+
+/* 8 */
+
+{
+type:"مقایسه",
+question:"کدام جمله درباره عنکبوت درست است؟",
+story:"🕸️ با نگاه دقیق‌تر می‌توانی تفاوت عنکبوت و حشرات را پیدا کنی.",
+visual:["🕷️"],
+answer:"عنکبوت هشت پا دارد",
+options:[
+"عنکبوت هشت پا دارد",
+"عنکبوت شش پا دارد",
+"عنکبوت چهار پا دارد",
+"عنکبوت بال دارد"
+]
+},
+
+
+/* 9 */
+
+{
+type:"جای خالی",
+question:"عنکبوت معمولاً ________ پا دارد.",
+story:"🕷️ تعداد پاهای این جانور را از روی تصویر پیدا کن.",
+visual:["🕷️"],
+answer:"هشت",
+options:[
+"شش",
+"هشت",
+"ده",
+"چهار"
+]
+},
+
+
+/* 10 */
+
+{
+type:"درست و نادرست",
+question:"درست یا نادرست؟ «همه جانوران بی‌مهره حشره هستند.»",
+story:"🌲 این جمله را با چیزهایی که تا اینجا یاد گرفته‌ای مقایسه کن.",
+visual:["🐌","🦋","🕷️","🐙"],
+answer:"نادرست",
+options:[
+"درست",
+"نادرست"
+]
+},
+
+
+/* 11 */
+
+{
+type:"درست و نادرست",
+question:"درست یا نادرست؟ «پروانه یک بی‌مهره است.»",
+story:"🦋 پروانه را در میان برگ‌ها پیدا کن و درباره آن فکر کن.",
+visual:["🦋"],
+answer:"درست",
+options:[
+"درست",
+"نادرست"
+]
+},
+
+
+/* 12 */
+
+{
+type:"جای خالی",
+question:"حلزون، کرم و پروانه همگی در گروه ________ قرار می‌گیرند.",
+story:"🐌🪱🦋 سه جانور را با هم مقایسه کن.",
+visual:["🐌","🪱","🦋"],
+answer:"بی‌مهرگان",
+options:[
+"مهره‌داران",
+"بی‌مهرگان",
+"پرندگان",
+"پستانداران"
+]
+},
+
+
+/* 13 */
+
+{
+type:"مثال",
+question:"کدام جانور در گروه بی‌مهرگان آبزی قرار دارد؟",
+story:"🌊 وارد برکه جنگل شدیم. جانور آبزی را پیدا کن.",
+visual:["🐙","🐱","🐦","🐰"],
+answer:"🐙",
+options:["🐙","🐱","🐦","🐰"]
+},
+
+
+/* 14 */
+
+{
+type:"مثال",
+question:"کدام گزینه یک بی‌مهره است؟",
+story:"🔎 چهار ردپا پیدا کرده‌ایم. یکی متعلق به یک بی‌مهره است.",
+visual:["🐟","🐍","🦀","🐕"],
+answer:"🦀",
+options:["🐟","🐍","🦀","🐕"]
+},
+
+
+/* 15 */
+
+{
+type:"درست و نادرست",
+question:"درست یا نادرست؟ «عنکبوت و پروانه هر دو بی‌مهره‌اند.»",
+story:"🧠 حالا باید اطلاعات چند مرحله قبل را با هم ترکیب کنی.",
+visual:["🕷️","🦋"],
+answer:"درست",
+options:[
+"درست",
+"نادرست"
+]
+},
+
+
+/* 16 */
+
+{
+type:"ترکیبی",
+question:"اگر جانوری ستون مهره نداشته باشد، در کدام گروه قرار می‌گیرد؟",
+story:"🕵️ یک جانور ناشناس پیدا کرده‌ایم. تنها سرنخ ما این است که ستون مهره ندارد.",
+visual:["❓","🔎"],
+answer:"بی‌مهرگان",
+options:[
+"بی‌مهرگان",
+"پستانداران",
+"پرندگان",
+"مهره‌داران"
+]
+},
+
+
+/* 17 */
+
+{
+type:"ترکیبی",
+question:"کدام گزینه ویژگی یک حشره را بهتر نشان می‌دهد؟",
+story:"🌿 سه دفترچه مختلف پیدا کرده‌ایم. فقط یکی ویژگی درست حشرات را نوشته است.",
+visual:["🐝","🐞","🦋"],
+answer:"سه جفت پا",
+options:[
+"سه جفت پا",
+"چهار جفت پا",
+"هشت جفت پا",
+"ستون مهره"
+]
+},
+
+
+/* 18 */
+
+{
+type:"مرور",
+question:"کدام گزینه نادرست است؟",
+story:"📚 وقت مرور مطالب جنگل است. این بار باید جمله اشتباه را پیدا کنی.",
+visual:["🧠","🔎"],
+answer:"عنکبوت حشره است",
+options:[
+"پروانه بی‌مهره است",
+"عنکبوت هشت پا دارد",
+"حلزون بی‌مهره است",
+"عنکبوت حشره است"
+]
+},
+
+
+/* 19 */
+
+{
+type:"مرور",
+question:"کدام مجموعه فقط شامل بی‌مهرگان است؟",
+story:"🏕️ تقریباً به پایان مأموریت رسیده‌ای. گروه درست را انتخاب کن.",
+visual:["🐌","🦋","🕷️"],
+answer:"حلزون، پروانه، عنکبوت",
+options:[
+"حلزون، پروانه، عنکبوت",
+"گربه، ماهی، پروانه",
+"پرنده، خرگوش، ماهی",
+"گربه، سگ، خرگوش"
+]
+},
+
+
+/* 20 */
+
+{
+type:"چالش نهایی",
+question:"کدام جمله تمام آموخته‌های ما را بهتر خلاصه می‌کند؟",
+story:"🏆 دروازه بزرگ جنگل باز شده است! برای تبدیل شدن به «دانشمند کوچک بی‌مهرگان» پاسخ نهایی را پیدا کن.",
+visual:["🐌","🦋","🕷️","🐙","🦀"],
+answer:"بی‌مهرگان ستون مهره ندارند",
+options:[
+"بی‌مهرگان ستون مهره ندارند",
+"همه بی‌مهرگان حشره هستند",
+"همه بی‌مهرگان بال دارند",
+"همه بی‌مهرگان در آب زندگی می‌کنند"
+]
+}
+
+];
+
+
+/* =========================================
+   متغیرهای بازی
+========================================= */
+
+let current=0;
+
+let score=0;
+
+let correct=0;
+
+let lives=3;
+
+
+/* =========================================
+   نمایش مرحله
+========================================= */
+
+function loadStage(){
+
+    const s=stages[current];
+
+    document.getElementById("stage").innerText=
+        current+1;
+
+    document.getElementById("level").innerText=
+        "🌿 "+s.type+" | مرحله "+(current+1);
+
+    document.getElementById("question").innerText=
+        s.question;
+
+    document.getElementById("story").innerText=
+        s.story;
+
+    document.getElementById("message").innerText="";
+
+    document.getElementById("next").style.display=
+        "none";
+
+    createVisual(s.visual);
+
+    createOptions(s.options);
+
+    updateProgress();
+}
+
+
+/* =========================================
+   تصویر
+========================================= */
+
+function createVisual(items){
+
+    const visual=
+        document.getElementById("visual");
+
+    visual.innerHTML="";
+
+    items.forEach(item=>{
+
+        const span=
+            document.createElement("span");
+
+        span.className="item";
+
+        span.innerText=item;
+
+        visual.appendChild(span);
+
+    });
+}
+
+
+/* =========================================
+   گزینه‌ها
+========================================= */
+
+function createOptions(options){
+
+    const container=
+        document.getElementById("options");
+
+    container.innerHTML="";
+
+    let shuffled=[...options];
+
+    shuffled.sort(
+        ()=>Math.random()-0.5
+    );
+
+    shuffled.forEach(option=>{
+
+        const button=
+            document.createElement("button");
+
+        button.className="option";
+
+        button.innerText=option;
+
+        button.onclick=()=>{
+
+            checkAnswer(
+                button,
+                option
+            );
+
+        };
+
+        container.appendChild(button);
+
+    });
+}
+
+
+/* =========================================
+   بررسی پاسخ
+========================================= */
+
+function checkAnswer(button,answer){
+
+    const s=stages[current];
+
+    const buttons=
+        document.querySelectorAll(".option");
+
+    buttons.forEach(
+        b=>b.disabled=true
+    );
+
+
+    if(answer===s.answer){
+
+        button.classList.add("correct");
+
+        correct++;
+
+        score+=10;
+
+        document.getElementById("score")
+            .innerText=score;
+
+        document.getElementById("message")
+            .innerText=
+            "🎉 آفرین کاوشگر! سرنخ را پیدا کردی.";
+
+        document.getElementById("message")
+            .style.color="#d9f99d";
+
+    }
+
+    else{
+
+        button.classList.add("wrong");
+
+        lives--;
+
+        document.getElementById("lives")
+            .innerText=
+            lives>0 ? lives : "🔋۰";
+
+        buttons.forEach(b=>{
+
+            if(b.innerText===s.answer){
+
+                b.classList.add("correct");
+
+            }
+
+        });
+
+        document.getElementById("message")
+            .innerText=
+            "🔎 هنوز جواب را پیدا نکرده‌ای. پاسخ درست: "
+            +s.answer;
+
+        document.getElementById("message")
+            .style.color="#ffb3a7";
+
+    }
+
+    document.getElementById("next")
+        .style.display="inline-block";
+
+}
+
+
+/* =========================================
+   مرحله بعد
+========================================= */
+
+function nextStage(){
+
+    current++;
+
+    if(current>=stages.length){
+
+        finishGame();
+
+    }else{
+
+        loadStage();
+
+    }
+
+}
+
+
+/* =========================================
+   پیشرفت
+========================================= */
+
+function updateProgress(){
+
+    const percent=
+        ((current+1)/stages.length)*100;
+
+    document.getElementById("progress")
+        .style.width=
+        percent+"%";
+
+}
+
+
+/* =========================================
+   پایان
+========================================= */
+
+function finishGame(){
+
+    document.getElementById("game")
+        .style.display="none";
+
+    document.getElementById("report")
+        .style.display="block";
+
+    document.getElementById("finalScore")
+        .innerText=score;
+
+    document.getElementById("finalCorrect")
+        .innerText=correct;
+
+    const percent=
+        Math.round(
+            correct/stages.length*100
+        );
+
+    document.getElementById("finalPercent")
+        .innerText=percent+"%";
+
+
+    let performance="";
+
+    if(percent>=90){
+
+        performance=
+        "🏆 دانشمند کوچک بی‌مهرگان! تو جنگل را به‌خوبی کاوش کردی.";
+
+    }
+
+    else if(percent>=75){
+
+        performance=
+        "🌟 کاوشگر حرفه‌ای! بیشتر رازهای جنگل را کشف کردی.";
+
+    }
+
+    else if(percent>=50){
+
+        performance=
+        "🌿 کاوشگر خوب! با کمی تمرین اطلاعاتت کامل‌تر می‌شود.";
+
+    }
+
+    else{
+
+        performance=
+        "🔎 دوباره وارد جنگل شو و این بار سرنخ‌های بیشتری پیدا کن.";
+
+    }
+
+    document.getElementById("performance")
+        .innerText=performance;
+
+}
+
+
+/* =========================================
+   شروع دوباره
+========================================= */
+
+function restartGame(){
+
+    current=0;
+
+    score=0;
+
+    correct=0;
+
+    lives=3;
+
+    document.getElementById("score")
+        .innerText="0";
+
+    document.getElementById("lives")
+        .innerText="3";
+
+    document.getElementById("game")
+        .style.display="block";
+
+    document.getElementById("report")
+        .style.display="none";
+
+    loadStage();
+
+}
+
+
+/* =========================================
+   شروع بازی
+========================================= */
+
+loadStage();
+
+</script>
+
+</body>
+</html>
