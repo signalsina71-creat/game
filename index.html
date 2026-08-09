@@ -1,369 +1,677 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>شکارچی واژه‌ها | بازی املا</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>شکارچی واژه‌ها - نسخه ۲</title>
 
 <style>
 
-* {
-    box-sizing: border-box;
+*{
+box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Tahoma, Arial, sans-serif;
-    background: linear-gradient(135deg, #dbeafe, #fef3c7);
-    min-height: 100vh;
-    color: #1e293b;
+body{
+
+margin:0;
+
+font-family:
+Tahoma,
+Arial,
+sans-serif;
+
+background:
+linear-gradient(
+135deg,
+#dbeafe,
+#fef3c7
+);
+
+min-height:100vh;
+
+color:#1e293b;
+
 }
 
-.container {
-    width: 95%;
-    max-width: 1000px;
-    margin: 25px auto;
-    background: white;
-    border-radius: 25px;
-    padding: 25px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+.container{
+
+width:95%;
+
+max-width:1000px;
+
+margin:20px auto;
+
+background:white;
+
+border-radius:25px;
+
+padding:25px;
+
+box-shadow:
+0 10px 35px
+rgba(0,0,0,.15);
+
 }
 
-h1 {
-    text-align: center;
-    color: #2563eb;
-    margin-bottom: 5px;
+h1{
+
+text-align:center;
+
+color:#2563eb;
+
+margin-bottom:5px;
+
+font-size:32px;
+
 }
 
-.subtitle {
-    text-align: center;
-    color: #64748b;
-    margin-bottom: 25px;
+.subtitle{
+
+text-align:center;
+
+color:#64748b;
+
+margin-bottom:25px;
+
 }
 
-.score-board {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 25px;
+.stats{
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+flex-wrap:wrap;
+
+margin-bottom:20px;
+
 }
 
-.score-box {
-    background: #eff6ff;
-    border-radius: 15px;
-    padding: 12px 30px;
-    min-width: 140px;
-    text-align: center;
-    font-weight: bold;
+.stat{
+
+background:#eff6ff;
+
+border-radius:15px;
+
+padding:12px 25px;
+
+min-width:125px;
+
+text-align:center;
+
+font-weight:bold;
+
 }
 
-.score-box span {
-    display: block;
-    font-size: 25px;
-    color: #2563eb;
-    margin-top: 5px;
+.stat span{
+
+display:block;
+
+font-size:25px;
+
+color:#2563eb;
+
+margin-top:5px;
+
 }
 
-.game-area {
-    background: #f8fafc;
-    border-radius: 20px;
-    padding: 25px;
-    text-align: center;
+.game{
+
+background:#f8fafc;
+
+border-radius:20px;
+
+padding:25px;
+
+text-align:center;
+
 }
 
-.instruction {
-    font-size: 21px;
-    font-weight: bold;
-    margin-bottom: 15px;
+.level{
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+color:#7c3aed;
+
 }
 
-.hint {
-    background: #fef9c3;
-    color: #854d0e;
-    border-radius: 12px;
-    padding: 12px;
-    max-width: 650px;
-    margin: 0 auto 20px;
+.listen{
+
+border:none;
+
+border-radius:18px;
+
+padding:16px 28px;
+
+background:#2563eb;
+
+color:white;
+
+font-size:20px;
+
+font-family:inherit;
+
+cursor:pointer;
+
+box-shadow:
+0 4px 0 #1d4ed8;
+
+margin-bottom:15px;
+
 }
 
-.word-display {
-    min-height: 75px;
-    background: white;
-    border: 3px dashed #93c5fd;
-    border-radius: 15px;
-    margin: 15px auto 25px;
-    padding: 12px;
+.listen:hover{
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
+transform:translateY(-2px);
 
-    max-width: 700px;
 }
 
-.selected-letter {
-    width: 52px;
-    height: 52px;
+.repeat{
 
-    border-radius: 12px;
+font-size:14px;
 
-    background: #2563eb;
-    color: white;
+color:#64748b;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+margin-bottom:15px;
 
-    font-size: 27px;
-    font-weight: bold;
 }
 
-.letters-title {
-    font-size: 19px;
-    font-weight: bold;
-    margin-bottom: 12px;
+.hint{
+
+background:#fef9c3;
+
+color:#854d0e;
+
+padding:12px;
+
+border-radius:12px;
+
+margin:10px auto 20px;
+
+max-width:650px;
+
 }
 
-.letters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
+.answer{
 
-    max-width: 750px;
-    margin: auto;
+min-height:70px;
+
+background:white;
+
+border:
+3px dashed #93c5fd;
+
+border-radius:15px;
+
+padding:10px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:7px;
+
+flex-wrap:wrap;
+
+max-width:700px;
+
+margin:20px auto;
+
 }
 
-.letter {
-    width: 58px;
-    height: 58px;
+.answer-letter{
 
-    border: none;
-    border-radius: 14px;
+width:52px;
 
-    background: #f59e0b;
-    color: white;
+height:52px;
 
-    font-size: 26px;
-    font-weight: bold;
+border-radius:12px;
 
-    cursor: pointer;
+background:#2563eb;
 
-    box-shadow: 0 4px 0 #d97706;
+color:white;
 
-    transition: 0.15s;
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:27px;
+
+font-weight:bold;
+
 }
 
-.letter:hover {
-    transform: translateY(-3px);
+.letters-title{
+
+font-size:19px;
+
+font-weight:bold;
+
+margin:20px 0 12px;
+
 }
 
-.letter.used {
-    opacity: 0.3;
-    cursor: not-allowed;
+.letters{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+max-width:750px;
+
+margin:auto;
+
 }
 
-.buttons {
-    margin-top: 25px;
+.letter{
 
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
+width:58px;
+
+height:58px;
+
+border:none;
+
+border-radius:14px;
+
+background:#f59e0b;
+
+color:white;
+
+font-size:26px;
+
+font-weight:bold;
+
+font-family:inherit;
+
+cursor:pointer;
+
+box-shadow:
+0 4px 0 #d97706;
+
+transition:.15s;
+
 }
 
-.control {
-    border: none;
-    border-radius: 12px;
+.letter:hover{
 
-    padding: 13px 25px;
+transform:translateY(-3px);
 
-    font-size: 17px;
-    font-family: inherit;
-
-    color: white;
-    cursor: pointer;
 }
 
-.check {
-    background: #16a34a;
+.letter.used{
+
+opacity:.3;
+
+cursor:not-allowed;
+
 }
 
-.clear {
-    background: #ef4444;
+.controls{
+
+display:flex;
+
+justify-content:center;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin-top:25px;
+
 }
 
-.next {
-    background: #7c3aed;
+button.control{
+
+border:none;
+
+border-radius:12px;
+
+padding:13px 22px;
+
+font-size:17px;
+
+font-family:inherit;
+
+color:white;
+
+cursor:pointer;
+
 }
 
-.control:hover {
-    opacity: 0.9;
+.check{
+
+background:#16a34a;
+
 }
 
-.message {
-    min-height: 45px;
-    margin-top: 20px;
+.clear{
 
-    font-size: 20px;
-    font-weight: bold;
+background:#ef4444;
+
 }
 
-.grid-section {
-    margin-top: 30px;
+.next{
 
-    background: #f8fafc;
+background:#7c3aed;
 
-    padding: 20px;
-
-    border-radius: 20px;
 }
 
-.grid-title {
-    text-align: center;
+.message{
 
-    font-weight: bold;
+min-height:45px;
 
-    font-size: 19px;
+margin-top:20px;
 
-    margin-bottom: 15px;
+font-size:20px;
+
+font-weight:bold;
+
 }
 
-.letter-grid {
-    display: grid;
+.hearts{
 
-    grid-template-columns: repeat(8, 1fr);
+font-size:25px;
 
-    gap: 7px;
+letter-spacing:5px;
 
-    max-width: 650px;
+margin:10px;
 
-    margin: auto;
 }
 
-.grid-letter {
-    height: 45px;
+.progress{
 
-    border: none;
+height:12px;
 
-    border-radius: 9px;
+background:#e2e8f0;
 
-    background: #60a5fa;
+border-radius:10px;
 
-    color: white;
+overflow:hidden;
 
-    font-size: 19px;
+margin:20px auto;
 
-    font-weight: bold;
+max-width:650px;
 
-    cursor: pointer;
 }
 
-.grid-letter:hover {
-    background: #3b82f6;
+.progress-bar{
+
+height:100%;
+
+width:0%;
+
+background:#22c55e;
+
+transition:.4s;
+
 }
 
-.footer {
-    text-align: center;
+.report{
 
-    margin-top: 20px;
+display:none;
 
-    color: #64748b;
+background:#eff6ff;
 
-    font-size: 14px;
+border-radius:20px;
+
+padding:25px;
+
+margin-top:20px;
+
+text-align:center;
+
 }
 
-@media(max-width:600px) {
+.report h2{
 
-    .container {
-        padding: 15px;
-    }
+color:#2563eb;
 
-    .letter {
-        width: 48px;
-        height: 48px;
-    }
+}
 
-    .selected-letter {
-        width: 43px;
-        height: 43px;
-        font-size: 22px;
-    }
+.report-number{
 
-    .letter-grid {
-        grid-template-columns: repeat(6, 1fr);
-    }
+font-size:35px;
+
+font-weight:bold;
+
+color:#16a34a;
+
+margin:10px;
+
+}
+
+.restart{
+
+border:none;
+
+background:#2563eb;
+
+color:white;
+
+padding:14px 25px;
+
+border-radius:12px;
+
+font-family:inherit;
+
+font-size:17px;
+
+cursor:pointer;
+
+}
+
+.footer{
+
+text-align:center;
+
+color:#64748b;
+
+font-size:14px;
+
+margin-top:20px;
+
+}
+
+@media(max-width:600px){
+
+.container{
+
+padding:15px;
+
+}
+
+h1{
+
+font-size:26px;
+
+}
+
+.letter{
+
+width:48px;
+
+height:48px;
+
+font-size:23px;
+
+}
+
+.answer-letter{
+
+width:43px;
+
+height:43px;
+
+font-size:22px;
+
+}
+
+.stat{
+
+min-width:105px;
+
+padding:10px;
+
+}
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
+
 
 <h1>🎯 شکارچی واژه‌ها</h1>
 
 <div class="subtitle">
-بازی تقویت املا و دقت نوشتاری
+
+نسخه ۲ | بازی تقویت املا و شنیداری
+
 </div>
 
 
-<div class="score-board">
+<div class="stats">
 
-<div class="score-box">
-امتیاز
+
+<div class="stat">
+
+⭐ امتیاز
+
 <span id="score">0</span>
-</div>
-
-<div class="score-box">
-پاسخ درست
-<span id="correct">0</span>
-</div>
-
-<div class="score-box">
-مرحله
-<span id="level">1</span>
-</div>
 
 </div>
 
 
-<div class="game-area">
+<div class="stat">
 
-<div class="instruction">
-🧩 حروف درست را به ترتیب انتخاب کن
+🏆 رکورد
+
+<span id="record">0</span>
+
 </div>
 
 
-<div class="hint" id="hint">
+<div class="stat">
+
+📚 کلمه
+
+<span id="wordNumber">1</span>
+
+</div>
+
+
+</div>
+
+
+<div class="game"
+id="gameArea">
+
+
+<div class="level"
+id="level">
+
+سطح ۱ | آسان
+
+</div>
+
+
+<div class="hearts"
+id="hearts">
+
+❤️❤️❤️
+
+</div>
+
+
+<button
+class="listen"
+onclick="speakWord()">
+
+🔊 پخش کلمه
+
+</button>
+
+
+<div class="repeat">
+
+برای شنیدن دوباره روی دکمه بالا بزن.
+
+</div>
+
+
+<div
+class="hint"
+id="hint">
+
 💡 راهنما
+
 </div>
 
 
-<div class="word-display" id="wordDisplay">
+<div
+class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+
+</div>
+
+</div>
+
+
+<div
+class="answer"
+id="answer">
+
 </div>
 
 
 <div class="letters-title">
-🔤 حروف جورچین
+
+🧩 حروف را به ترتیب انتخاب کن
+
 </div>
 
 
-<div class="letters" id="lettersContainer">
+<div
+class="letters"
+id="letters">
+
 </div>
 
 
-<div class="buttons">
+<div class="controls">
+
 
 <button
 class="control clear"
-onclick="clearWord()">
+onclick="clearAnswer()">
 
 پاک کردن
 
@@ -372,7 +680,7 @@ onclick="clearWord()">
 
 <button
 class="control check"
-onclick="checkWord()">
+onclick="checkAnswer()">
 
 بررسی پاسخ ✓
 
@@ -387,40 +695,91 @@ onclick="nextWord()">
 
 </button>
 
+
 </div>
 
 
 <div
 class="message"
 id="message">
-</div>
 
 </div>
 
-
-<div class="grid-section">
-
-<div class="grid-title">
-
-🔤 جدول حروف فارسی
 
 </div>
 
 
 <div
-class="letter-grid"
-id="letterGrid">
+class="report"
+id="report">
+
+
+<h2>🎉 مرحله تمام شد!</h2>
+
+
+<div>
+
+امتیاز شما
 
 </div>
+
+
+<div
+class="report-number"
+id="finalScore">
+
+0
+
+</div>
+
+
+<div>
+
+پاسخ‌های درست:
+
+<strong id="finalCorrect">
+
+0
+
+</strong>
+
+</div>
+
+
+<div>
+
+رکورد شما:
+
+<strong id="finalRecord">
+
+0
+
+</strong>
+
+</div>
+
+
+<br>
+
+
+<button
+class="restart"
+onclick="restartGame()">
+
+🔄 شروع دوباره
+
+</button>
+
 
 </div>
 
 
 <div class="footer">
 
-🌟 با دقت انتخاب کن و امتیاز بگیر
+🌟 گوش کن، فکر کن، بساز، یاد بگیر!
 
 </div>
+
 
 </div>
 
@@ -428,427 +787,752 @@ id="letterGrid">
 <script>
 
 
-const words = [
+/* =========================
+   بانک کلمات
+========================= */
+
+
+const levels = [
 
 {
-word: "مدرسه",
-hint: "جایی که دانش‌آموزان در آن درس می‌خوانند."
+
+name:"سطح ۱ | آسان",
+
+words:[
+
+{
+word:"کتاب",
+hint:"چیزی که برای خواندن و یادگیری استفاده می‌کنیم."
 },
 
 {
-word: "کتاب",
-hint: "چیزی که برای خواندن و یادگیری استفاده می‌کنیم."
+word:"مداد",
+hint:"وسیله‌ای برای نوشتن."
 },
 
 {
-word: "درخت",
-hint: "گیاهی بزرگ که تنه و شاخه دارد."
+word:"خانه",
+hint:"جایی که در آن زندگی می‌کنیم."
 },
 
 {
-word: "پرنده",
-hint: "جانوری که معمولاً بال دارد و می‌تواند پرواز کند."
+word:"مادر",
+hint:"یکی از اعضای مهم خانواده."
 },
 
 {
-word: "باران",
-hint: "آبی که از آسمان می‌بارد."
+word:"دوست",
+hint:"کسی که با او رابطه خوبی داریم."
+}
+
+]
+
 },
 
 {
-word: "دوست",
-hint: "کسی که با او رابطه خوبی داریم."
+
+name:"سطح ۲ | متوسط",
+
+words:[
+
+{
+word:"مدرسه",
+hint:"جایی که دانش‌آموزان در آن درس می‌خوانند."
 },
 
 {
-word: "خانه",
-hint: "جایی که در آن زندگی می‌کنیم."
+word:"پرنده",
+hint:"جانوری که معمولاً بال دارد."
 },
 
 {
-word: "خورشید",
-hint: "چیزی که در روز به ما نور و گرما می‌دهد."
+word:"باران",
+hint:"آبی که از آسمان می‌بارد."
 },
 
 {
-word: "مادر",
-hint: "یکی از مهم‌ترین اعضای خانواده."
+word:"درخت",
+hint:"گیاهی بزرگ که تنه و شاخه دارد."
 },
 
 {
-word: "مداد",
-hint: "وسیله‌ای برای نوشتن."
+word:"خورشید",
+hint:"در روز به ما نور و گرما می‌دهد."
+}
+
+]
+
+},
+
+{
+
+name:"سطح ۳ | سخت",
+
+words:[
+
+{
+word:"دانش‌آموز",
+hint:"کسی که در مدرسه یا مرکز آموزشی درس می‌خواند."
+},
+
+{
+word:"کتابخانه",
+hint:"جایی که کتاب‌های زیادی در آن نگهداری می‌شود."
+},
+
+{
+word:"آزمایشگاه",
+hint:"محلی برای انجام آزمایش‌های علمی."
+},
+
+{
+word:"مهربانی",
+hint:"رفتار خوب و محبت‌آمیز با دیگران."
+},
+
+{
+word:"مسئولیت",
+hint:"وظیفه‌ای که انجام آن بر عهده ماست."
+}
+
+]
+
 }
 
 ];
 
 
-const alphabet = [
-
-"ا","ب","پ","ت","ث",
-"ج","چ","ح","خ","د",
-"ذ","ر","ز","ژ","س",
-"ش","ص","ض","ط","ظ",
-"ع","غ","ف","ق","ک",
-"گ","ل","م","ن","و",
-"ه","ی"
-
-];
+/* =========================
+   متغیرهای بازی
+========================= */
 
 
-let currentWordIndex = 0;
+let levelIndex = 0;
 
-let selectedLetters = [];
+let wordIndex = 0;
 
 let score = 0;
 
 let correct = 0;
 
-let level = 1;
+let lives = 3;
+
+let selected = [];
 
 let answered = false;
 
+let totalWords =
+levels.reduce(
+(sum,level)=>sum+level.words.length,
+0
+);
+
+let currentLevel =
+levels[levelIndex];
+
+let currentWord =
+currentLevel.words[wordIndex];
 
 
-function loadWord() {
-
-    const current = words[currentWordIndex];
-
-    selectedLetters = [];
-
-    answered = false;
-
-    document.getElementById("message").innerText = "";
-
-    document.getElementById("hint").innerText =
-        "💡 راهنما: " + current.hint;
-
-    createLetters();
-
-    updateDisplay();
-
-}
+let record =
+parseInt(
+localStorage.getItem("amlaRecord")
+) || 0;
 
 
-
-function createLetters() {
-
-    const container =
-        document.getElementById("lettersContainer");
-
-    container.innerHTML = "";
+document.getElementById(
+"record"
+).innerText = record;
 
 
-    const currentWord =
-        words[currentWordIndex].word;
+/* =========================
+   شروع بازی
+========================= */
 
 
-    let letters =
-        currentWord.split("");
+function loadWord(){
+
+currentLevel =
+levels[levelIndex];
+
+currentWord =
+currentLevel.words[wordIndex];
+
+selected=[];
+
+lives=3;
+
+answered=false;
 
 
-    const extraLetters = [
-
-        "ا",
-        "ب",
-        "د",
-        "ر",
-        "س",
-        "م",
-        "ن",
-        "ک"
-
-    ];
+document.getElementById(
+"level"
+).innerText =
+currentLevel.name;
 
 
-    for(let i = 0; i < 4; i++) {
-
-        letters.push(
-
-            extraLetters[
-                Math.floor(
-                    Math.random() *
-                    extraLetters.length
-                )
-            ]
-
-        );
-
-    }
+document.getElementById(
+"wordNumber"
+).innerText =
+wordIndex+1;
 
 
-    letters.sort(
-        () => Math.random() - 0.5
-    );
+document.getElementById(
+"hint"
+).innerText =
+"💡 راهنما: "+
+currentWord.hint;
 
 
-    letters.forEach(
-
-        (letter,index) => {
-
-            const button =
-                document.createElement("button");
-
-            button.className = "letter";
-
-            button.innerText = letter;
+document.getElementById(
+"message"
+).innerText="";
 
 
-            button.onclick = function() {
+updateHearts();
 
-                if(
-                    button.classList.contains("used")
-                    ||
-                    answered
-                ) {
-                    return;
-                }
+updateProgress();
 
+createLetters();
 
-                selectedLetters.push({
-
-                    letter: letter,
-
-                    button: button
-
-                });
-
-
-                button.classList.add("used");
-
-
-                updateDisplay();
-
-            };
-
-
-            container.appendChild(button);
-
-        }
-
-    );
+updateAnswer();
 
 }
 
 
-
-function updateDisplay() {
-
-    const display =
-        document.getElementById("wordDisplay");
-
-    display.innerHTML = "";
+/* =========================
+   ساخت حروف
+========================= */
 
 
-    selectedLetters.forEach(
+function createLetters(){
 
-        item => {
+const container =
+document.getElementById("letters");
 
-            const div =
-                document.createElement("div");
-
-            div.className =
-                "selected-letter";
-
-            div.innerText =
-                item.letter;
-
-            display.appendChild(div);
-
-        }
-
-    );
-
-}
+container.innerHTML="";
 
 
-
-function clearWord() {
-
-    if(answered) {
-        return;
-    }
+let letters =
+currentWord.word.split("");
 
 
-    selectedLetters.forEach(
+const extra=[
 
-        item => {
+"ا","ب","د",
+"ر","س","م",
+"ن","ک","ت",
+"ل"
 
-            if(item.button) {
-
-                item.button.classList.remove(
-                    "used"
-                );
-
-            }
-
-        }
-
-    );
+];
 
 
-    selectedLetters = [];
+for(let i=0;i<4;i++){
 
-
-    updateDisplay();
-
-
-    document.getElementById(
-        "message"
-    ).innerText = "";
+letters.push(
+extra[
+Math.floor(
+Math.random()*extra.length
+)
+]
+);
 
 }
 
 
-
-function checkWord() {
-
-    if(answered) {
-        return;
-    }
+letters.sort(
+()=>Math.random()-.5
+);
 
 
-    const currentWord =
-        words[currentWordIndex].word;
+letters.forEach(
+(letter,index)=>{
+
+const button =
+document.createElement("button");
 
 
-    const answer =
-        selectedLetters
-        .map(
-            item => item.letter
-        )
-        .join("");
+button.className="letter";
+
+button.innerText=letter;
 
 
-    const message =
-        document.getElementById("message");
+button.onclick=function(){
+
+if(
+button.classList.contains("used")
+||
+answered
+||
+lives<=0
+){
+return;
+}
 
 
-    if(answer === currentWord) {
+selected.push({
 
-        score += 10;
+letter:letter,
 
-        correct++;
+button:button
 
-        answered = true;
-
-
-        document.getElementById(
-            "score"
-        ).innerText = score;
+});
 
 
-        document.getElementById(
-            "correct"
-        ).innerText = correct;
+button.classList.add("used");
+
+updateAnswer();
+
+};
 
 
-        message.innerText =
-            "🎉 آفرین! پاسخ کاملاً درست است.";
+container.appendChild(button);
 
-        message.style.color =
-            "#16a34a";
+}
 
-    }
-
-    else {
-
-        message.innerText =
-            "❌ هنوز درست نیست. دوباره تلاش کن.";
-
-        message.style.color =
-            "#dc2626";
-
-    }
+);
 
 }
 
 
-
-function nextWord() {
-
-    currentWordIndex++;
-
-
-    if(
-        currentWordIndex >= words.length
-    ) {
-
-        currentWordIndex = 0;
-
-        level++;
+/* =========================
+   نمایش پاسخ
+========================= */
 
 
-        document.getElementById(
-            "level"
-        ).innerText = level;
+function updateAnswer(){
 
-    }
+const answer =
+document.getElementById("answer");
+
+answer.innerHTML="";
 
 
-    loadWord();
+selected.forEach(
+item=>{
+
+const div =
+document.createElement("div");
+
+div.className=
+"answer-letter";
+
+div.innerText=
+item.letter;
+
+answer.appendChild(div);
+
+}
+
+);
 
 }
 
 
-
-function createLetterGrid() {
-
-    const grid =
-        document.getElementById("letterGrid");
+/* =========================
+   پاک کردن
+========================= */
 
 
-    alphabet.forEach(
+function clearAnswer(){
 
-        letter => {
-
-            const button =
-                document.createElement("button");
+if(answered)
+return;
 
 
-            button.className =
-                "grid-letter";
+selected.forEach(
+item=>{
+
+item.button.classList.remove(
+"used"
+);
+
+}
+);
 
 
-            button.innerText =
-                letter;
+selected=[];
 
-
-            /*
-             جدول حروف در این نسخه
-             فقط نقش آموزشی/شناخت حروف دارد
-             و مستقیماً پاسخ را وارد نمی‌کند.
-            */
-
-
-            button.onclick = function() {
-
-                document.getElementById(
-                    "message"
-                ).innerText =
-                    "🔤 حرف «" +
-                    letter +
-                    "» انتخاب شد.";
-
-                document.getElementById(
-                    "message"
-                ).style.color =
-                    "#2563eb";
-
-            };
-
-
-            grid.appendChild(button);
-
-        }
-
-    );
+updateAnswer();
 
 }
 
 
+/* =========================
+   بررسی پاسخ
+========================= */
 
-createLetterGrid();
+
+function checkAnswer(){
+
+if(answered)
+return;
+
+
+if(selected.length===0){
+
+showMessage(
+"⚠️ ابتدا حروف را انتخاب کن.",
+"#d97706"
+);
+
+return;
+
+}
+
+
+const answer =
+selected
+.map(
+item=>item.letter
+)
+.join("");
+
+
+if(answer===currentWord.word){
+
+answered=true;
+
+correct++;
+
+score +=
+10*lives;
+
+
+if(score>record){
+
+record=score;
+
+localStorage.setItem(
+"amlaRecord",
+record
+);
+
+}
+
+
+document.getElementById(
+"score"
+).innerText=score;
+
+
+document.getElementById(
+"record"
+).innerText=record;
+
+
+showMessage(
+"🎉 آفرین! پاسخ درست است.",
+"#16a34a"
+);
+
+
+}
+
+else{
+
+lives--;
+
+updateHearts();
+
+
+if(lives<=0){
+
+answered=true;
+
+
+showMessage(
+"❌ فرصت‌ها تمام شد. پاسخ: "+
+currentWord.word,
+"#dc2626"
+);
+
+}
+
+else{
+
+showMessage(
+"❌ پاسخ درست نیست. دوباره تلاش کن.",
+"#dc2626"
+);
+
+}
+
+}
+
+}
+
+
+/* =========================
+   جان‌ها
+========================= */
+
+
+function updateHearts(){
+
+let result="";
+
+for(
+let i=0;
+i<3;
+i++
+){
+
+if(i<lives){
+
+result+="❤️";
+
+}
+
+else{
+
+result+="🖤";
+
+}
+
+}
+
+
+document.getElementById(
+"hearts"
+).innerText=result;
+
+}
+
+
+/* =========================
+   پیام
+========================= */
+
+
+function showMessage(
+text,
+color
+){
+
+const message =
+document.getElementById(
+"message"
+);
+
+message.innerText=text;
+
+message.style.color=color;
+
+}
+
+
+/* =========================
+   کلمه بعدی
+========================= */
+
+
+function nextWord(){
+
+if(!answered){
+
+showMessage(
+"⚠️ ابتدا پاسخ را بررسی کن.",
+"#d97706"
+);
+
+return;
+
+}
+
+
+wordIndex++;
+
+
+if(
+wordIndex >=
+currentLevel.words.length
+){
+
+wordIndex=0;
+
+levelIndex++;
+
+
+if(
+levelIndex >=
+levels.length
+){
+
+finishGame();
+
+return;
+
+}
+
+}
+
+
+loadWord();
+
+}
+
+
+/* =========================
+   پخش صوت
+========================= */
+
+
+function speakWord(){
+
+if(
+!("speechSynthesis" in window)
+){
+
+showMessage(
+"⚠️ مرورگر شما از پخش صوت پشتیبانی نمی‌کند.",
+"#dc2626"
+);
+
+return;
+
+}
+
+
+window.speechSynthesis.cancel();
+
+
+const utterance =
+new SpeechSynthesisUtterance(
+currentWord.word
+);
+
+
+utterance.lang="fa-IR";
+
+utterance.rate=.75;
+
+utterance.pitch=1;
+
+
+window.speechSynthesis.speak(
+utterance
+);
+
+}
+
+
+/* =========================
+   پیشرفت
+========================= */
+
+
+function updateProgress(){
+
+let completed=0;
+
+
+for(
+let i=0;
+i<levelIndex;
+i++
+){
+
+completed +=
+levels[i].words.length;
+
+}
+
+
+completed += wordIndex;
+
+
+const percent =
+(
+completed/
+totalWords
+)*100;
+
+
+document.getElementById(
+"progressBar"
+).style.width =
+percent+"%";
+
+}
+
+
+/* =========================
+   پایان بازی
+========================= */
+
+
+function finishGame(){
+
+document.getElementById(
+"gameArea"
+).style.display="none";
+
+
+document.getElementById(
+"report"
+).style.display="block";
+
+
+document.getElementById(
+"finalScore"
+).innerText=score;
+
+
+document.getElementById(
+"finalCorrect"
+).innerText=correct;
+
+
+document.getElementById(
+"finalRecord"
+).innerText=record;
+
+}
+
+
+/* =========================
+   شروع دوباره
+========================= */
+
+
+function restartGame(){
+
+levelIndex=0;
+
+wordIndex=0;
+
+score=0;
+
+correct=0;
+
+lives=3;
+
+
+document.getElementById(
+"score"
+).innerText="0";
+
+
+document.getElementById(
+"report"
+).style.display="none";
+
+
+document.getElementById(
+"gameArea"
+).style.display="block";
+
+
+loadWord();
+
+}
+
+
+/* =========================
+   شروع اولیه
+========================= */
+
 
 loadWord();
 
@@ -856,4 +1540,5 @@ loadWord();
 </script>
 
 </body>
+
 </html>
