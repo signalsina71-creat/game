@@ -1,1 +1,1405 @@
-tasvir.html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>شکارچی کلمه‌ها - بازی تصویری</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #dbeafe,
+        #fef3c7
+    );
+
+    min-height:100vh;
+
+    color:#1e293b;
+}
+
+.container{
+
+    width:95%;
+
+    max-width:1000px;
+
+    margin:20px auto;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    box-shadow:
+    0 10px 35px
+    rgba(0,0,0,.15);
+}
+
+h1{
+
+    text-align:center;
+
+    color:#2563eb;
+
+    margin-bottom:5px;
+
+    font-size:32px;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-bottom:25px;
+}
+
+.stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:20px;
+}
+
+.stat{
+
+    background:#eff6ff;
+
+    border-radius:15px;
+
+    padding:12px 25px;
+
+    min-width:125px;
+
+    text-align:center;
+
+    font-weight:bold;
+}
+
+.stat span{
+
+    display:block;
+
+    font-size:25px;
+
+    color:#2563eb;
+
+    margin-top:5px;
+}
+
+.game{
+
+    background:#f8fafc;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    text-align:center;
+}
+
+.level{
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    color:#7c3aed;
+
+    margin-bottom:10px;
+}
+
+.hearts{
+
+    font-size:25px;
+
+    letter-spacing:5px;
+
+    margin:10px;
+}
+
+.instruction{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin:15px 0;
+
+    color:#334155;
+}
+
+/* تصویر */
+
+.picture-box{
+
+    width:260px;
+
+    height:220px;
+
+    margin:20px auto;
+
+    background:white;
+
+    border:4px solid #93c5fd;
+
+    border-radius:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:
+    0 6px 15px
+    rgba(0,0,0,.10);
+}
+
+.picture{
+
+    font-size:125px;
+
+    user-select:none;
+}
+
+/* گزینه ها */
+
+.options-title{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    margin:20px 0 12px;
+}
+
+.options{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2, minmax(180px,1fr));
+
+    gap:14px;
+
+    max-width:650px;
+
+    margin:auto;
+}
+
+.option{
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#f59e0b;
+
+    color:white;
+
+    font-family:inherit;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    padding:17px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 0 #d97706;
+
+    transition:.15s;
+}
+
+.option:hover{
+
+    transform:
+    translateY(-3px);
+}
+
+.option:active{
+
+    transform:
+    translateY(2px);
+}
+
+.option.correct{
+
+    background:#16a34a;
+
+    box-shadow:
+    0 5px 0 #15803d;
+}
+
+.option.wrong{
+
+    background:#ef4444;
+
+    box-shadow:
+    0 5px 0 #b91c1c;
+}
+
+.option.disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+}
+
+/* راهنما */
+
+.hint{
+
+    background:#fef9c3;
+
+    color:#854d0e;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    max-width:650px;
+
+    margin:20px auto;
+}
+
+/* پیشرفت */
+
+.progress{
+
+    height:12px;
+
+    background:#e2e8f0;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    margin:20px auto;
+
+    max-width:650px;
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0%;
+
+    background:#22c55e;
+
+    transition:.4s;
+}
+
+.message{
+
+    min-height:45px;
+
+    margin-top:20px;
+
+    font-size:20px;
+
+    font-weight:bold;
+}
+
+.next-button{
+
+    border:none;
+
+    background:#7c3aed;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border-radius:12px;
+
+    font-family:inherit;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    margin-top:10px;
+
+    display:none;
+}
+
+/* گزارش */
+
+.report{
+
+    display:none;
+
+    background:#eff6ff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+}
+
+.report h2{
+
+    color:#2563eb;
+}
+
+.report-number{
+
+    font-size:40px;
+
+    font-weight:bold;
+
+    color:#16a34a;
+
+    margin:10px;
+}
+
+.restart{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px 28px;
+
+    border-radius:12px;
+
+    font-family:inherit;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    margin-top:20px;
+}
+
+.footer{
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:14px;
+
+    margin-top:20px;
+}
+
+@media(max-width:650px){
+
+    .container{
+
+        padding:15px;
+    }
+
+    h1{
+
+        font-size:26px;
+    }
+
+    .picture-box{
+
+        width:210px;
+
+        height:180px;
+    }
+
+    .picture{
+
+        font-size:100px;
+    }
+
+    .options{
+
+        grid-template-columns:1fr;
+    }
+
+    .option{
+
+        font-size:21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+🎯 شکارچی کلمه‌ها
+</h1>
+
+<div class="subtitle">
+
+نسخه ۱ | بازی تصویری واژه‌یابی
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+⭐ امتیاز
+
+<span id="score">
+0
+</span>
+
+</div>
+
+<div class="stat">
+
+🏆 رکورد
+
+<span id="record">
+0
+</span>
+
+</div>
+
+<div class="stat">
+
+🖼️ مرحله
+
+<span id="questionNumber">
+1
+</span>
+
+</div>
+
+</div>
+
+
+<div class="game" id="gameArea">
+
+<div class="level" id="level">
+
+سطح ۱ | آسان
+
+</div>
+
+<div class="hearts" id="hearts">
+
+❤️❤️❤️
+
+</div>
+
+<div class="instruction">
+
+👀 به شکل نگاه کن و کلمه مناسب را پیدا کن.
+
+</div>
+
+
+<div class="picture-box">
+
+<div class="picture" id="picture">
+
+📚
+
+</div>
+
+</div>
+
+
+<div class="options-title">
+
+🔤 کدام کلمه مربوط به این شکل است؟
+
+</div>
+
+
+<div class="options" id="options">
+
+</div>
+
+
+<div class="hint" id="hint">
+
+💡 راهنما
+
+</div>
+
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+
+<div
+class="message"
+id="message">
+</div>
+
+
+<button
+class="next-button"
+id="nextButton"
+onclick="nextQuestion()">
+
+مرحله بعد ➜
+
+</button>
+
+</div>
+
+
+<div
+class="report"
+id="report">
+
+<h2>
+🎉 بازی تمام شد!
+</h2>
+
+<div>
+امتیاز شما
+</div>
+
+<div
+class="report-number"
+id="finalScore">
+
+0
+
+</div>
+
+<div>
+
+پاسخ‌های درست:
+<strong id="finalCorrect">
+0
+</strong>
+
+</div>
+
+<br>
+
+<div>
+
+درصد موفقیت:
+<strong id="finalPercent">
+0%
+</strong>
+
+</div>
+
+<br>
+
+<div>
+
+🏆 رکورد:
+<strong id="finalRecord">
+0
+</strong>
+
+</div>
+
+<button
+class="restart"
+onclick="restartGame()">
+
+🔄 شروع دوباره
+
+</button>
+
+</div>
+
+
+<div class="footer">
+
+🌟 ببین، فکر کن، پیدا کن، یاد بگیر!
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   بانک سوالات
+========================= */
+
+const questions = [
+
+/* ===== آسان ===== */
+
+{
+level:"سطح ۱ | آسان",
+picture:"🍎",
+word:"سیب",
+options:[
+"سیب",
+"موز",
+"هویج",
+"پرتقال"
+],
+hint:"یک میوه گرد و معمولاً قرمز یا سبز است."
+},
+
+{
+level:"سطح ۱ | آسان",
+picture:"🍌",
+word:"موز",
+options:[
+"سیب",
+"موز",
+"هلو",
+"هویج"
+],
+hint:"میوه‌ای زرد و کشیده است."
+},
+
+{
+level:"سطح ۱ | آسان",
+picture:"🐱",
+word:"گربه",
+options:[
+"سگ",
+"گربه",
+"خرگوش",
+"ماهی"
+],
+hint:"یک حیوان خانگی است که معمولاً میو می‌کند."
+},
+
+{
+level:"سطح ۱ | آسان",
+picture:"🐟",
+word:"ماهی",
+options:[
+"پرنده",
+"ماهی",
+"گربه",
+"اسب"
+],
+hint:"این جانور در آب زندگی می‌کند."
+},
+
+{
+level:"سطح ۱ | آسان",
+picture:"🏠",
+word:"خانه",
+options:[
+"مدرسه",
+"خانه",
+"پارک",
+"کتابخانه"
+],
+hint:"جایی که انسان‌ها در آن زندگی می‌کنند."
+},
+
+
+/* ===== متوسط ===== */
+
+{
+level:"سطح ۲ | متوسط",
+picture:"📚",
+word:"کتاب",
+options:[
+"دفتر",
+"کتاب",
+"مداد",
+"کیف"
+],
+hint:"چیزی که برای خواندن و یادگیری استفاده می‌کنیم."
+},
+
+{
+level:"سطح ۲ | متوسط",
+picture:"✏️",
+word:"مداد",
+options:[
+"پاک‌کن",
+"مداد",
+"خط‌کش",
+"کتاب"
+],
+hint:"با آن می‌توانیم بنویسیم و نقاشی کنیم."
+},
+
+{
+level:"سطح ۲ | متوسط",
+picture:"🌳",
+word:"درخت",
+options:[
+"گل",
+"درخت",
+"چمن",
+"کوه"
+],
+hint:"گیاهی است که تنه و شاخه دارد."
+},
+
+{
+level:"سطح ۲ | متوسط",
+picture:"☀️",
+word:"خورشید",
+options:[
+"ماه",
+"ابر",
+"خورشید",
+"ستاره"
+],
+hint:"در روز به زمین نور و گرما می‌دهد."
+},
+
+{
+level:"سطح ۲ | متوسط",
+picture:"🚲",
+word:"دوچرخه",
+options:[
+"ماشین",
+"دوچرخه",
+"اتوبوس",
+"قطار"
+],
+hint:"وسیله‌ای است که معمولاً دو چرخ دارد."
+},
+
+
+/* ===== سخت ===== */
+
+{
+level:"سطح ۳ | سخت",
+picture:"🏫",
+word:"مدرسه",
+options:[
+"بیمارستان",
+"مدرسه",
+"کتابخانه",
+"فروشگاه"
+],
+hint:"دانش‌آموزان برای یادگیری به این مکان می‌روند."
+},
+
+{
+level:"سطح ۳ | سخت",
+picture:"📖",
+word:"کتابخانه",
+options:[
+"آزمایشگاه",
+"کتابخانه",
+"مدرسه",
+"فروشگاه"
+],
+hint:"جایی که کتاب‌های زیادی در آن نگهداری می‌شود."
+},
+
+{
+level:"سطح ۳ | سخت",
+picture:"🔬",
+word:"آزمایشگاه",
+options:[
+"آزمایشگاه",
+"کتابخانه",
+"کلاس",
+"باغ"
+],
+hint:"دانشمندان در آن آزمایش‌های علمی انجام می‌دهند."
+},
+
+{
+level:"سطح ۳ | سخت",
+picture:"🌧️",
+word:"باران",
+options:[
+"برف",
+"باد",
+"باران",
+"خورشید"
+],
+hint:"آبی است که از آسمان به زمین می‌بارد."
+},
+
+{
+level:"سطح ۳ | سخت",
+picture:"🦋",
+word:"پروانه",
+options:[
+"زنبور",
+"پروانه",
+"پرنده",
+"کفشدوزک"
+],
+hint:"حشره‌ای زیبا با بال‌های رنگارنگ است."
+}
+
+];
+
+
+/* =========================
+   متغیرهای بازی
+========================= */
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let correct = 0;
+
+let lives = 3;
+
+let answered = false;
+
+let record =
+parseInt(
+localStorage.getItem(
+"pictureWordRecord"
+)
+) || 0;
+
+
+document.getElementById(
+"record"
+).innerText = record;
+
+
+/* =========================
+   بارگذاری سوال
+========================= */
+
+function loadQuestion(){
+
+const q =
+questions[currentQuestion];
+
+lives = 3;
+
+answered = false;
+
+
+document.getElementById(
+"level"
+).innerText =
+q.level;
+
+
+document.getElementById(
+"questionNumber"
+).innerText =
+currentQuestion + 1;
+
+
+document.getElementById(
+"picture"
+).innerText =
+q.picture;
+
+
+document.getElementById(
+"hint"
+).innerText =
+"💡 راهنما: " + q.hint;
+
+
+document.getElementById(
+"message"
+).innerText =
+"";
+
+
+document.getElementById(
+"nextButton"
+).style.display =
+"none";
+
+
+updateHearts();
+
+updateProgress();
+
+createOptions();
+
+}
+
+
+/* =========================
+   ساخت گزینه ها
+========================= */
+
+function createOptions(){
+
+const container =
+document.getElementById(
+"options"
+);
+
+container.innerHTML = "";
+
+
+const q =
+questions[currentQuestion];
+
+
+let options =
+[...q.options];
+
+
+options.sort(
+() =>
+Math.random() - .5
+);
+
+
+options.forEach(
+word => {
+
+const button =
+document.createElement(
+"button"
+);
+
+button.className =
+"option";
+
+button.innerText =
+word;
+
+
+button.onclick =
+function(){
+
+selectAnswer(
+button,
+word
+);
+
+};
+
+
+container.appendChild(
+button
+);
+
+});
+
+}
+
+
+/* =========================
+   انتخاب پاسخ
+========================= */
+
+function selectAnswer(
+button,
+word
+){
+
+if(answered){
+
+return;
+
+}
+
+
+if(word ===
+questions[
+currentQuestion
+].word){
+
+answered = true;
+
+correct++;
+
+score +=
+10 * lives;
+
+
+button.classList.add(
+"correct"
+);
+
+
+if(score > record){
+
+record = score;
+
+localStorage.setItem(
+"pictureWordRecord",
+record
+);
+
+}
+
+
+document.getElementById(
+"score"
+).innerText =
+score;
+
+
+document.getElementById(
+"record"
+).innerText =
+record;
+
+
+disableOptions();
+
+
+showMessage(
+"🎉 آفرین! پاسخ درست است.",
+"#16a34a"
+);
+
+
+document.getElementById(
+"nextButton"
+).style.display =
+"inline-block";
+
+
+}else{
+
+lives--;
+
+button.classList.add(
+"wrong"
+);
+
+updateHearts();
+
+
+button.classList.add(
+"disabled"
+);
+
+
+showMessage(
+"❌ این کلمه درست نیست. دوباره تلاش کن.",
+"#dc2626"
+);
+
+
+if(lives <= 0){
+
+answered = true;
+
+showCorrectAnswer();
+
+disableOptions();
+
+
+document.getElementById(
+"nextButton"
+).style.display =
+"inline-block";
+
+}
+
+}
+
+}
+
+
+/* =========================
+   نمایش پاسخ درست
+========================= */
+
+function showCorrectAnswer(){
+
+const correctWord =
+questions[
+currentQuestion
+].word;
+
+
+const buttons =
+document.querySelectorAll(
+".option"
+);
+
+
+buttons.forEach(
+button => {
+
+if(
+button.innerText ===
+correctWord
+){
+
+button.classList.add(
+"correct"
+);
+
+}
+
+});
+
+
+showMessage(
+"❌ فرصت‌ها تمام شد. پاسخ درست: " +
+correctWord,
+"#dc2626"
+);
+
+}
+
+
+/* =========================
+   غیرفعال کردن گزینه ها
+========================= */
+
+function disableOptions(){
+
+const buttons =
+document.querySelectorAll(
+".option"
+);
+
+
+buttons.forEach(
+button => {
+
+button.disabled =
+true;
+
+});
+
+}
+
+
+/* =========================
+   جان ها
+========================= */
+
+function updateHearts(){
+
+let hearts = "";
+
+for(
+let i=0;
+i<3;
+i++
+){
+
+hearts +=
+i < lives
+? "❤️"
+: "🖤";
+
+}
+
+
+document.getElementById(
+"hearts"
+).innerText =
+hearts;
+
+}
+
+
+/* =========================
+   پیام
+========================= */
+
+function showMessage(
+text,
+color
+){
+
+const message =
+document.getElementById(
+"message"
+);
+
+message.innerText =
+text;
+
+message.style.color =
+color;
+
+}
+
+
+/* =========================
+   سوال بعد
+========================= */
+
+function nextQuestion(){
+
+currentQuestion++;
+
+
+if(
+currentQuestion >=
+questions.length
+){
+
+finishGame();
+
+return;
+
+}
+
+
+loadQuestion();
+
+}
+
+
+/* =========================
+   پیشرفت
+========================= */
+
+function updateProgress(){
+
+const percent =
+(
+currentQuestion /
+questions.length
+) * 100;
+
+
+document.getElementById(
+"progressBar"
+).style.width =
+percent + "%";
+
+}
+
+
+/* =========================
+   پایان بازی
+========================= */
+
+function finishGame(){
+
+document.getElementById(
+"gameArea"
+).style.display =
+"none";
+
+
+document.getElementById(
+"report"
+).style.display =
+"block";
+
+
+document.getElementById(
+"finalScore"
+).innerText =
+score;
+
+
+document.getElementById(
+"finalCorrect"
+).innerText =
+correct;
+
+
+document.getElementById(
+"finalPercent"
+).innerText =
+Math.round(
+(correct /
+questions.length) *
+100
+) + "%";
+
+
+document.getElementById(
+"finalRecord"
+).innerText =
+record;
+
+}
+
+
+/* =========================
+   شروع دوباره
+========================= */
+
+function restartGame(){
+
+currentQuestion = 0;
+
+score = 0;
+
+correct = 0;
+
+lives = 3;
+
+answered = false;
+
+
+document.getElementById(
+"score"
+).innerText =
+"0";
+
+
+document.getElementById(
+"report"
+).style.display =
+"none";
+
+
+document.getElementById(
+"gameArea"
+).style.display =
+"block";
+
+
+loadQuestion();
+
+}
+
+
+/* =========================
+   شروع بازی
+========================= */
+
+loadQuestion();
+
+</script>
+
+</body>
+
+</html>
