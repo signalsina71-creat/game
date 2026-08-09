@@ -1,11 +1,859 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>بازی املا</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>شکارچی واژه‌ها | بازی املا</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #fef3c7);
+    min-height: 100vh;
+    color: #1e293b;
+}
+
+.container {
+    width: 95%;
+    max-width: 1000px;
+    margin: 25px auto;
+    background: white;
+    border-radius: 25px;
+    padding: 25px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+}
+
+h1 {
+    text-align: center;
+    color: #2563eb;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.score-board {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.score-box {
+    background: #eff6ff;
+    border-radius: 15px;
+    padding: 12px 30px;
+    min-width: 140px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.score-box span {
+    display: block;
+    font-size: 25px;
+    color: #2563eb;
+    margin-top: 5px;
+}
+
+.game-area {
+    background: #f8fafc;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+.instruction {
+    font-size: 21px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.hint {
+    background: #fef9c3;
+    color: #854d0e;
+    border-radius: 12px;
+    padding: 12px;
+    max-width: 650px;
+    margin: 0 auto 20px;
+}
+
+.word-display {
+    min-height: 75px;
+    background: white;
+    border: 3px dashed #93c5fd;
+    border-radius: 15px;
+    margin: 15px auto 25px;
+    padding: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    max-width: 700px;
+}
+
+.selected-letter {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.letters-title {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.letters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    max-width: 750px;
+    margin: auto;
+}
+
+.letter {
+    width: 58px;
+    height: 58px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #f59e0b;
+    color: white;
+
+    font-size: 26px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 0 #d97706;
+
+    transition: 0.15s;
+}
+
+.letter:hover {
+    transform: translateY(-3px);
+}
+
+.letter.used {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.buttons {
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.control {
+    border: none;
+    border-radius: 12px;
+
+    padding: 13px 25px;
+
+    font-size: 17px;
+    font-family: inherit;
+
+    color: white;
+    cursor: pointer;
+}
+
+.check {
+    background: #16a34a;
+}
+
+.clear {
+    background: #ef4444;
+}
+
+.next {
+    background: #7c3aed;
+}
+
+.control:hover {
+    opacity: 0.9;
+}
+
+.message {
+    min-height: 45px;
+    margin-top: 20px;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.grid-section {
+    margin-top: 30px;
+
+    background: #f8fafc;
+
+    padding: 20px;
+
+    border-radius: 20px;
+}
+
+.grid-title {
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 19px;
+
+    margin-bottom: 15px;
+}
+
+.letter-grid {
+    display: grid;
+
+    grid-template-columns: repeat(8, 1fr);
+
+    gap: 7px;
+
+    max-width: 650px;
+
+    margin: auto;
+}
+
+.grid-letter {
+    height: 45px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #60a5fa;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.grid-letter:hover {
+    background: #3b82f6;
+}
+
+.footer {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+@media(max-width:600px) {
+
+    .container {
+        padding: 15px;
+    }
+
+    .letter {
+        width: 48px;
+        height: 48px;
+    }
+
+    .selected-letter {
+        width: 43px;
+        height: 43px;
+        font-size: 22px;
+    }
+
+    .letter-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+}
+
+</style>
 </head>
+
 <body>
-<h1>سلام! بازی املا آماده است 🎯</h1>
-<p>این اولین تست بازی ماست.</p>
+
+<div class="container">
+
+<h1>🎯 شکارچی واژه‌ها</h1>
+
+<div class="subtitle">
+بازی تقویت املا و دقت نوشتاری
+</div>
+
+
+<div class="score-board">
+
+<div class="score-box">
+امتیاز
+<span id="score">0</span>
+</div>
+
+<div class="score-box">
+پاسخ درست
+<span id="correct">0</span>
+</div>
+
+<div class="score-box">
+مرحله
+<span id="level">1</span>
+</div>
+
+</div>
+
+
+<div class="game-area">
+
+<div class="instruction">
+🧩 حروف درست را به ترتیب انتخاب کن
+</div>
+
+
+<div class="hint" id="hint">
+💡 راهنما
+</div>
+
+
+<div class="word-display" id="wordDisplay">
+</div>
+
+
+<div class="letters-title">
+🔤 حروف جورچین
+</div>
+
+
+<div class="letters" id="lettersContainer">
+</div>
+
+
+<div class="buttons">
+
+<button
+class="control clear"
+onclick="clearWord()">
+
+پاک کردن
+
+</button>
+
+
+<button
+class="control check"
+onclick="checkWord()">
+
+بررسی پاسخ ✓
+
+</button>
+
+
+<button
+class="control next"
+onclick="nextWord()">
+
+کلمه بعدی ➜
+
+</button>
+
+</div>
+
+
+<div
+class="message"
+id="message">
+</div>
+
+</div>
+
+
+<div class="grid-section">
+
+<div class="grid-title">
+
+🔤 جدول حروف فارسی
+
+</div>
+
+
+<div
+class="letter-grid"
+id="letterGrid">
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+🌟 با دقت انتخاب کن و امتیاز بگیر
+
+</div>
+
+</div>
+
+
+<script>
+
+
+const words = [
+
+{
+word: "مدرسه",
+hint: "جایی که دانش‌آموزان در آن درس می‌خوانند."
+},
+
+{
+word: "کتاب",
+hint: "چیزی که برای خواندن و یادگیری استفاده می‌کنیم."
+},
+
+{
+word: "درخت",
+hint: "گیاهی بزرگ که تنه و شاخه دارد."
+},
+
+{
+word: "پرنده",
+hint: "جانوری که معمولاً بال دارد و می‌تواند پرواز کند."
+},
+
+{
+word: "باران",
+hint: "آبی که از آسمان می‌بارد."
+},
+
+{
+word: "دوست",
+hint: "کسی که با او رابطه خوبی داریم."
+},
+
+{
+word: "خانه",
+hint: "جایی که در آن زندگی می‌کنیم."
+},
+
+{
+word: "خورشید",
+hint: "چیزی که در روز به ما نور و گرما می‌دهد."
+},
+
+{
+word: "مادر",
+hint: "یکی از مهم‌ترین اعضای خانواده."
+},
+
+{
+word: "مداد",
+hint: "وسیله‌ای برای نوشتن."
+}
+
+];
+
+
+const alphabet = [
+
+"ا","ب","پ","ت","ث",
+"ج","چ","ح","خ","د",
+"ذ","ر","ز","ژ","س",
+"ش","ص","ض","ط","ظ",
+"ع","غ","ف","ق","ک",
+"گ","ل","م","ن","و",
+"ه","ی"
+
+];
+
+
+let currentWordIndex = 0;
+
+let selectedLetters = [];
+
+let score = 0;
+
+let correct = 0;
+
+let level = 1;
+
+let answered = false;
+
+
+
+function loadWord() {
+
+    const current = words[currentWordIndex];
+
+    selectedLetters = [];
+
+    answered = false;
+
+    document.getElementById("message").innerText = "";
+
+    document.getElementById("hint").innerText =
+        "💡 راهنما: " + current.hint;
+
+    createLetters();
+
+    updateDisplay();
+
+}
+
+
+
+function createLetters() {
+
+    const container =
+        document.getElementById("lettersContainer");
+
+    container.innerHTML = "";
+
+
+    const currentWord =
+        words[currentWordIndex].word;
+
+
+    let letters =
+        currentWord.split("");
+
+
+    const extraLetters = [
+
+        "ا",
+        "ب",
+        "د",
+        "ر",
+        "س",
+        "م",
+        "ن",
+        "ک"
+
+    ];
+
+
+    for(let i = 0; i < 4; i++) {
+
+        letters.push(
+
+            extraLetters[
+                Math.floor(
+                    Math.random() *
+                    extraLetters.length
+                )
+            ]
+
+        );
+
+    }
+
+
+    letters.sort(
+        () => Math.random() - 0.5
+    );
+
+
+    letters.forEach(
+
+        (letter,index) => {
+
+            const button =
+                document.createElement("button");
+
+            button.className = "letter";
+
+            button.innerText = letter;
+
+
+            button.onclick = function() {
+
+                if(
+                    button.classList.contains("used")
+                    ||
+                    answered
+                ) {
+                    return;
+                }
+
+
+                selectedLetters.push({
+
+                    letter: letter,
+
+                    button: button
+
+                });
+
+
+                button.classList.add("used");
+
+
+                updateDisplay();
+
+            };
+
+
+            container.appendChild(button);
+
+        }
+
+    );
+
+}
+
+
+
+function updateDisplay() {
+
+    const display =
+        document.getElementById("wordDisplay");
+
+    display.innerHTML = "";
+
+
+    selectedLetters.forEach(
+
+        item => {
+
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "selected-letter";
+
+            div.innerText =
+                item.letter;
+
+            display.appendChild(div);
+
+        }
+
+    );
+
+}
+
+
+
+function clearWord() {
+
+    if(answered) {
+        return;
+    }
+
+
+    selectedLetters.forEach(
+
+        item => {
+
+            if(item.button) {
+
+                item.button.classList.remove(
+                    "used"
+                );
+
+            }
+
+        }
+
+    );
+
+
+    selectedLetters = [];
+
+
+    updateDisplay();
+
+
+    document.getElementById(
+        "message"
+    ).innerText = "";
+
+}
+
+
+
+function checkWord() {
+
+    if(answered) {
+        return;
+    }
+
+
+    const currentWord =
+        words[currentWordIndex].word;
+
+
+    const answer =
+        selectedLetters
+        .map(
+            item => item.letter
+        )
+        .join("");
+
+
+    const message =
+        document.getElementById("message");
+
+
+    if(answer === currentWord) {
+
+        score += 10;
+
+        correct++;
+
+        answered = true;
+
+
+        document.getElementById(
+            "score"
+        ).innerText = score;
+
+
+        document.getElementById(
+            "correct"
+        ).innerText = correct;
+
+
+        message.innerText =
+            "🎉 آفرین! پاسخ کاملاً درست است.";
+
+        message.style.color =
+            "#16a34a";
+
+    }
+
+    else {
+
+        message.innerText =
+            "❌ هنوز درست نیست. دوباره تلاش کن.";
+
+        message.style.color =
+            "#dc2626";
+
+    }
+
+}
+
+
+
+function nextWord() {
+
+    currentWordIndex++;
+
+
+    if(
+        currentWordIndex >= words.length
+    ) {
+
+        currentWordIndex = 0;
+
+        level++;
+
+
+        document.getElementById(
+            "level"
+        ).innerText = level;
+
+    }
+
+
+    loadWord();
+
+}
+
+
+
+function createLetterGrid() {
+
+    const grid =
+        document.getElementById("letterGrid");
+
+
+    alphabet.forEach(
+
+        letter => {
+
+            const button =
+                document.createElement("button");
+
+
+            button.className =
+                "grid-letter";
+
+
+            button.innerText =
+                letter;
+
+
+            /*
+             جدول حروف در این نسخه
+             فقط نقش آموزشی/شناخت حروف دارد
+             و مستقیماً پاسخ را وارد نمی‌کند.
+            */
+
+
+            button.onclick = function() {
+
+                document.getElementById(
+                    "message"
+                ).innerText =
+                    "🔤 حرف «" +
+                    letter +
+                    "» انتخاب شد.";
+
+                document.getElementById(
+                    "message"
+                ).style.color =
+                    "#2563eb";
+
+            };
+
+
+            grid.appendChild(button);
+
+        }
+
+    );
+
+}
+
+
+
+createLetterGrid();
+
+loadWord();
+
+
+</script>
+
 </body>
 </html>
