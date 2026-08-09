@@ -1,0 +1,2082 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>ماجراجویی انرژی</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+    Tahoma,
+    Arial,
+    sans-serif;
+
+    background:
+    linear-gradient(
+        135deg,
+        #fef3c7,
+        #dbeafe,
+        #fce7f3
+    );
+
+    min-height:100vh;
+
+    color:#334155;
+}
+
+.container{
+
+    width:95%;
+
+    max-width:1000px;
+
+    margin:20px auto;
+
+    background:#ffffff;
+
+    border-radius:30px;
+
+    padding:25px;
+
+    box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.15);
+}
+
+
+/* عنوان */
+
+.title{
+
+    text-align:center;
+
+    font-size:34px;
+
+    color:#f59e0b;
+
+    margin:5px 0;
+
+    text-shadow:
+    2px 2px 0 #fde68a;
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#64748b;
+
+    font-size:17px;
+
+    margin-bottom:25px;
+}
+
+
+/* اطلاعات بازی */
+
+.stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:20px;
+}
+
+.stat{
+
+    background:#eff6ff;
+
+    border-radius:18px;
+
+    padding:10px 25px;
+
+    min-width:125px;
+
+    text-align:center;
+
+    font-weight:bold;
+}
+
+.stat span{
+
+    display:block;
+
+    font-size:25px;
+
+    color:#2563eb;
+
+    margin-top:4px;
+}
+
+
+/* محیط بازی */
+
+.game{
+
+    background:
+    linear-gradient(
+        180deg,
+        #f8fafc,
+        #ffffff
+    );
+
+    border-radius:25px;
+
+    padding:25px;
+
+    text-align:center;
+
+    border:3px solid #e0f2fe;
+}
+
+
+/* نوع سؤال */
+
+.question-type{
+
+    display:inline-block;
+
+    background:#ede9fe;
+
+    color:#7c3aed;
+
+    border-radius:20px;
+
+    padding:8px 20px;
+
+    font-weight:bold;
+
+    margin-bottom:12px;
+}
+
+
+/* مرحله */
+
+.level{
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    color:#0f766e;
+
+    margin:8px;
+}
+
+
+/* جان */
+
+.hearts{
+
+    font-size:27px;
+
+    letter-spacing:5px;
+
+    margin:10px;
+}
+
+
+/* سؤال */
+
+.question{
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    margin:25px auto;
+
+    max-width:750px;
+
+    line-height:2;
+}
+
+
+/* تصویر */
+
+.picture-box{
+
+    width:270px;
+
+    height:200px;
+
+    margin:20px auto;
+
+    background:
+    linear-gradient(
+        135deg,
+        #fff7ed,
+        #fef3c7
+    );
+
+    border:4px solid #fbbf24;
+
+    border-radius:30px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:
+    0 7px 15px
+    rgba(0,0,0,.1);
+}
+
+.picture{
+
+    font-size:115px;
+
+    user-select:none;
+}
+
+
+/* گزینه ها */
+
+.options{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:15px;
+
+    max-width:700px;
+
+    margin:20px auto;
+}
+
+.option{
+
+    border:none;
+
+    background:#60a5fa;
+
+    color:white;
+
+    border-radius:18px;
+
+    padding:18px 10px;
+
+    font-family:Tahoma,Arial,sans-serif;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 0 #2563eb;
+
+    transition:.15s;
+}
+
+.option:hover{
+
+    transform:
+    translateY(-3px);
+}
+
+.option:active{
+
+    transform:
+    translateY(2px);
+}
+
+.option.correct{
+
+    background:#22c55e;
+
+    box-shadow:
+    0 5px 0 #15803d;
+}
+
+.option.wrong{
+
+    background:#ef4444;
+
+    box-shadow:
+    0 5px 0 #b91c1c;
+}
+
+.option.disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+}
+
+
+/* جای خالی */
+
+.fill-text{
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    margin:25px auto;
+}
+
+.blank{
+
+    display:inline-block;
+
+    min-width:150px;
+
+    border-bottom:4px solid #f59e0b;
+
+    color:#2563eb;
+
+    padding:0 10px;
+}
+
+
+/* درست و نادرست */
+
+.true-false{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    margin:25px auto;
+}
+
+.true-button,
+.false-button{
+
+    border:none;
+
+    color:white;
+
+    font-family:Tahoma;
+
+    font-size:23px;
+
+    font-weight:bold;
+
+    padding:18px 45px;
+
+    border-radius:18px;
+
+    cursor:pointer;
+}
+
+.true-button{
+
+    background:#22c55e;
+
+    box-shadow:
+    0 5px 0 #15803d;
+}
+
+.false-button{
+
+    background:#ef4444;
+
+    box-shadow:
+    0 5px 0 #b91c1c;
+}
+
+
+/* پیام */
+
+.message{
+
+    min-height:50px;
+
+    margin:20px auto;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    max-width:700px;
+}
+
+
+/* دکمه مرحله بعد */
+
+.next{
+
+    display:none;
+
+    border:none;
+
+    background:#8b5cf6;
+
+    color:white;
+
+    padding:15px 30px;
+
+    border-radius:15px;
+
+    font-family:Tahoma;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    margin-top:5px;
+
+    box-shadow:
+    0 5px 0 #6d28d9;
+}
+
+
+/* پیشرفت */
+
+.progress{
+
+    height:14px;
+
+    background:#e2e8f0;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    max-width:750px;
+
+    margin:25px auto 5px;
+}
+
+.progress-bar{
+
+    height:100%;
+
+    width:0%;
+
+    background:
+    linear-gradient(
+        90deg,
+        #22c55e,
+        #facc15
+    );
+
+    transition:.5s;
+}
+
+
+/* گزارش */
+
+.report{
+
+    display:none;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        #fef3c7
+    );
+
+    border-radius:25px;
+
+    padding:35px;
+
+    text-align:center;
+}
+
+.report h2{
+
+    font-size:30px;
+
+    color:#2563eb;
+}
+
+.final-score{
+
+    font-size:48px;
+
+    font-weight:bold;
+
+    color:#16a34a;
+
+    margin:15px;
+}
+
+.performance{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin:20px;
+}
+
+.restart{
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:15px 30px;
+
+    border-radius:15px;
+
+    font-family:Tahoma;
+
+    font-size:18px;
+
+    cursor:pointer;
+}
+
+
+/* پایین صفحه */
+
+.footer{
+
+    text-align:center;
+
+    color:#64748b;
+
+    margin-top:20px;
+
+    font-size:14px;
+}
+
+
+/* موبایل */
+
+@media(max-width:650px){
+
+    .container{
+
+        padding:15px;
+    }
+
+    .title{
+
+        font-size:27px;
+    }
+
+    .options{
+
+        grid-template-columns:1fr;
+    }
+
+    .option{
+
+        font-size:20px;
+    }
+
+    .picture-box{
+
+        width:220px;
+
+        height:170px;
+    }
+
+    .picture{
+
+        font-size:90px;
+    }
+
+    .true-false{
+
+        flex-direction:column;
+
+        align-items:center;
+    }
+
+    .true-button,
+    .false-button{
+
+        width:80%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="title">
+
+⚡ ماجراجویی انرژی 🌈
+
+</div>
+
+
+<div class="subtitle">
+
+ببین، فکر کن، انتخاب کن و انرژی را کشف کن!
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat">
+
+⭐ امتیاز
+
+<span id="score">
+0
+</span>
+
+</div>
+
+
+<div class="stat">
+
+🏆 رکورد
+
+<span id="record">
+0
+</span>
+
+</div>
+
+
+<div class="stat">
+
+🚀 مرحله
+
+<span id="stage">
+1
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="game" id="gameArea">
+
+
+<div
+class="question-type"
+id="questionType">
+
+🖼️ تصویر را ببین
+
+</div>
+
+
+<div
+class="level"
+id="level">
+
+سطح ۱
+
+</div>
+
+
+<div
+class="hearts"
+id="hearts">
+
+❤️❤️❤️
+
+</div>
+
+
+<div
+class="question"
+id="question">
+
+</div>
+
+
+<div
+id="pictureContainer">
+
+</div>
+
+
+<div
+class="options"
+id="options">
+
+</div>
+
+
+<div
+class="message"
+id="message">
+
+</div>
+
+
+<button
+class="next"
+id="nextButton"
+onclick="nextQuestion()">
+
+مرحله بعد ➜
+
+</button>
+
+
+<div class="progress">
+
+<div
+class="progress-bar"
+id="progressBar">
+</div>
+
+</div>
+
+
+</div>
+
+
+<div
+class="report"
+id="report">
+
+
+<h2>
+
+🎉 مأموریت انرژی تمام شد!
+
+</h2>
+
+
+<div>
+
+امتیاز نهایی
+
+</div>
+
+
+<div
+class="final-score"
+id="finalScore">
+
+0
+
+</div>
+
+
+<div>
+
+پاسخ‌های درست:
+
+<strong id="finalCorrect">
+0
+</strong>
+
+از ۲۰
+
+</div>
+
+
+<br>
+
+
+<div>
+
+درصد موفقیت:
+
+<strong id="finalPercent">
+0%
+</strong>
+
+</div>
+
+
+<div
+class="performance"
+id="performance">
+
+</div>
+
+
+<div>
+
+🏆 رکورد:
+
+<strong id="finalRecord">
+0
+</strong>
+
+</div>
+
+
+<br>
+
+
+<button
+class="restart"
+onclick="restartGame()">
+
+🔄 دوباره بازی کن
+
+</button>
+
+
+</div>
+
+
+<div class="footer">
+
+🌟 قهرمان انرژی باش!
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   بانک ۲۰ مرحله بازی
+========================================= */
+
+
+const questions = [
+
+
+/* مرحله ۱ */
+
+{
+type:"picture",
+
+typeText:"🖼️ تصویر را ببین",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این وسیله بیشتر از کدام نوع انرژی استفاده می‌کند؟",
+
+picture:"☀️",
+
+answer:"انرژی نورانی",
+
+options:[
+"انرژی نورانی",
+"انرژی صوتی",
+"انرژی حرکتی",
+"انرژی الکتریکی"
+]
+
+},
+
+
+/* مرحله ۲ */
+
+{
+type:"picture",
+
+typeText:"🖼️ تصویر را ببین",
+
+level:"سطح ۱ | آشنایی",
+
+question:"در این تصویر، کدام نوع انرژی را بیشتر می‌بینی؟",
+
+picture:"🔊",
+
+answer:"انرژی صوتی",
+
+options:[
+"انرژی صوتی",
+"انرژی گرمایی",
+"انرژی شیمیایی",
+"انرژی حرکتی"
+]
+
+},
+
+
+/* مرحله ۳ */
+
+{
+type:"picture",
+
+typeText:"🖼️ تصویر را ببین",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این تصویر بیشتر با کدام نوع انرژی ارتباط دارد؟",
+
+picture:"🔥",
+
+answer:"انرژی گرمایی",
+
+options:[
+"انرژی گرمایی",
+"انرژی صوتی",
+"انرژی نورانی",
+"انرژی حرکتی"
+]
+
+},
+
+
+/* مرحله ۴ */
+
+{
+type:"picture",
+
+typeText:"🖼️ تصویر را ببین",
+
+level:"سطح ۱ | آشنایی",
+
+question:"این وسیله برای حرکت کردن از چه نوع انرژی استفاده می‌کند؟",
+
+picture:"🚲",
+
+answer:"انرژی حرکتی",
+
+options:[
+"انرژی حرکتی",
+"انرژی نورانی",
+"انرژی صوتی",
+"انرژی گرمایی"
+]
+
+},
+
+
+/* مرحله ۵ */
+
+{
+type:"picture",
+
+typeText:"🖼️ تصویر را ببین",
+
+level:"سطح ۱ | آشنایی",
+
+question:"کدام انرژی در باتری ذخیره شده است؟",
+
+picture:"🔋",
+
+answer:"انرژی شیمیایی",
+
+options:[
+"انرژی شیمیایی",
+"انرژی صوتی",
+"انرژی نورانی",
+"انرژی حرکتی"
+]
+
+},
+
+
+/* مرحله ۶ */
+
+{
+type:"choice",
+
+typeText:"🎯 چهار گزینه‌ای",
+
+level:"سطح ۲ | شناخت",
+
+question:"کدام مورد یک منبع انرژی طبیعی است؟",
+
+options:[
+"خورشید",
+"مداد",
+"صندلی",
+"کتاب"
+],
+
+answer:"خورشید"
+
+},
+
+
+/* مرحله ۷ */
+
+{
+type:"choice",
+
+typeText:"🎯 چهار گزینه‌ای",
+
+level:"سطح ۲ | شناخت",
+
+question:"کدام وسیله انرژی الکتریکی را به نور تبدیل می‌کند؟",
+
+options:[
+"لامپ",
+"دوچرخه",
+"قاشق",
+"توپ"
+],
+
+answer:"لامپ"
+
+},
+
+
+/* مرحله ۸ */
+
+{
+type:"choice",
+
+typeText:"🎯 چهار گزینه‌ای",
+
+level:"سطح ۲ | شناخت",
+
+question:"کدام مورد انرژی صوتی تولید می‌کند؟",
+
+options:[
+"بلندگو",
+"چراغ",
+"بخاری",
+"یخچال"
+],
+
+answer:"بلندگو"
+
+},
+
+
+/* مرحله ۹ */
+
+{
+type:"choice",
+
+typeText:"🎯 چهار گزینه‌ای",
+
+level:"سطح ۲ | شناخت",
+
+question:"کدام وسیله انرژی الکتریکی را به انرژی گرمایی تبدیل می‌کند؟",
+
+options:[
+"بخاری برقی",
+"رادیو",
+"چراغ قوه",
+"دوچرخه"
+],
+
+answer:"بخاری برقی"
+
+},
+
+
+/* مرحله ۱۰ */
+
+{
+type:"choice",
+
+typeText:"🎯 چهار گزینه‌ای",
+
+level:"سطح ۲ | شناخت",
+
+question:"انرژی خورشید بیشتر به چه چیزهایی کمک می‌کند؟",
+
+options:[
+"نور و گرما",
+"صدا و حرکت",
+"سرما و صدا",
+"فقط حرکت"
+],
+
+answer:"نور و گرما"
+
+},
+
+
+/* مرحله ۱۱ */
+
+{
+type:"fill",
+
+typeText:"🔤 جای خالی",
+
+level:"سطح ۳ | فکر کن",
+
+question:"خورشید منبع بزرگی از انرژی ______ است.",
+
+answer:"نورانی",
+
+options:[
+"نورانی",
+"صوتی",
+"حرکتی",
+"الکتریکی"
+]
+
+},
+
+
+/* مرحله ۱۲ */
+
+{
+type:"fill",
+
+typeText:"🔤 جای خالی",
+
+level:"سطح ۳ | فکر کن",
+
+question:"صدای زنگ مدرسه نوعی انرژی ______ است.",
+
+answer:"صوتی",
+
+options:[
+"صوتی",
+"گرمایی",
+"نورانی",
+"شیمیایی"
+]
+
+},
+
+
+/* مرحله ۱۳ */
+
+{
+type:"fill",
+
+typeText:"🔤 جای خالی",
+
+level:"سطح ۳ | فکر کن",
+
+question:"انرژی موجود در مواد غذایی، نوعی انرژی ______ است.",
+
+answer:"شیمیایی",
+
+options:[
+"شیمیایی",
+"صوتی",
+"نورانی",
+"حرکتی"
+]
+
+},
+
+
+/* مرحله ۱۴ */
+
+{
+type:"fill",
+
+typeText:"🔤 جای خالی",
+
+level:"سطح ۳ | فکر کن",
+
+question:"وقتی توپ حرکت می‌کند، دارای انرژی ______ است.",
+
+answer:"حرکتی",
+
+options:[
+"حرکتی",
+"صوتی",
+"نورانی",
+"شیمیایی"
+]
+
+},
+
+
+/* مرحله ۱۵ */
+
+{
+type:"fill",
+
+typeText:"🔤 جای خالی",
+
+level:"سطح ۳ | فکر کن",
+
+question:"بخاری انرژی را به انرژی ______ تبدیل می‌کند.",
+
+answer:"گرمایی",
+
+options:[
+"گرمایی",
+"صوتی",
+"حرکتی",
+"نورانی"
+]
+
+},
+
+
+/* مرحله ۱۶ */
+
+{
+type:"truefalse",
+
+typeText:"✅❌ درست یا نادرست",
+
+level:"سطح ۴ | استاد انرژی",
+
+question:"خورشید یکی از مهم‌ترین منابع انرژی برای زمین است.",
+
+answer:"درست"
+
+},
+
+
+/* مرحله ۱۷ */
+
+{
+type:"truefalse",
+
+typeText:"✅❌ درست یا نادرست",
+
+level:"سطح ۴ | استاد انرژی",
+
+question:"انرژی صوتی همان انرژی نورانی است.",
+
+answer:"نادرست"
+
+},
+
+
+/* مرحله ۱۸ */
+
+{
+type:"truefalse",
+
+typeText:"✅❌ درست یا نادرست",
+
+level:"سطح ۴ | استاد انرژی",
+
+question:"غذا می‌تواند انرژی مورد نیاز بدن ما را تأمین کند.",
+
+answer:"درست"
+
+},
+
+
+/* مرحله ۱۹ */
+
+{
+type:"truefalse",
+
+typeText:"✅❌ درست یا نادرست",
+
+level:"سطح ۴ | استاد انرژی",
+
+question:"یک جسم در حال حرکت می‌تواند انرژی حرکتی داشته باشد.",
+
+answer:"درست"
+
+},
+
+
+/* مرحله ۲۰ */
+
+{
+type:"truefalse",
+
+typeText:"✅❌ درست یا نادرست",
+
+level:"سطح ۴ | استاد انرژی",
+
+question:"انرژی همیشه فقط به یک شکل وجود دارد و نمی‌تواند تغییر کند.",
+
+answer:"نادرست"
+
+}
+
+];
+
+
+/* =========================================
+   متغیرهای بازی
+========================================= */
+
+
+let current = 0;
+
+let score = 0;
+
+let correct = 0;
+
+let lives = 3;
+
+let answered = false;
+
+
+let record =
+parseInt(
+localStorage.getItem(
+"energyGameRecord"
+)
+) || 0;
+
+
+document.getElementById(
+"record"
+).innerText =
+record;
+
+
+/* =========================================
+   بارگذاری مرحله
+========================================= */
+
+
+function loadQuestion(){
+
+const q =
+questions[current];
+
+
+lives = 3;
+
+answered = false;
+
+
+document.getElementById(
+"stage"
+).innerText =
+current + 1;
+
+
+document.getElementById(
+"level"
+).innerText =
+q.level;
+
+
+document.getElementById(
+"questionType"
+).innerText =
+q.typeText;
+
+
+document.getElementById(
+"question"
+).innerText =
+q.question;
+
+
+document.getElementById(
+"message"
+).innerText =
+"";
+
+
+document.getElementById(
+"nextButton"
+).style.display =
+"none";
+
+
+updateHearts();
+
+updateProgress();
+
+createQuestion(q);
+
+}
+
+
+/* =========================================
+   ساخت سؤال
+========================================= */
+
+
+function createQuestion(q){
+
+const pictureContainer =
+document.getElementById(
+"pictureContainer"
+);
+
+
+const optionsContainer =
+document.getElementById(
+"options"
+);
+
+
+pictureContainer.innerHTML =
+"";
+
+optionsContainer.innerHTML =
+"";
+
+
+/* تصویر */
+
+if(q.picture){
+
+pictureContainer.innerHTML = `
+
+<div class="picture-box">
+
+<div class="picture">
+
+${q.picture}
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* چهارگزینه‌ای */
+
+if(
+q.type ===
+"picture" ||
+q.type ===
+"choice"
+){
+
+createOptions(
+q.options
+);
+
+}
+
+
+/* جای خالی */
+
+if(q.type === "fill"){
+
+createOptions(
+q.options
+);
+
+}
+
+
+/* درست و نادرست */
+
+if(
+q.type ===
+"truefalse"
+){
+
+const box =
+document.createElement(
+"div"
+);
+
+box.className =
+"true-false";
+
+
+const trueButton =
+document.createElement(
+"button"
+);
+
+trueButton.className =
+"true-button";
+
+trueButton.innerText =
+"✅ درست";
+
+trueButton.onclick =
+function(){
+
+checkAnswer(
+trueButton,
+"درست"
+);
+
+};
+
+
+const falseButton =
+document.createElement(
+"button"
+);
+
+falseButton.className =
+"false-button";
+
+falseButton.innerText =
+"❌ نادرست";
+
+falseButton.onclick =
+function(){
+
+checkAnswer(
+falseButton,
+"نادرست"
+);
+
+};
+
+
+box.appendChild(
+trueButton
+);
+
+box.appendChild(
+falseButton
+);
+
+optionsContainer.appendChild(
+box
+);
+
+}
+
+}
+
+
+/* =========================================
+   ساخت گزینه ها
+========================================= */
+
+
+function createOptions(
+options
+){
+
+const container =
+document.getElementById(
+"options"
+);
+
+
+let shuffled =
+[...options];
+
+
+shuffled.sort(
+() =>
+Math.random() - .5
+);
+
+
+shuffled.forEach(
+option => {
+
+const button =
+document.createElement(
+"button"
+);
+
+button.className =
+"option";
+
+button.innerText =
+option;
+
+
+button.onclick =
+function(){
+
+checkAnswer(
+button,
+option
+);
+
+};
+
+
+container.appendChild(
+button
+);
+
+});
+
+}
+
+
+/* =========================================
+   بررسی پاسخ
+========================================= */
+
+
+function checkAnswer(
+button,
+answer
+){
+
+if(answered){
+
+return;
+
+}
+
+
+const correctAnswer =
+questions[
+current
+].answer;
+
+
+if(answer ===
+correctAnswer){
+
+answered = true;
+
+correct++;
+
+
+/* امتیاز بر اساس تعداد جان */
+
+score +=
+10 * lives;
+
+
+button.classList.add(
+"correct"
+);
+
+
+if(score > record){
+
+record = score;
+
+localStorage.setItem(
+"energyGameRecord",
+record
+);
+
+}
+
+
+document.getElementById(
+"score"
+).innerText =
+score;
+
+
+document.getElementById(
+"record"
+).innerText =
+record;
+
+
+disableButtons();
+
+
+showMessage(
+"🎉 آفرین! پاسخ کاملاً درست است.",
+"#16a34a"
+);
+
+
+document.getElementById(
+"nextButton"
+).style.display =
+"inline-block";
+
+
+}else{
+
+lives--;
+
+
+button.classList.add(
+"wrong"
+);
+
+button.disabled =
+true;
+
+
+updateHearts();
+
+
+if(lives > 0){
+
+showMessage(
+"❌ پاسخ درست نیست. دوباره فکر کن!",
+"#dc2626"
+);
+
+}else{
+
+answered = true;
+
+
+showCorrectAnswer();
+
+
+disableButtons();
+
+
+document.getElementById(
+"nextButton"
+).style.display =
+"inline-block";
+
+}
+
+}
+
+}
+
+
+/* =========================================
+   پاسخ صحیح
+========================================= */
+
+
+function showCorrectAnswer(){
+
+const answer =
+questions[
+current
+].answer;
+
+
+const buttons =
+document.querySelectorAll(
+".option"
+);
+
+
+buttons.forEach(
+button => {
+
+if(
+button.innerText ===
+answer
+){
+
+button.classList.add(
+"correct"
+);
+
+}
+
+});
+
+
+showMessage(
+"💡 پاسخ درست: " +
+answer,
+"#dc2626"
+);
+
+}
+
+
+/* =========================================
+   غیرفعال کردن دکمه ها
+========================================= */
+
+
+function disableButtons(){
+
+const buttons =
+document.querySelectorAll(
+".option"
+);
+
+
+buttons.forEach(
+button => {
+
+button.disabled =
+true;
+
+});
+
+
+
+const trueButtons =
+document.querySelectorAll(
+".true-button"
+);
+
+
+const falseButtons =
+document.querySelectorAll(
+".false-button"
+);
+
+
+trueButtons.forEach(
+button => {
+
+button.disabled =
+true;
+
+});
+
+
+falseButtons.forEach(
+button => {
+
+button.disabled =
+true;
+
+});
+
+}
+
+
+/* =========================================
+   جان
+========================================= */
+
+
+function updateHearts(){
+
+let hearts = "";
+
+
+for(
+let i=0;
+i<3;
+i++
+){
+
+hearts +=
+i < lives
+? "❤️"
+: "🖤";
+
+}
+
+
+document.getElementById(
+"hearts"
+).innerText =
+hearts;
+
+}
+
+
+/* =========================================
+   پیام
+========================================= */
+
+
+function showMessage(
+text,
+color
+){
+
+const message =
+document.getElementById(
+"message"
+);
+
+message.innerText =
+text;
+
+message.style.color =
+color;
+
+}
+
+
+/* =========================================
+   مرحله بعد
+========================================= */
+
+
+function nextQuestion(){
+
+current++;
+
+
+if(
+current >=
+questions.length
+){
+
+finishGame();
+
+return;
+
+}
+
+
+loadQuestion();
+
+}
+
+
+/* =========================================
+   نوار پیشرفت
+========================================= */
+
+
+function updateProgress(){
+
+const percent =
+(
+current /
+questions.length
+) * 100;
+
+
+document.getElementById(
+"progressBar"
+).style.width =
+percent + "%";
+
+}
+
+
+/* =========================================
+   پایان بازی
+========================================= */
+
+
+function finishGame(){
+
+document.getElementById(
+"gameArea"
+).style.display =
+"none";
+
+
+document.getElementById(
+"report"
+).style.display =
+"block";
+
+
+document.getElementById(
+"finalScore"
+).innerText =
+score;
+
+
+document.getElementById(
+"finalCorrect"
+).innerText =
+correct;
+
+
+document.getElementById(
+"finalPercent"
+).innerText =
+Math.round(
+(
+correct /
+questions.length
+) * 100
+) + "%";
+
+
+document.getElementById(
+"finalRecord"
+).innerText =
+record;
+
+
+let text = "";
+
+
+if(correct >= 18){
+
+text =
+"🏆 فوق‌العاده! تو یک قهرمان انرژی هستی!";
+
+}
+
+else if(correct >= 15){
+
+text =
+"🌟 خیلی خوب بود! دانشت درباره انرژی عالی است.";
+
+}
+
+else if(correct >= 10){
+
+text =
+"👍 خوب بود! با کمی تمرین بهتر هم می‌شوی.";
+
+}
+
+else{
+
+text =
+"💪 دوباره بازی کن و انرژی‌ها را بهتر یاد بگیر!";
+
+}
+
+
+document.getElementById(
+"performance"
+).innerText =
+text;
+
+}
+
+
+/* =========================================
+   شروع دوباره
+========================================= */
+
+
+function restartGame(){
+
+current = 0;
+
+score = 0;
+
+correct = 0;
+
+lives = 3;
+
+answered = false;
+
+
+document.getElementById(
+"score"
+).innerText =
+"0";
+
+
+document.getElementById(
+"report"
+).style.display =
+"none";
+
+
+document.getElementById(
+"gameArea"
+).style.display =
+"block";
+
+
+loadQuestion();
+
+}
+
+
+/* =========================================
+   شروع بازی
+========================================= */
+
+
+loadQuestion();
+
+</script>
+
+</body>
+
+</html>
