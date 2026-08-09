@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شهر آبنبات‌های تقسیم‌شده</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    min-height:100vh;
+    background:
+        linear-gradient(135deg,#ffd6e7,#d9f3ff,#e5d7ff);
+    color:#51465b;
+}
+
+.container{
+    width:94%;
+    max-width:1000px;
+    margin:20px auto;
+}
+
+.header{
+    text-align:center;
+    background:rgba(255,255,255,.75);
+    border-radius:30px;
+    padding:20px;
+    box-shadow:0 8px 20px rgba(100,80,100,.15);
+}
+
+.header h1{
+    margin:0;
+    color:#d95f91;
+    font-size:35px;
+}
+
+.header p{
+    margin:10px 0 0;
+    font-size:17px;
+}
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:18px 0;
+}
+
+.stat{
+    background:#fff;
+    border-radius:18px;
+    padding:10px 25px;
+    min-width:130px;
+    text-align:center;
+    box-shadow:0 5px 12px rgba(100,80,100,.12);
+}
+
+.stat strong{
+    display:block;
+    font-size:23px;
+    color:#8b72c9;
+    margin-top:5px;
+}
+
+.game{
+    background:rgba(255,255,255,.92);
+    border-radius:30px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(100,80,100,.18);
+}
+
+.level{
+    display:inline-block;
+    background:#eadfff;
+    color:#7656b8;
+    border-radius:20px;
+    padding:8px 18px;
+    font-weight:bold;
+}
+
+.question{
+    font-size:23px;
+    font-weight:bold;
+    line-height:2;
+    margin:20px auto;
+    max-width:800px;
+}
+
+.story{
+    background:#fff4d9;
+    border-radius:20px;
+    padding:15px;
+    margin:15px auto;
+    max-width:800px;
+    font-size:17px;
+    line-height:2;
+}
+
+.visual{
+    min-height:150px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    background:#f8f1ff;
+    border-radius:25px;
+    padding:20px;
+    margin:20px auto;
+    max-width:800px;
+}
+
+.item{
+    font-size:38px;
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+}
+
+.item:hover{
+    transform:scale(1.15);
+}
+
+.groups{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.group{
+    min-width:100px;
+    min-height:90px;
+    background:#fff;
+    border:4px dashed #d7b9e8;
+    border-radius:20px;
+    padding:10px;
+    font-size:30px;
+}
+
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    max-width:700px;
+    margin:20px auto;
+}
+
+.option{
+    border:none;
+    border-radius:18px;
+    padding:16px;
+    font-family:Tahoma;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#b9e7f5;
+    color:#4d6570;
+    box-shadow:0 5px 0 #82c9dc;
+    transition:.15s;
+}
+
+.option:nth-child(2){
+    background:#ffd0df;
+    box-shadow:0 5px 0 #e7a1b8;
+}
+
+.option:nth-child(3){
+    background:#d9cef9;
+    box-shadow:0 5px 0 #ae9bdc;
+}
+
+.option:nth-child(4){
+    background:#d8f0c5;
+    box-shadow:0 5px 0 #acd48c;
+}
+
+.option:hover{
+    transform:translateY(-3px);
+}
+
+.option.correct{
+    background:#9be6b0 !important;
+    box-shadow:0 5px 0 #68bd80 !important;
+}
+
+.option.wrong{
+    background:#ffaaa9 !important;
+    box-shadow:0 5px 0 #e47c7a !important;
+}
+
+.message{
+    min-height:45px;
+    font-size:20px;
+    font-weight:bold;
+    margin:15px;
+}
+
+.next{
+    display:none;
+    border:none;
+    background:#f4a261;
+    color:white;
+    padding:14px 30px;
+    border-radius:18px;
+    font-family:Tahoma;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 5px 0 #d27b43;
+}
+
+.progress{
+    height:13px;
+    background:#eee5f5;
+    border-radius:20px;
+    overflow:hidden;
+    margin:25px auto 5px;
+    max-width:800px;
+}
+
+.progress-bar{
+    width:0;
+    height:100%;
+    background:linear-gradient(90deg,#b9e7f5,#d9cef9,#ffd0df);
+    transition:.5s;
+}
+
+.report{
+    display:none;
+    background:#fff;
+    border-radius:30px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(100,80,100,.18);
+}
+
+.report h2{
+    color:#d95f91;
+}
+
+.final-score{
+    font-size:48px;
+    color:#8b72c9;
+    font-weight:bold;
+    margin:15px;
+}
+
+.restart{
+    border:none;
+    background:#9b82d3;
+    color:#fff;
+    padding:15px 30px;
+    border-radius:18px;
+    font-family:Tahoma;
+    font-size:18px;
+    cursor:pointer;
+}
+
+@media(max-width:650px){
+    .header h1{
+        font-size:27px;
+    }
+
+    .options{
+        grid-template-columns:1fr;
+    }
+
+    .question{
+        font-size:19px;
+    }
+
+    .item{
+        font-size:30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+    <h1>🍬 شهر آبنبات‌های تقسیم‌شده 🍬</h1>
+    <p>
+        به شهر شیرین تقسیم خوش آمدی!
+        با تقسیم عادلانه، دوستانت را خوشحال کن.
+    </p>
+</div>
+
+<div class="stats">
+
+    <div class="stat">
+        ⭐ امتیاز
+        <strong id="score">0</strong>
+    </div>
+
+    <div class="stat">
+        🏆 رکورد
+        <strong id="record">0</strong>
+    </div>
+
+    <div class="stat">
+        🚀 مرحله
+        <strong id="stage">1</strong>
+    </div>
+
+</div>
+
+<div class="game" id="game">
+
+    <div class="level" id="level">
+        مرحله ۱
+    </div>
+
+    <div class="question" id="question"></div>
+
+    <div class="story" id="story"></div>
+
+    <div class="visual" id="visual"></div>
+
+    <div class="options" id="options"></div>
+
+    <div class="message" id="message"></div>
+
+    <button class="next" id="next" onclick="nextStage()">
+        🌈 مرحله بعد
+    </button>
+
+    <div class="progress">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+
+</div>
+
+<div class="report" id="report">
+
+    <h2>🎉 آفرین قهرمان تقسیم!</h2>
+
+    <p>تو تمام مراحل شهر آبنبات‌ها را پشت سر گذاشتی.</p>
+
+    <div class="final-score" id="finalScore">0</div>
+
+    <p>
+        پاسخ‌های درست:
+        <strong id="finalCorrect">0</strong>
+        از ۲۰
+    </p>
+
+    <p>
+        درصد موفقیت:
+        <strong id="finalPercent">0%</strong>
+    </p>
+
+    <h3 id="performance"></h3>
+
+    <p>
+        🏆 رکورد:
+        <strong id="finalRecord">0</strong>
+    </p>
+
+    <button class="restart" onclick="restartGame()">
+        🔄 دوباره بازی کن
+    </button>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+   مراحل بازی
+========================= */
+
+const stages = [
+
+{
+type:"تصویری",
+question:"۶ آبنبات داریم. آن‌ها را بین ۲ دوست به طور مساوی تقسیم کنیم. هر دوست چند آبنبات می‌گیرد؟",
+story:"🍬 دو دوست کوچولو منتظر آبنبات هستند. کمک کن سهم هر دو نفر برابر باشد.",
+visual:["🍬","🍬","🍬","🍬","🍬","🍬"],
+answer:"۳",
+options:["۲","۳","۴","۶"]
+},
+
+{
+type:"تصویری",
+question:"۸ شیرینی را بین ۴ کودک تقسیم کنیم. سهم هر کودک چند شیرینی است؟",
+story:"🍪 چهار دوست برای جشن آماده شده‌اند. شیرینی‌ها باید عادلانه تقسیم شوند.",
+visual:["🍪","🍪","🍪","🍪","🍪","🍪","🍪","🍪"],
+answer:"۲",
+options:["۱","۲","۳","۴"]
+},
+
+{
+type:"تصویری",
+question:"۱۲ عروسک را در ۳ قفسه به طور مساوی قرار بده. در هر قفسه چند عروسک قرار می‌گیرد؟",
+story:"🧸 قفسه‌های فروشگاه باید مرتب و مساوی پر شوند.",
+visual:["🧸","🧸","🧸","🧸","🧸","🧸","🧸","🧸","🧸","🧸","🧸","🧸"],
+answer:"۴",
+options:["۳","۴","۵","۶"]
+},
+
+{
+type:"تصویری",
+question:"۱۵ سیب را بین ۵ سبد مساوی تقسیم کنیم. در هر سبد چند سیب قرار می‌گیرد؟",
+story:"🍎 باغبان می‌خواهد ۵ سبد کاملاً مساوی داشته باشد.",
+visual:["🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎"],
+answer:"۳",
+options:["۲","۳","۴","۵"]
+},
+
+{
+type:"دسته‌بندی",
+question:"کدام گزینه یک تقسیم عادلانه را نشان می‌دهد؟",
+story:"🎁 چهار جعبه داریم. فقط یکی از آن‌ها وسایل را کاملاً مساوی تقسیم کرده است.",
+visual:["📦  3","📦  3","📦  3","📦  3"],
+answer:"همه برابر",
+options:["همه برابر","یکی بیشتر دارد","دو تا بیشتر دارد","هیچ‌کدام"]
+},
+
+{
+type:"مفهوم تقسیم",
+question:"۲۰ هویج را بین ۴ خرگوش مساوی تقسیم کنیم. هر خرگوش چند هویج می‌گیرد؟",
+story:"🐰 خرگوش‌ها گرسنه‌اند! مراقب باش سهم هیچ‌کدام بیشتر یا کمتر نباشد.",
+visual:["🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕","🥕"],
+answer:"۵",
+options:["۴","۵","۶","۱۰"]
+},
+
+{
+type:"مفهوم تقسیم",
+question:"۱۸ گل را بین ۳ گلدان مساوی تقسیم کنیم. در هر گلدان چند گل قرار می‌گیرد؟",
+story:"🌷 باغ جادویی باید سه گلدان مساوی داشته باشد.",
+visual:["🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷","🌷"],
+answer:"۶",
+options:["۵","۶","۷","۹"]
+},
+
+{
+type:"نماد ریاضی",
+question:"۱۲ آبنبات را در ۳ گروه مساوی قرار داده‌ایم. کدام عبارت درست است؟",
+story:"🍭 حالا می‌خواهیم کاری را که انجام دادیم با زبان ریاضی بنویسیم.",
+visual:["🍭","🍭","🍭","🍭","🍭","🍭","🍭","🍭","🍭","🍭","🍭","🍭"],
+answer:"۱۲ ÷ ۳ = ۴",
+options:[
+"۱۲ ÷ ۳ = ۴",
+"۱۲ + ۳ = ۱۵",
+"۱۲ × ۳ = ۳۶",
+"۱۲ - ۳ = ۹"
+]
+},
+
+{
+type:"نماد ریاضی",
+question:"کدام عبارت نشان می‌دهد ۲۰ را به ۵ گروه مساوی تقسیم کرده‌ایم؟",
+story:"🧩 عددها را کنار هم بچین تا عبارت درست را پیدا کنی.",
+visual:["۲۰","÷","۵"],
+answer:"۲۰ ÷ ۵ = ۴",
+options:[
+"۲۰ ÷ ۵ = ۴",
+"۲۰ ÷ ۴ = ۵",
+"۲۰ × ۵ = ۱۰۰",
+"۲۰ - ۵ = ۱۵"
+]
+},
+
+{
+type:"تقسیم ساده",
+question:"۲۴ ÷ ۶ چند می‌شود؟",
+story:"🚂 قطار آبنبات‌ها ۲۴ بسته دارد و باید آن‌ها را بین ۶ فروشگاه تقسیم کند.",
+visual:["🚂","🍬","🍬","🍬","🍬"],
+answer:"۴",
+options:["۳","۴","۵","۶"]
+},
+
+{
+type:"تقسیم ساده",
+question:"۳۶ ÷ ۴ چند می‌شود؟",
+story:"🏪 ۳۶ شیرینی باید به طور مساوی بین ۴ مغازه تقسیم شود.",
+visual:["🍪","🍪","🍪","🍪"],
+answer:"۹",
+options:["۷","۸","۹","۱۰"]
+},
+
+{
+type:"تقسیم ساده",
+question:"۴۸ ÷ ۶ چند می‌شود؟",
+story:"🎈 ۴۸ بادکنک داریم و ۶ اتاق باید سهم مساوی داشته باشند.",
+visual:["🎈","🎈","🎈","🎈","🎈","🎈"],
+answer:"۸",
+options:["۶","۷","۸","۹"]
+},
+
+{
+type:"مسئله کلامی",
+question:"مریم ۳۲ مداد دارد و می‌خواهد آن‌ها را به طور مساوی بین ۴ دوست تقسیم کند. به هر دوست چند مداد می‌رسد؟",
+story:"✏️ دوستان مریم منتظرند تا مدادهایشان را بگیرند.",
+visual:["👧","✏️","✏️","✏️","✏️"],
+answer:"۸",
+options:["۶","۷","۸","۹"]
+},
+
+{
+type:"مسئله کلامی",
+question:"۲۷ شکلات را بین ۳ کودک به طور مساوی تقسیم کنیم. هر کودک چند شکلات می‌گیرد؟",
+story:"🍫 جشن شکلاتی شروع شده است! هیچ کودکی نباید سهم بیشتری داشته باشد.",
+visual:["👦","👧","👦"],
+answer:"۹",
+options:["۷","۸","۹","۱۰"]
+},
+
+{
+type:"باقیمانده",
+question:"اگر ۱۰ سیب را بین ۳ نفر مساوی تقسیم کنیم، چند سیب باقی می‌ماند؟",
+story:"🍎 همه سیب‌ها را نمی‌توان کاملاً مساوی تقسیم کرد. باقی‌مانده را پیدا کن.",
+visual:["🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎","🍎"],
+answer:"۱",
+options:["۰","۱","۲","۳"]
+},
+
+{
+type:"باقیمانده",
+question:"۱۷ توپ را بین ۵ کودک مساوی تقسیم کنیم، چند توپ باقی می‌ماند؟",
+story:"⚽ توپ‌ها را تقسیم کن و ببین آیا چیزی باقی می‌ماند.",
+visual:["⚽","⚽","⚽","⚽","⚽"],
+answer:"۲",
+options:["۱","۲","۳","۴"]
+},
+
+{
+type:"تقسیم",
+question:"۶۳ ÷ ۷ چند می‌شود؟",
+story:"🚀 موشک جادویی ۶۳ ستاره دارد و باید آن‌ها را بین ۷ سفینه تقسیم کند.",
+visual:["🚀","⭐","⭐","⭐","⭐","⭐","⭐","⭐"],
+answer:"۹",
+options:["۷","۸","۹","۱۰"]
+},
+
+{
+type:"تقسیم",
+question:"۷۲ ÷ ۸ چند می‌شود؟",
+story:"🌟 ۷۲ ستاره باید بین ۸ اتاق قلعه تقسیم شوند.",
+visual:["🏰","⭐","⭐","⭐","⭐","⭐","⭐","⭐","⭐"],
+answer:"۹",
+options:["۸","۹","۱۰","۱۲"]
+},
+
+{
+type:"مسئله ترکیبی",
+question:"۴۵ مداد را بین ۵ دانش‌آموز تقسیم کنیم. اگر هر دانش‌آموز ۲ مداد استفاده کند، چند مداد برای هر دانش‌آموز باقی می‌ماند؟",
+story:"✏️ قهرمان تقسیم! اول تقسیم کن و بعد به سؤال دوم دقت کن.",
+visual:["👧","👦","👧","👦","👧"],
+answer:"۷",
+options:["۵","۶","۷","۸"]
+},
+
+{
+type:"چالش نهایی",
+question:"۸۴ آبنبات را بین ۷ کودک مساوی تقسیم کنیم. سهم هر کودک چند آبنبات است؟",
+story:"👑 آخرین مأموریت! اگر این مرحله را حل کنی، قهرمان شهر تقسیم خواهی شد.",
+visual:["👑","🍬","🍬","🍬","🍬","🍬","🍬","🍬"],
+answer:"۱۲",
+options:["۱۰","۱۱","۱۲","۱۴"]
+}
+
+];
+
+
+/* =========================
+   متغیرها
+========================= */
+
+let current=0;
+let score=0;
+let correct=0;
+
+let record=
+parseInt(localStorage.getItem("divisionRecord")) || 0;
+
+document.getElementById("record").innerText=record;
+
+
+/* =========================
+   نمایش مرحله
+========================= */
+
+function loadStage(){
+
+    const s=stages[current];
+
+    document.getElementById("stage").innerText=current+1;
+
+    document.getElementById("level").innerText=
+        "🍬 "+s.type+" | مرحله "+(current+1);
+
+    document.getElementById("question").innerText=
+        s.question;
+
+    document.getElementById("story").innerText=
+        s.story;
+
+    document.getElementById("message").innerText="";
+
+    document.getElementById("next").style.display="none";
+
+    createVisual(s.visual);
+
+    createOptions(s.options);
+
+    updateProgress();
+}
+
+
+/* =========================
+   نمایش تصویر
+========================= */
+
+function createVisual(items){
+
+    const visual=
+        document.getElementById("visual");
+
+    visual.innerHTML="";
+
+    items.forEach(item=>{
+
+        const span=
+            document.createElement("span");
+
+        span.className="item";
+
+        span.innerText=item;
+
+        visual.appendChild(span);
+
+    });
+}
+
+
+/* =========================
+   ساخت گزینه‌ها
+========================= */
+
+function createOptions(options){
+
+    const container=
+        document.getElementById("options");
+
+    container.innerHTML="";
+
+    let shuffled=[...options];
+
+    shuffled.sort(()=>Math.random()-0.5);
+
+    shuffled.forEach(option=>{
+
+        const button=
+            document.createElement("button");
+
+        button.className="option";
+
+        button.innerText=option;
+
+        button.onclick=()=>{
+
+            checkAnswer(button,option);
+
+        };
+
+        container.appendChild(button);
+
+    });
+}
+
+
+/* =========================
+   بررسی پاسخ
+========================= */
+
+function checkAnswer(button,answer){
+
+    const s=stages[current];
+
+    const buttons=
+        document.querySelectorAll(".option");
+
+    buttons.forEach(b=>b.disabled=true);
+
+    if(answer===s.answer){
+
+        button.classList.add("correct");
+
+        correct++;
+
+        score+=10;
+
+        if(score>record){
+
+            record=score;
+
+            localStorage.setItem(
+                "divisionRecord",
+                record
+            );
+
+        }
+
+        document.getElementById("score").innerText=score;
+
+        document.getElementById("record").innerText=record;
+
+        document.getElementById("message").innerText=
+            "🎉 آفرین! تقسیم را درست انجام دادی.";
+
+        document.getElementById("message").style.color=
+            "#39a96b";
+
+    }else{
+
+        button.classList.add("wrong");
+
+        buttons.forEach(b=>{
+
+            if(b.innerText===s.answer){
+
+                b.classList.add("correct");
+
+            }
+
+        });
+
+        document.getElementById("message").innerText=
+            "💡 پاسخ درست: "+s.answer;
+
+        document.getElementById("message").style.color=
+            "#d95f91";
+    }
+
+    document.getElementById("next").style.display=
+        "inline-block";
+}
+
+
+/* =========================
+   مرحله بعد
+========================= */
+
+function nextStage(){
+
+    current++;
+
+    if(current>=stages.length){
+
+        finishGame();
+
+    }else{
+
+        loadStage();
+
+    }
+}
+
+
+/* =========================
+   نوار پیشرفت
+========================= */
+
+function updateProgress(){
+
+    const percent=
+        (current/stages.length)*100;
+
+    document.getElementById("progress")
+        .style.width=percent+"%";
+}
+
+
+/* =========================
+   پایان بازی
+========================= */
+
+function finishGame(){
+
+    document.getElementById("game").style.display=
+        "none";
+
+    document.getElementById("report").style.display=
+        "block";
+
+    document.getElementById("finalScore").innerText=
+        score;
+
+    document.getElementById("finalCorrect").innerText=
+        correct;
+
+    const percent=
+        Math.round(
+            correct/stages.length*100
+        );
+
+    document.getElementById("finalPercent").innerText=
+        percent+"%";
+
+    document.getElementById("finalRecord").innerText=
+        record;
+
+    let text="";
+
+    if(percent>=90){
+
+        text=
+        "🏆 فوق‌العاده! تو قهرمان تقسیم شهر آبنبات‌ها شدی!";
+
+    }else if(percent>=75){
+
+        text=
+        "🌟 عالی بود! مهارت تقسیم تو خیلی خوب شده است.";
+
+    }else if(percent>=50){
+
+        text=
+        "👍 خوب بود! با کمی تمرین بهتر هم می‌شوی.";
+
+    }else{
+
+        text=
+        "💪 دوباره بازی کن؛ این بار موفق‌تر خواهی شد!";
+
+    }
+
+    document.getElementById("performance").innerText=
+        text;
+}
+
+
+/* =========================
+   شروع دوباره
+========================= */
+
+function restartGame(){
+
+    current=0;
+    score=0;
+    correct=0;
+
+    document.getElementById("score").innerText="0";
+
+    document.getElementById("game").style.display=
+        "block";
+
+    document.getElementById("report").style.display=
+        "none";
+
+    loadStage();
+}
+
+
+/* =========================
+   شروع بازی
+========================= */
+
+loadStage();
+
+</script>
+
+</body>
+</html>
