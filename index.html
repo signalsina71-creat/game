@@ -4,11 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>شکارچی واژه‌ها - نسخه ۲.۱</title>
+<title>شکارچی واژه‌ها - نسخه ۲.۲</title>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -86,34 +84,6 @@ h1{
     font-size:25px;
     letter-spacing:5px;
     margin:10px;
-}
-
-.listen{
-    border:none;
-    border-radius:18px;
-    padding:17px 30px;
-    background:#2563eb;
-    color:white;
-    font-size:20px;
-    font-family:inherit;
-    cursor:pointer;
-    box-shadow:0 4px 0 #1d4ed8;
-    margin:8px;
-}
-
-.listen:hover{
-    transform:translateY(-2px);
-}
-
-.listen:active{
-    transform:translateY(2px);
-    box-shadow:0 1px 0 #1d4ed8;
-}
-
-.repeat{
-    font-size:14px;
-    color:#64748b;
-    margin-bottom:15px;
 }
 
 .hint{
@@ -315,9 +285,7 @@ h1{
         padding:10px;
     }
 }
-
 </style>
-
 </head>
 
 <body>
@@ -327,7 +295,7 @@ h1{
 <h1>🎯 شکارچی واژه‌ها</h1>
 
 <div class="subtitle">
-نسخه ۲.۱ | تمرین شنیداری و املا
+نسخه ۲.۲ | بازی تقویت املا
 </div>
 
 <div class="stats">
@@ -357,14 +325,6 @@ h1{
 
 <div class="hearts" id="hearts">
 ❤️❤️❤️
-</div>
-
-<button class="listen" onclick="speakWord()">
-🔊 گوش کن
-</button>
-
-<div class="repeat">
-برای شنیدن دوباره، دوباره روی دکمه بزن.
 </div>
 
 <div class="hint" id="hint">
@@ -442,16 +402,12 @@ h1{
 </div>
 
 <div class="footer">
-🌟 گوش کن، فکر کن، بساز، یاد بگیر!
+🌟 فکر کن، بساز، یاد بگیر!
 </div>
 
 </div>
 
 <script>
-
-/* =========================
-   بانک کلمات
-========================= */
 
 const levels = [
 
@@ -489,7 +445,6 @@ hint:"کسی که با او رابطه خوبی داریم."
 },
 
 {
-
 name:"سطح ۲ | متوسط",
 
 words:[
@@ -523,7 +478,6 @@ hint:"در روز به ما نور و گرما می‌دهد."
 },
 
 {
-
 name:"سطح ۳ | سخت",
 
 words:[
@@ -558,22 +512,17 @@ hint:"وظیفه‌ای که انجام آن بر عهده ماست."
 
 ];
 
+let levelIndex=0;
+let wordIndex=0;
+let score=0;
+let correct=0;
+let lives=3;
+let selected=[];
+let answered=false;
 
-/* =========================
-   متغیرهای بازی
-========================= */
-
-let levelIndex = 0;
-let wordIndex = 0;
-let score = 0;
-let correct = 0;
-let lives = 3;
-let selected = [];
-let answered = false;
-
-let totalWords =
+const totalWords =
 levels.reduce(
-(sum,level) => sum + level.words.length,
+(sum,level)=>sum+level.words.length,
 0
 );
 
@@ -583,664 +532,413 @@ let currentWord;
 let record =
 parseInt(
 localStorage.getItem("amlaRecord")
-) || 0;
+)||0;
 
-document.getElementById("record").innerText = record;
+document.getElementById("record").innerText=record;
 
-
-/* =========================
-   آماده‌سازی صدا
-========================= */
-
-let voices = [];
-
-function loadVoices(){
-
-    if(!("speechSynthesis" in window)){
-        return;
-    }
-
-    voices =
-    window.speechSynthesis.getVoices();
-}
-
-loadVoices();
-
-if("speechSynthesis" in window){
-
-    window.speechSynthesis.onvoiceschanged =
-    loadVoices;
-
-}
-
-
-/* =========================
-   پیدا کردن صدای فارسی
-========================= */
-
-function getPersianVoice(){
-
-    if(!voices || voices.length === 0){
-        voices =
-        window.speechSynthesis.getVoices();
-    }
-
-    let voice =
-    voices.find(
-        v =>
-        v.lang &&
-        v.lang.toLowerCase() === "fa-ir"
-    );
-
-    if(voice){
-        return voice;
-    }
-
-    voice =
-    voices.find(
-        v =>
-        v.lang &&
-        v.lang.toLowerCase().startsWith("fa")
-    );
-
-    return voice || null;
-}
-
-
-/* =========================
-   پخش کلمه
-========================= */
-
-function speakWord(){
-
-    if(!("speechSynthesis" in window)){
-
-        showMessage(
-            "⚠️ مرورگر شما از صدای مصنوعی پشتیبانی نمی‌کند.",
-            "#dc2626"
-        );
-
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const text =
-    currentWord.word;
-
-    const utterance =
-    new SpeechSynthesisUtterance(text);
-
-    const persianVoice =
-    getPersianVoice();
-
-    if(persianVoice){
-
-        utterance.voice =
-        persianVoice;
-
-        utterance.lang =
-        persianVoice.lang;
-
-    }else{
-
-        utterance.lang =
-        "fa-IR";
-
-    }
-
-    /*
-       سرعت کمتر برای وضوح بیشتر
-       مناسب‌تر برای کودکان
-    */
-
-    utterance.rate = 0.65;
-
-    utterance.pitch = 1;
-
-    utterance.volume = 1;
-
-    window.speechSynthesis.speak(
-        utterance
-    );
-
-}
-
-
-/* =========================
-   شروع / نمایش کلمه
-========================= */
 
 function loadWord(){
 
-    currentLevel =
-    levels[levelIndex];
+currentLevel=levels[levelIndex];
 
-    currentWord =
-    currentLevel.words[wordIndex];
+currentWord=currentLevel.words[wordIndex];
 
-    selected = [];
+selected=[];
 
-    lives = 3;
+lives=3;
 
-    answered = false;
+answered=false;
 
-    document.getElementById(
-        "level"
-    ).innerText =
-    currentLevel.name;
+document.getElementById("level").innerText=
+currentLevel.name;
 
-    document.getElementById(
-        "wordNumber"
-    ).innerText =
-    wordIndex + 1;
+document.getElementById("wordNumber").innerText=
+wordIndex+1;
 
-    document.getElementById(
-        "hint"
-    ).innerText =
-    "💡 راهنما: " +
-    currentWord.hint;
+document.getElementById("hint").innerText=
+"💡 راهنما: "+currentWord.hint;
 
-    document.getElementById(
-        "message"
-    ).innerText = "";
+document.getElementById("message").innerText="";
 
-    updateHearts();
+updateHearts();
 
-    updateProgress();
+updateProgress();
 
-    createLetters();
+createLetters();
 
-    updateAnswer();
+updateAnswer();
 
 }
 
-
-/* =========================
-   ساخت حروف
-========================= */
 
 function createLetters(){
 
-    const container =
-    document.getElementById("letters");
+const container=
+document.getElementById("letters");
 
-    container.innerHTML = "";
+container.innerHTML="";
 
-    let letters =
-    currentWord.word.split("");
+let letters=
+currentWord.word.split("");
 
-    const extra = [
-        "ا",
-        "ب",
-        "د",
-        "ر",
-        "س",
-        "م",
-        "ن",
-        "ک",
-        "ت",
-        "ل"
-    ];
+const extra=[
+"ا","ب","د","ر","س",
+"م","ن","ک","ت","ل"
+];
 
-    for(let i=0;i<4;i++){
+for(let i=0;i<4;i++){
 
-        letters.push(
-            extra[
-                Math.floor(
-                    Math.random() *
-                    extra.length
-                )
-            ]
-        );
-
-    }
-
-    letters.sort(
-        () =>
-        Math.random() - .5
-    );
-
-    letters.forEach(
-    (letter,index) => {
-
-        const button =
-        document.createElement(
-            "button"
-        );
-
-        button.className =
-        "letter";
-
-        button.innerText =
-        letter;
-
-        button.onclick =
-        function(){
-
-            if(
-                button.classList.contains(
-                    "used"
-                )
-                ||
-                answered
-                ||
-                lives <= 0
-            ){
-                return;
-            }
-
-            selected.push({
-
-                letter:letter,
-
-                button:button
-
-            });
-
-            button.classList.add(
-                "used"
-            );
-
-            updateAnswer();
-
-        };
-
-        container.appendChild(
-            button
-        );
-
-    });
+letters.push(
+extra[
+Math.floor(
+Math.random()*extra.length
+)
+]
+);
 
 }
 
+letters.sort(
+()=>Math.random()-.5
+);
 
-/* =========================
-   نمایش حروف انتخاب‌شده
-========================= */
+letters.forEach(
+(letter)=>{
+
+const button=
+document.createElement("button");
+
+button.className="letter";
+
+button.innerText=letter;
+
+button.onclick=function(){
+
+if(
+button.classList.contains("used")
+||
+answered
+||
+lives<=0
+){
+return;
+}
+
+selected.push({
+letter:letter,
+button:button
+});
+
+button.classList.add("used");
+
+updateAnswer();
+
+};
+
+container.appendChild(button);
+
+});
+
+}
+
 
 function updateAnswer(){
 
-    const answer =
-    document.getElementById(
-        "answer"
-    );
+const answer=
+document.getElementById("answer");
 
-    answer.innerHTML = "";
+answer.innerHTML="";
 
-    if(selected.length === 0){
+if(selected.length===0){
 
-        const empty =
-        document.createElement(
-            "div"
-        );
+const empty=
+document.createElement("div");
 
-        empty.className =
-        "empty-answer";
+empty.className="empty-answer";
 
-        empty.innerText =
-        "حروف انتخاب‌شده اینجا نمایش داده می‌شوند";
+empty.innerText=
+"حروف انتخاب‌شده اینجا نمایش داده می‌شوند";
 
-        answer.appendChild(
-            empty
-        );
+answer.appendChild(empty);
 
-        return;
-    }
-
-    selected.forEach(
-    item => {
-
-        const div =
-        document.createElement(
-            "div"
-        );
-
-        div.className =
-        "answer-letter";
-
-        div.innerText =
-        item.letter;
-
-        answer.appendChild(
-            div
-        );
-
-    });
+return;
 
 }
 
+selected.forEach(
+item=>{
 
-/* =========================
-   پاک کردن پاسخ
-========================= */
+const div=
+document.createElement("div");
+
+div.className="answer-letter";
+
+div.innerText=item.letter;
+
+answer.appendChild(div);
+
+});
+
+}
+
 
 function clearAnswer(){
 
-    if(answered){
-        return;
-    }
+if(answered){
+return;
+}
 
-    selected.forEach(
-    item => {
+selected.forEach(
+item=>{
+item.button.classList.remove("used");
+}
+);
 
-        item.button.classList.remove(
-            "used"
-        );
+selected=[];
 
-    });
-
-    selected = [];
-
-    updateAnswer();
+updateAnswer();
 
 }
 
-
-/* =========================
-   بررسی پاسخ
-========================= */
 
 function checkAnswer(){
 
-    if(answered){
-        return;
-    }
+if(answered){
+return;
+}
 
-    if(selected.length === 0){
+if(selected.length===0){
 
-        showMessage(
-            "⚠️ ابتدا حروف را انتخاب کن.",
-            "#d97706"
-        );
+showMessage(
+"⚠️ ابتدا حروف را انتخاب کن.",
+"#d97706"
+);
 
-        return;
-    }
+return;
+}
 
-    const answer =
-    selected
-    .map(
-        item => item.letter
-    )
-    .join("");
+const answer=
+selected.map(
+item=>item.letter
+).join("");
 
-    if(answer === currentWord.word){
+if(answer===currentWord.word){
 
-        answered = true;
+answered=true;
 
-        correct++;
+correct++;
 
-        score +=
-        10 * lives;
+score+=10*lives;
 
-        if(score > record){
+if(score>record){
 
-            record = score;
+record=score;
 
-            localStorage.setItem(
-                "amlaRecord",
-                record
-            );
-
-        }
-
-        document.getElementById(
-            "score"
-        ).innerText = score;
-
-        document.getElementById(
-            "record"
-        ).innerText = record;
-
-        showMessage(
-            "🎉 آفرین! پاسخ درست است: " +
-            currentWord.word,
-            "#16a34a"
-        );
-
-    }else{
-
-        lives--;
-
-        updateHearts();
-
-        if(lives <= 0){
-
-            answered = true;
-
-            showMessage(
-                "❌ فرصت‌ها تمام شد. پاسخ درست: " +
-                currentWord.word,
-                "#dc2626"
-            );
-
-        }else{
-
-            showMessage(
-                "❌ پاسخ درست نیست. دوباره تلاش کن.",
-                "#dc2626"
-            );
-
-        }
-
-    }
+localStorage.setItem(
+"amlaRecord",
+record
+);
 
 }
 
+document.getElementById("score").innerText=score;
 
-/* =========================
-   نمایش جان‌ها
-========================= */
+document.getElementById("record").innerText=record;
+
+showMessage(
+"🎉 آفرین! پاسخ درست است: "+
+currentWord.word,
+"#16a34a"
+);
+
+}else{
+
+lives--;
+
+updateHearts();
+
+if(lives<=0){
+
+answered=true;
+
+showMessage(
+"❌ فرصت‌ها تمام شد. پاسخ درست: "+
+currentWord.word,
+"#dc2626"
+);
+
+}else{
+
+showMessage(
+"❌ پاسخ درست نیست. دوباره تلاش کن.",
+"#dc2626"
+);
+
+}
+
+}
+
+}
+
 
 function updateHearts(){
 
-    let result = "";
+let result="";
 
-    for(let i=0;i<3;i++){
+for(let i=0;i<3;i++){
 
-        if(i < lives){
+result+=
+i<lives
+?"❤️"
+:"🖤";
 
-            result += "❤️";
+}
 
-        }else{
-
-            result += "🖤";
-
-        }
-
-    }
-
-    document.getElementById(
-        "hearts"
-    ).innerText = result;
+document.getElementById("hearts").innerText=result;
 
 }
 
 
-/* =========================
-   پیام
-========================= */
+function showMessage(text,color){
 
-function showMessage(
-text,
-color
-){
+const message=
+document.getElementById("message");
 
-    const message =
-    document.getElementById(
-        "message"
-    );
+message.innerText=text;
 
-    message.innerText = text;
-
-    message.style.color = color;
+message.style.color=color;
 
 }
 
-
-/* =========================
-   کلمه بعدی
-========================= */
 
 function nextWord(){
 
-    if(!answered){
+if(!answered){
 
-        showMessage(
-            "⚠️ ابتدا پاسخ را بررسی کن.",
-            "#d97706"
-        );
+showMessage(
+"⚠️ ابتدا پاسخ را بررسی کن.",
+"#d97706"
+);
 
-        return;
-    }
+return;
+}
 
-    wordIndex++;
+wordIndex++;
 
-    if(
-        wordIndex >=
-        currentLevel.words.length
-    ){
+if(
+wordIndex>=
+currentLevel.words.length
+){
 
-        wordIndex = 0;
+wordIndex=0;
 
-        levelIndex++;
+levelIndex++;
 
-        if(
-            levelIndex >=
-            levels.length
-        ){
+if(
+levelIndex>=levels.length
+){
 
-            finishGame();
+finishGame();
 
-            return;
-        }
-
-    }
-
-    loadWord();
+return;
 
 }
 
+}
 
-/* =========================
-   نوار پیشرفت
-========================= */
+loadWord();
+
+}
+
 
 function updateProgress(){
 
-    let completed = 0;
+let completed=0;
 
-    for(
-        let i=0;
-        i<levelIndex;
-        i++
-    ){
+for(
+let i=0;
+i<levelIndex;
+i++
+){
 
-        completed +=
-        levels[i].words.length;
-
-    }
-
-    completed += wordIndex;
-
-    const percent =
-    (
-        completed /
-        totalWords
-    ) * 100;
-
-    document.getElementById(
-        "progressBar"
-    ).style.width =
-    percent + "%";
+completed+=
+levels[i].words.length;
 
 }
 
+completed+=wordIndex;
 
-/* =========================
-   پایان بازی
-========================= */
+const percent=
+(completed/totalWords)*100;
+
+document.getElementById(
+"progressBar"
+).style.width=
+percent+"%";
+
+}
+
 
 function finishGame(){
 
-    document.getElementById(
-        "gameArea"
-    ).style.display =
-    "none";
+document.getElementById(
+"gameArea"
+).style.display="none";
 
-    document.getElementById(
-        "report"
-    ).style.display =
-    "block";
+document.getElementById(
+"report"
+).style.display="block";
 
-    document.getElementById(
-        "finalScore"
-    ).innerText =
-    score;
+document.getElementById(
+"finalScore"
+).innerText=score;
 
-    document.getElementById(
-        "finalCorrect"
-    ).innerText =
-    correct;
+document.getElementById(
+"finalCorrect"
+).innerText=correct;
 
-    const percent =
-    Math.round(
-        (correct / totalWords) * 100
-    );
+document.getElementById(
+"finalPercent"
+).innerText=
+Math.round(
+(correct/totalWords)*100
+)+"%";
 
-    document.getElementById(
-        "finalPercent"
-    ).innerText =
-    percent + "%";
-
-    document.getElementById(
-        "finalRecord"
-    ).innerText =
-    record;
+document.getElementById(
+"finalRecord"
+).innerText=record;
 
 }
 
-
-/* =========================
-   شروع دوباره
-========================= */
 
 function restartGame(){
 
-    window.speechSynthesis.cancel();
+levelIndex=0;
 
-    levelIndex = 0;
+wordIndex=0;
 
-    wordIndex = 0;
+score=0;
 
-    score = 0;
+correct=0;
 
-    correct = 0;
+lives=3;
 
-    lives = 3;
+document.getElementById(
+"score"
+).innerText="0";
 
-    document.getElementById(
-        "score"
-    ).innerText = "0";
+document.getElementById(
+"report"
+).style.display="none";
 
-    document.getElementById(
-        "report"
-    ).style.display =
-    "none";
+document.getElementById(
+"gameArea"
+).style.display="block";
 
-    document.getElementById(
-        "gameArea"
-    ).style.display =
-    "block";
-
-    loadWord();
+loadWord();
 
 }
 
-
-/* =========================
-   شروع اولیه
-========================= */
 
 loadWord();
 
