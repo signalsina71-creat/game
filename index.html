@@ -1378,44 +1378,54 @@ loadWord();
 ========================= */
 
 
-function speakWord(){
+function speakWord() {
 
-if(
-!("speechSynthesis" in window)
-){
+    if (!("speechSynthesis" in window)) {
+        showMessage(
+            "⚠️ مرورگر شما از قابلیت پخش صوت پشتیبانی نمی‌کند.",
+            "#dc2626"
+        );
+        return;
+    }
 
-showMessage(
-"⚠️ مرورگر شما از پخش صوت پشتیبانی نمی‌کند.",
-"#dc2626"
-);
+    const text = currentWord.word;
 
-return;
+    window.speechSynthesis.cancel();
 
+    const voices = window.speechSynthesis.getVoices();
+
+    let persianVoice = voices.find(
+        voice =>
+            voice.lang &&
+            (
+                voice.lang.toLowerCase() === "fa-ir" ||
+                voice.lang.toLowerCase().startsWith("fa")
+            )
+    );
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    if (persianVoice) {
+        utterance.voice = persianVoice;
+        utterance.lang = persianVoice.lang;
+    } else {
+        utterance.lang = "fa-IR";
+    }
+
+    utterance.rate = 0.7;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    window.speechSynthesis.speak(utterance);
+
+    if (!persianVoice) {
+        showMessage(
+            "🔊 کلمه پخش شد؛ اگر صدا شنیده نمی‌شود، صدای فارسی روی دستگاه فعال نیست.",
+            "#2563eb"
+        );
+    }
 }
-
-
-window.speechSynthesis.cancel();
-
-
-const utterance =
-new SpeechSynthesisUtterance(
-currentWord.word
-);
-
-
-utterance.lang="fa-IR";
-
-utterance.rate=.75;
-
-utterance.pitch=1;
-
-
-window.speechSynthesis.speak(
-utterance
-);
-
-}
-
 
 /* =========================
    پیشرفت
