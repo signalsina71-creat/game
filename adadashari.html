@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>سرزمین اعداد اعشاری</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+user-select:none;
+}
+
+body{
+margin:0;
+font-family:Tahoma,Arial,sans-serif;
+overflow-x:hidden;
+color:white;
+
+background:
+radial-gradient(circle at 20% 10%,#49356e,transparent 30%),
+radial-gradient(circle at 80% 20%,#135e68,transparent 28%),
+linear-gradient(#080b24,#101b3d 55%,#06151b);
+
+min-height:100vh;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.game{
+width:96%;
+max-width:1250px;
+margin:auto;
+padding:12px 0 30px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+position:relative;
+z-index:10;
+
+padding:18px;
+
+text-align:center;
+
+border-radius:28px;
+
+background:
+linear-gradient(
+145deg,
+rgba(36,31,74,.95),
+rgba(13,49,64,.95)
+);
+
+border:1px solid #c7a95b;
+
+box-shadow:
+0 0 25px #c7a95b55,
+0 15px 45px #000b;
+}
+
+header h1{
+margin:0;
+
+font-size:34px;
+
+color:#f6d77a;
+
+text-shadow:
+0 0 12px #ffd866,
+0 0 30px #d49e3c;
+}
+
+header p{
+margin:7px 0 0;
+
+color:#c7d5f5;
+
+font-size:15px;
+}
+
+/* =========================
+   CLOUDS
+========================= */
+
+.sky{
+position:absolute;
+top:0;
+left:0;
+right:0;
+height:220px;
+
+overflow:hidden;
+
+pointer-events:none;
+}
+
+.cloud{
+position:absolute;
+
+width:170px;
+height:55px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.85),
+rgba(205,226,244,.6)
+);
+
+border-radius:60px;
+
+filter:blur(.2px);
+
+opacity:.65;
+
+animation:
+cloudMove linear infinite;
+}
+
+.cloud:before,
+.cloud:after{
+content:"";
+
+position:absolute;
+
+background:inherit;
+
+border-radius:50%;
+}
+
+.cloud:before{
+width:75px;
+height:75px;
+
+left:25px;
+top:-35px;
+}
+
+.cloud:after{
+width:90px;
+height:90px;
+
+right:20px;
+top:-45px;
+}
+
+.c1{
+top:45px;
+left:-200px;
+animation-duration:34s;
+}
+
+.c2{
+top:100px;
+left:-300px;
+animation-duration:45s;
+animation-delay:-18s;
+transform:scale(.75);
+}
+
+.c3{
+top:25px;
+left:-400px;
+animation-duration:52s;
+animation-delay:-30s;
+transform:scale(.55);
+}
+
+@keyframes cloudMove{
+
+from{
+transform:translateX(0);
+}
+
+to{
+transform:translateX(1450px);
+}
+
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+
+margin:15px 0;
+}
+
+.stat{
+
+min-width:125px;
+
+padding:9px 15px;
+
+text-align:center;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+145deg,
+#29254e,
+#142f42
+);
+
+border:1px solid #827143;
+
+box-shadow:
+0 8px 20px #0007,
+inset 0 0 15px #ffffff08;
+}
+
+.stat span{
+display:block;
+
+font-size:13px;
+
+color:#bfc9ec;
+}
+
+.stat strong{
+display:block;
+
+margin-top:3px;
+
+font-size:21px;
+
+color:#f6d77a;
+}
+
+/* =========================
+   LANDSCAPE
+========================= */
+
+.world{
+
+position:relative;
+
+min-height:780px;
+
+overflow:hidden;
+
+border-radius:35px;
+
+background:
+
+linear-gradient(
+180deg,
+#111a45 0%,
+#172f54 45%,
+#174d45 72%,
+#0a2930 100%
+);
+
+border:1px solid #b39552;
+
+box-shadow:
+0 30px 70px #000c,
+inset 0 0 80px #0006;
+}
+
+/* moon */
+
+.moon{
+
+position:absolute;
+
+width:100px;
+height:100px;
+
+right:8%;
+top:40px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle at 35% 30%,
+#fff8d0,
+#d9bd67 55%,
+#7c6631
+);
+
+box-shadow:
+0 0 30px #ffe99a,
+0 0 70px #e8c75c55;
+}
+
+/* stars */
+
+.star{
+position:absolute;
+
+width:3px;
+height:3px;
+
+background:#fff;
+
+border-radius:50%;
+
+box-shadow:0 0 7px #fff;
+
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+
+from{
+opacity:.2;
+}
+
+to{
+opacity:1;
+}
+
+}
+
+/* =========================
+   FOREST
+========================= */
+
+.forest{
+
+position:absolute;
+
+bottom:150px;
+
+left:0;
+right:0;
+
+height:190px;
+
+display:flex;
+
+align-items:end;
+
+justify-content:space-around;
+
+opacity:.85;
+}
+
+.tree{
+
+position:relative;
+
+width:45px;
+
+height:130px;
+}
+
+.trunk{
+
+position:absolute;
+
+bottom:0;
+left:18px;
+
+width:12px;
+height:65px;
+
+background:
+linear-gradient(
+90deg,
+#4a2b20,
+#875033,
+#3c231c
+);
+
+border-radius:5px;
+}
+
+.leaf{
+position:absolute;
+
+width:65px;
+height:65px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle at 35% 25%,
+#64d69b,
+#187257 55%,
+#0c423a
+);
+
+box-shadow:
+0 0 20px #2dcf9866;
+}
+
+.l1{
+top:15px;
+left:-10px;
+}
+
+.l2{
+top:40px;
+left:-25px;
+}
+
+.l3{
+top:35px;
+left:5px;
+}
+
+/* =========================
+   RIVER
+========================= */
+
+.river{
+
+position:absolute;
+
+bottom:0;
+
+left:0;
+right:0;
+
+height:155px;
+
+overflow:hidden;
+
+background:
+
+linear-gradient(
+180deg,
+#2ec4cf,
+#126b91 55%,
+#073e63
+);
+
+border-top:
+3px solid #76e9e4;
+
+box-shadow:
+0 -10px 30px #2acbd455;
+}
+
+.wave{
+
+position:absolute;
+
+width:220%;
+
+height:60px;
+
+top:-18px;
+
+left:-40%;
+
+background:
+
+radial-gradient(
+ellipse,
+transparent 35%,
+#a6f6f2 36%,
+#a6f6f2 39%,
+transparent 40%
+);
+
+opacity:.45;
+
+animation:
+riverWave 6s linear infinite;
+}
+
+.wave.two{
+top:25px;
+opacity:.22;
+animation-duration:9s;
+}
+
+@keyframes riverWave{
+
+from{
+transform:translateX(0);
+}
+
+to{
+transform:translateX(180px);
+}
+
+}
+
+/* =========================
+   GAME PANEL
+========================= */
+
+.panel{
+
+position:relative;
+
+z-index:5;
+
+width:94%;
+
+max-width:1050px;
+
+margin:25px auto;
+
+padding:22px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+145deg,
+rgba(25,27,62,.94),
+rgba(18,39,55,.94)
+);
+
+border:
+1px solid #c5a85c;
+
+box-shadow:
+
+0 20px 50px #000b,
+
+inset 0 0 30px #ffffff06;
+}
+
+/* =========================
+   TIMER
+========================= */
+
+.timerArea{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:12px;
+}
+
+.timerRing{
+
+width:75px;
+height:75px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:
+
+conic-gradient(
+#f5d36b var(--time),
+#2a3156 var(--time)
+);
+
+box-shadow:
+0 0 25px #e6c45b66;
+
+position:relative;
+}
+
+.timerRing:after{
+
+content:"";
+
+position:absolute;
+
+width:58px;
+height:58px;
+
+border-radius:50%;
+
+background:#12172f;
+}
+
+.timerNumber{
+
+position:relative;
+
+z-index:2;
+
+font-size:22px;
+
+font-weight:bold;
+
+color:#f8dc7b;
+}
+
+/* =========================
+   QUESTION
+========================= */
+
+.question{
+
+text-align:center;
+
+font-size:23px;
+
+line-height:1.8;
+
+min-height:75px;
+
+color:#f4f5ff;
+
+}
+
+.highlight{
+
+color:#f7d66f;
+
+text-shadow:0 0 10px #d8ad4b;
+}
+
+/* =========================
+   PLACE VALUE TABLE
+========================= */
+
+.placeTable{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+margin:20px auto;
+
+direction:rtl;
+}
+
+.place{
+
+width:115px;
+
+padding:10px;
+
+border:1px solid #9b8651;
+
+background:
+
+linear-gradient(
+145deg,
+#34305b,
+#172e43
+);
+
+box-shadow:
+0 10px 25px #0007;
+
+}
+
+.placeTitle{
+
+font-size:13px;
+
+color:#c9c8de;
+
+margin-bottom:8px;
+}
+
+.drop{
+
+height:65px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border:2px dashed #68769c;
+
+border-radius:15px;
+
+font-size:31px;
+
+font-weight:bold;
+
+background:#0b1028;
+
+transition:.2s;
+}
+
+.drop.over{
+
+border-color:#f5d46d;
+
+background:#3a355b;
+
+transform:scale(1.04);
+}
+
+.drop.filled{
+
+border-style:solid;
+
+color:#15152a;
+
+background:
+linear-gradient(
+145deg,
+#f9d975,
+#b87d29
+);
+
+box-shadow:
+0 5px 0 #694619,
+0 0 20px #f4ca5d55;
+}
+
+/* =========================
+   DIGITS
+========================= */
+
+.digits{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+min-height:70px;
+
+margin:18px 0;
+}
+
+.digit{
+
+width:60px;
+height:60px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+border-radius:18px;
+
+font-size:27px;
+
+font-weight:bold;
+
+color:#fff;
+
+cursor:grab;
+
+background:
+
+linear-gradient(
+145deg,
+#6a4f9c,
+#283f70
+);
+
+border:1px solid #c0a8e4;
+
+box-shadow:
+0 7px 0 #15162e,
+0 0 20px #7257b044;
+
+transition:.2s;
+}
+
+.digit:hover{
+
+transform:
+translateY(-6px)
+rotate(-4deg);
+
+box-shadow:
+0 10px 0 #15162e,
+0 0 25px #bda2ff66;
+}
+
+.digit.used{
+
+opacity:.15;
+
+pointer-events:none;
+}
+
+/* =========================
+   ANSWERS
+========================= */
+
+.answers{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+margin:18px 0;
+}
+
+.answer{
+
+min-width:135px;
+
+padding:13px 18px;
+
+border-radius:17px;
+
+font-family:Tahoma;
+
+font-size:17px;
+
+font-weight:bold;
+
+color:white;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+145deg,
+#37315d,
+#183c50
+);
+
+border:
+1px solid #897749;
+
+box-shadow:
+0 6px 0 #11152c;
+
+transition:.2s;
+}
+
+.answer:hover{
+
+transform:translateY(-4px);
+
+background:
+linear-gradient(
+145deg,
+#4c4377,
+#1d5560
+);
+
+box-shadow:
+0 9px 20px #0008;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+
+min-height:35px;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:bold;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.next{
+
+display:none;
+
+margin:12px auto;
+
+padding:13px 30px;
+
+border:0;
+
+border-radius:18px;
+
+font-family:Tahoma;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+145deg,
+#f5d873,
+#a66d20
+);
+
+color:#18162b;
+
+box-shadow:
+0 6px 0 #604017,
+0 0 20px #f0c75b44;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.progress{
+
+height:9px;
+
+width:80%;
+
+margin:18px auto;
+
+background:#080d23;
+
+border-radius:20px;
+
+overflow:hidden;
+}
+
+.progressBar{
+
+height:100%;
+
+width:0;
+
+background:
+linear-gradient(
+90deg,
+#3ce0bb,
+#f4d56c
+);
+
+box-shadow:
+0 0 15px #7de7ce;
+
+transition:.4s;
+}
+
+/* =========================
+   FIREWORKS
+========================= */
+
+.fireworks{
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+z-index:100;
+}
+
+.spark{
+
+position:absolute;
+
+width:6px;
+height:6px;
+
+border-radius:50%;
+
+background:#ffe16e;
+
+box-shadow:
+0 0 12px #fff,
+0 0 25px #ffd85b;
+
+animation:
+explode 900ms ease-out forwards;
+}
+
+@keyframes explode{
+
+0%{
+transform:translate(0,0) scale(1);
+opacity:1;
+}
+
+100%{
+transform:
+translate(
+calc(var(--x)*1px),
+calc(var(--y)*1px)
+)
+scale(.1);
+
+opacity:0;
+}
+
+}
+
+/* =========================
+   RESULT
+========================= */
+
+.result{
+
+display:none;
+
+text-align:center;
+
+padding:45px 20px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+145deg,
+#292653,
+#112d3d
+);
+
+border:1px solid #c8a956;
+
+box-shadow:
+0 20px 60px #000c;
+}
+
+.result h2{
+
+font-size:32px;
+
+color:#f8d76d;
+}
+
+.finalScore{
+
+font-size:65px;
+
+font-weight:bold;
+
+color:#f8d76d;
+
+text-shadow:
+0 0 25px #e5bb4c;
+}
+
+.restart{
+
+padding:13px 30px;
+
+border:0;
+
+border-radius:18px;
+
+font-family:Tahoma;
+
+font-weight:bold;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+145deg,
+#f3d46c,
+#a86d21
+);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+header h1{
+font-size:25px;
+}
+
+.world{
+min-height:850px;
+}
+
+.panel{
+padding:15px;
+}
+
+.question{
+font-size:18px;
+}
+
+.place{
+width:24%;
+}
+
+.placeTitle{
+font-size:10px;
+}
+
+.drop{
+height:55px;
+font-size:25px;
+}
+
+.digit{
+width:52px;
+height:52px;
+font-size:23px;
+}
+
+.answer{
+min-width:105px;
+font-size:15px;
+}
+
+}
+
+/* =========================
+   3D EFFECT
+========================= */
+
+.threeD{
+
+transform:
+perspective(800px)
+rotateX(5deg);
+
+box-shadow:
+0 18px 30px #0009,
+inset 0 0 20px #ffffff08;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<header>
+
+<h1>✨ سرزمین اعداد اعشاری ✨</h1>
+
+<p>
+به سرزمین رودخانه‌ها و جنگل‌های جادویی خوش آمدی!
+</p>
+
+</header>
+
+<div class="stats">
+
+<div class="stat">
+<span>💰 امتیاز</span>
+<strong id="score">0</strong>
+</div>
+
+<div class="stat">
+<span>🔥 زنجیره</span>
+<strong id="streak">0</strong>
+</div>
+
+<div class="stat">
+<span>📍 مرحله</span>
+<strong id="stage">1</strong>
+</div>
+
+<div class="stat">
+<span>🎯 پاسخ درست</span>
+<strong id="correct">0</strong>
+</div>
+
+</div>
+
+
+<div class="world" id="world">
+
+<div class="sky">
+
+<div class="cloud c1"></div>
+<div class="cloud c2"></div>
+<div class="cloud c3"></div>
+
+</div>
+
+<div class="moon"></div>
+
+<div class="star" style="top:8%;left:8%"></div>
+<div class="star" style="top:14%;left:19%"></div>
+<div class="star" style="top:20%;left:32%"></div>
+<div class="star" style="top:12%;left:52%"></div>
+<div class="star" style="top:28%;left:67%"></div>
+<div class="star" style="top:15%;left:83%"></div>
+
+<div class="forest">
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+</div>
+
+
+<div class="panel" id="panel">
+
+<div class="timerArea">
+
+<div class="timerRing" id="timerRing">
+
+<div class="timerNumber" id="timer">
+30
+</div>
+
+</div>
+
+<div>
+زمان باقی‌مانده
+<br>
+<strong>۳۰ ثانیه</strong>
+</div>
+
+</div>
+
+
+<div id="stageLabel"
+style="
+text-align:center;
+color:#f4d56d;
+margin:10px;
+">
+مرحله ۱ از ۲۰
+</div>
+
+
+<div class="question" id="question"></div>
+
+
+<div class="placeTable" id="placeTable"></div>
+
+
+<div class="digits" id="digits"></div>
+
+
+<div class="answers" id="answers"></div>
+
+
+<div class="message" id="message"></div>
+
+
+<button class="next" id="next" onclick="nextStage()">
+➡️ مرحله بعد
+</button>
+
+
+<div class="progress">
+
+<div class="progressBar" id="progress"></div>
+
+</div>
+
+</div>
+
+
+<div class="river">
+
+<div class="wave"></div>
+<div class="wave two"></div>
+
+</div>
+
+</div>
+
+
+<div class="result" id="result">
+
+<h2>🏆 سفر تو به پایان رسید!</h2>
+
+<p>
+تو توانستی سرزمین اعداد اعشاری را کامل طی کنی.
+</p>
+
+<div class="finalScore" id="finalScore">
+0
+</div>
+
+<p>
+پاسخ‌های درست:
+<strong id="finalCorrect">0</strong>
+از ۲۰
+</p>
+
+<p>
+درصد موفقیت:
+<strong id="finalPercent">0%</strong>
+</p>
+
+<h3 id="finalMessage"></h3>
+
+<button class="restart" onclick="restartGame()">
+🔄 شروع دوباره
+</button>
+
+</div>
+
+
+<div class="fireworks" id="fireworks"></div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   QUESTIONS
+========================================= */
+
+const questions=[
+
+{
+type:"drag",
+digits:["۳","۵","۲","۷"],
+answer:["۳","۵","۲","۷"],
+question:
+"رقم‌ها را در جدول ارزش مکانی قرار بده و عدد <b class='highlight'>۳۵۲۷</b> را بساز."
+},
+
+{
+type:"drag",
+digits:["۴","۸","۶","۳"],
+answer:["۴","۸","۶","۳"],
+question:
+"عدد <b class='highlight'>۴۸۶۳</b> را در جدول بساز."
+},
+
+{
+type:"drag",
+digits:["۲","۷","۵","۴"],
+answer:["۲","۷","۵","۴"],
+question:
+"عدد <b class='highlight'>۲۷/۵۴</b> را بساز."
+},
+
+{
+type:"fill",
+question:
+"در عدد <b class='highlight'>۳/۷۵</b>، رقم ۷ در کدام جایگاه قرار دارد؟",
+options:[
+"دهم",
+"صدم",
+"یکان",
+"دهگان"
+],
+correct:"دهم"
+},
+
+{
+type:"fill",
+question:
+"در عدد <b class='highlight'>۶/۴۸</b>، رقم ۸ در جایگاه ... قرار دارد.",
+options:[
+"یکان",
+"دهم",
+"صدم",
+"دهگان"
+],
+correct:"صدم"
+},
+
+{
+type:"compare",
+question:
+"کدام علامت رابطه را درست می‌کند؟<br><br><b>۳/۷ &nbsp; ? &nbsp; ۳/۵</b>",
+options:[">","<","=","+"],
+correct:">"
+},
+
+{
+type:"compare",
+question:
+"کدام علامت درست است؟<br><br><b>۲/۴۵ &nbsp; ? &nbsp; ۲/۵</b>",
+options:[">","<","=","+"],
+correct:"<"
+},
+
+{
+type:"compare",
+question:
+"کدام عدد بزرگ‌تر است؟",
+options:[
+"۴/۲۵",
+"۴/۵",
+"۴/۰۵",
+"۴/۱۵"
+],
+correct:"۴/۵"
+},
+
+{
+type:"fill",
+question:
+"جای خالی را پیدا کن:<br><br><b>۳/۴ + ۰/۶ = ؟</b>",
+options:[
+"۳/۸",
+"۴",
+"۴/۶",
+"۳/۱۰"
+],
+correct:"۴"
+},
+
+{
+type:"fill",
+question:
+"جای خالی را پیدا کن:<br><br><b>۵/۷ - ۲/۳ = ؟</b>",
+options:[
+"۳/۴",
+"۳/۱",
+"۲/۴",
+"۴/۱"
+],
+correct:"۳/۴"
+},
+
+{
+type:"fill",
+question:
+"حاصل را پیدا کن:<br><br><b>۲/۳۵ + ۱/۲۵ = ؟</b>",
+options:[
+"۳/۵۰",
+"۳/۶۰",
+"۳/۷۰",
+"۲/۶۰"
+],
+correct:"۳/۶۰"
+},
+
+{
+type:"fill",
+question:
+"حاصل تفریق را پیدا کن:<br><br><b>۶/۷۵ - ۲/۲۵ = ؟</b>",
+options:[
+"۴/۵۰",
+"۴/۶۰",
+"۵/۵۰",
+"۳/۵۰"
+],
+correct:"۴/۵۰"
+},
+
+{
+type:"compare",
+question:
+"کدام عدد کوچک‌تر است؟",
+options:[
+"۵/۲",
+"۵/۰۲",
+"۵/۲۰",
+"۵/۱۲"
+],
+correct:"۵/۰۲"
+},
+
+{
+type:"fill",
+question:
+"عدد مناسب را پیدا کن:<br><br><b>۷/۴ = ۷/۴۰</b>",
+options:[
+"درست",
+"نادرست",
+"گاهی درست",
+"هیچ‌کدام"
+],
+correct:"درست"
+},
+
+{
+type:"fill",
+question:
+"رقم مناسب را پیدا کن:<br><br><b>۴/۵ = ۴/۵۰</b>",
+options:[
+"درست",
+"نادرست",
+"فقط در جمع",
+"فقط در تفریق"
+],
+correct:"درست"
+},
+
+{
+type:"fill",
+question:
+"حاصل را پیدا کن:<br><br><b>۱۰/۵ - ۳/۲۵ = ؟</b>",
+options:[
+"۷/۲۵",
+"۷/۳۵",
+"۶/۲۵",
+"۸/۲۵"
+],
+correct:"۷/۲۵"
+},
+
+{
+type:"fill",
+question:
+"حاصل جمع را پیدا کن:<br><br><b>۴/۷۵ + ۲/۱۵ = ؟</b>",
+options:[
+"۶/۹۰",
+"۶/۸۰",
+"۶/۷۰",
+"۵/۹۰"
+],
+correct:"۶/۹۰"
+},
+
+{
+type:"compare",
+question:
+"کدام گزینه درست است؟<br><br><b>۸/۳۰ &nbsp; ? &nbsp; ۸/۳</b>",
+options:[
+">",
+"<",
+"=",
+"≠"
+],
+correct:"="
+},
+
+{
+type:"fill",
+question:
+"کدام عدد بین ۲/۳ و ۲/۵ قرار می‌گیرد؟",
+options:[
+"۲/۲",
+"۲/۴",
+"۲/۶",
+"۳/۴"
+],
+correct:"۲/۴"
+},
+
+{
+type:"final",
+question:
+"🌟 چالش نهایی 🌟<br><br>حاصل عبارت زیر را پیدا کن:<br><br><b>۱۲/۵ - ۴/۷۵ + ۲/۲۵</b>",
+options:[
+"۱۰",
+"۹/۵",
+"۱۰/۵",
+"۸"
+],
+correct:"۱۰"
+}
+
+];
+
+let current=0;
+let score=0;
+let correct=0;
+let streak=0;
+let time=30;
+let timer=null;
+
+
+/* =========================================
+   START
+========================================= */
+
+function startGame(){
+
+loadQuestion();
+
+}
+
+
+/* =========================================
+   LOAD
+========================================= */
+
+function loadQuestion(){
+
+clearInterval(timer);
+
+time=30;
+
+document.getElementById("timer").innerText=time;
+
+document.getElementById("timerRing")
+.style.setProperty("--time","100%");
+
+document.getElementById("message").innerText="";
+
+document.getElementById("next").style.display="none";
+
+document.getElementById("stage").innerText=current+1;
+
+document.getElementById("stageLabel").innerText=
+"مرحله "+(current+1)+" از ۲۰";
+
+updateProgress();
+
+const q=questions[current];
+
+document.getElementById("question").innerHTML=
+q.question;
+
+document.getElementById("placeTable").innerHTML="";
+
+document.getElementById("digits").innerHTML="";
+
+document.getElementById("answers").innerHTML="";
+
+if(q.type==="drag"){
+
+createDrag(q);
+
+}else{
+
+createChoices(q);
+
+}
+
+startTimer();
+
+}
+
+
+/* =========================================
+   DRAG TABLE
+========================================= */
+
+function createDrag(q){
+
+const table=
+document.getElementById("placeTable");
+
+let places;
+
+if(current<2){
+
+places=[
+"هزارگان",
+"صدگان",
+"دهگان",
+"یکان"
+];
+
+}else{
+
+places=[
+"یکان",
+"دهم",
+"صدم",
+"هزارم"
+];
+
+}
+
+places.forEach((p,index)=>{
+
+const div=
+document.createElement("div");
+
+div.className="place threeD";
+
+div.innerHTML=`
+
+<div class="placeTitle">
+${p}
+</div>
+
+<div
+class="drop"
+data-index="${index}">
+؟
+</div>
+
+`;
+
+table.appendChild(div);
+
+});
+
+
+q.digits.forEach((digit,index)=>{
+
+const d=
+document.createElement("div");
+
+d.className="digit";
+
+d.innerText=digit;
+
+d.draggable=true;
+
+d.dataset.index=index;
+
+d.dataset.value=digit;
+
+d.addEventListener(
+"dragstart",
+e=>{
+
+e.dataTransfer.setData(
+"index",
+index
+);
+
+e.dataTransfer.setData(
+"value",
+digit
+);
+
+});
+
+document
+.getElementById("digits")
+.appendChild(d);
+
+});
+
+
+document
+.querySelectorAll(".drop")
+.forEach(drop=>{
+
+drop.addEventListener(
+"dragover",
+e=>{
+
+e.preventDefault();
+
+drop.classList.add("over");
+
+});
+
+drop.addEventListener(
+"dragleave",
+()=>{
+
+drop.classList.remove("over");
+
+});
+
+drop.addEventListener(
+"drop",
+e=>{
+
+e.preventDefault();
+
+drop.classList.remove("over");
+
+const index=
+Number(
+e.dataTransfer.getData("index")
+);
+
+const value=
+e.dataTransfer.getData("value");
+
+if(value===q.answer[index]){
+
+drop.innerText=value;
+
+drop.classList.add("filled");
+
+document
+.querySelectorAll(".digit")
+[index]
+.classList.add("used");
+
+checkDrag();
+
+}else{
+
+wrong();
+
+}
+
+});
+
+});
+
+}
+
+
+/* =========================================
+   CHECK DRAG
+========================================= */
+
+function checkDrag(){
+
+const filled=
+document.querySelectorAll(".drop.filled")
+.length;
+
+if(filled===questions[current].answer.length){
+
+correctAnswer();
+
+}
+
+}
+
+
+/* =========================================
+   CHOICES
+========================================= */
+
+function createChoices(q){
+
+const answers=
+document.getElementById("answers");
+
+q.options.forEach(option=>{
+
+const b=
+document.createElement("button");
+
+b.className="answer";
+
+b.innerText=option;
+
+b.onclick=()=>{
+
+if(option===q.correct){
+
+correctAnswer();
+
+}else{
+
+wrong();
+
+}
+
+};
+
+answers.appendChild(b);
+
+});
+
+}
+
+
+/* =========================================
+   CORRECT
+========================================= */
+
+function correctAnswer(){
+
+clearInterval(timer);
+
+correct++;
+
+streak++;
+
+const points=
+40+
+time+
+streak*5;
+
+score+=points;
+
+document.getElementById("score").innerText=score;
+
+document.getElementById("correct").innerText=correct;
+
+document.getElementById("streak").innerText=streak;
+
+document.getElementById("message").innerHTML=
+"✨ آفرین! "+points+
+" امتیاز به دست آوردی! ✨";
+
+document.getElementById("message").style.color=
+"#f8d76d";
+
+fireworks();
+
+document.getElementById("next").style.display="block";
+
+document
+.querySelectorAll(".answer")
+.forEach(b=>b.disabled=true);
+
+}
+
+
+/* =========================================
+   WRONG
+========================================= */
+
+function wrong(){
+
+streak=0;
+
+document.getElementById("streak").innerText=0;
+
+document.getElementById("message").innerHTML=
+"💭 دوباره فکر کن... هنوز فرصت داری.";
+
+document.getElementById("message").style.color=
+"#ff9b9b";
+
+}
+
+
+/* =========================================
+   TIMER
+========================================= */
+
+function startTimer(){
+
+timer=setInterval(()=>{
+
+time--;
+
+document.getElementById("timer").innerText=time;
+
+const percent=
+(time/30)*100;
+
+document
+.getElementById("timerRing")
+.style.setProperty(
+"--time",
+percent+"%"
+);
+
+if(time<=10){
+
+document
+.getElementById("timerRing")
+.style.boxShadow=
+"0 0 30px #ff5964";
+
+}
+
+if(time<=0){
+
+clearInterval(timer);
+
+timeOut();
+
+}
+
+},1000);
+
+}
+
+
+/* =========================================
+   TIME OUT
+========================================= */
+
+function timeOut(){
+
+document.getElementById("message").innerHTML=
+"⏰ زمان تمام شد!<br>سفر از ابتدا آغاز می‌شود...";
+
+document.getElementById("message").style.color=
+"#ff6f78";
+
+setTimeout(()=>{
+
+restartGame();
+
+},1500);
+
+}
+
+
+/* =========================================
+   NEXT
+========================================= */
+
+function nextStage(){
+
+current++;
+
+if(current>=questions.length){
+
+finishGame();
+
+}else{
+
+loadQuestion();
+
+}
+
+}
+
+
+/* =========================================
+   PROGRESS
+========================================= */
+
+function updateProgress(){
+
+document.getElementById("progress").style.width=
+(current/20*100)+"%";
+
+}
+
+
+/* =========================================
+   FIREWORKS
+========================================= */
+
+function fireworks(){
+
+const container=
+document.getElementById("fireworks");
+
+container.innerHTML="";
+
+const colors=[
+"#ffe16e",
+"#6ef7e1",
+"#ff82c8",
+"#9f8cff",
+"#ffffff"
+];
+
+for(let i=0;i<55;i++){
+
+const s=
+document.createElement("div");
+
+s.className="spark";
+
+s.style.left=
+(35+Math.random()*30)+"%";
+
+s.style.top=
+(25+Math.random()*30)+"%";
+
+s.style.background=
+colors[
+Math.floor(
+Math.random()*colors.length
+)
+];
+
+const angle=
+Math.random()*Math.PI*2;
+
+const distance=
+80+Math.random()*220;
+
+s.style.setProperty(
+"--x",
+Math.cos(angle)*distance
+);
+
+s.style.setProperty(
+"--y",
+Math.sin(angle)*distance
+);
+
+container.appendChild(s);
+
+}
+
+setTimeout(()=>{
+
+container.innerHTML="";
+
+},1000);
+
+}
+
+
+/* =========================================
+   FINISH
+========================================= */
+
+function finishGame(){
+
+clearInterval(timer);
+
+document.getElementById("panel")
+.style.display="none";
+
+document.getElementById("result")
+.style.display="block";
+
+document.getElementById("finalScore")
+.innerText=score;
+
+document.getElementById("finalCorrect")
+.innerText=correct;
+
+const percent=
+Math.round(correct/20*100);
+
+document.getElementById("finalPercent")
+.innerText=
+percent+"%";
+
+let text;
+
+if(percent>=90){
+
+text=
+"🏆 فوق‌العاده! تو استاد اعداد اعشاری شدی!";
+
+}else if(percent>=75){
+
+text=
+"🌟 عالی بود! سرزمین اعشاری را به خوبی پشت سر گذاشتی.";
+
+}else if(percent>=50){
+
+text=
+"👏 خوب بود! کمی تمرین بیشتر تو را حرفه‌ای می‌کند.";
+
+}else{
+
+text=
+"📚 دوباره تلاش کن؛ این سرزمین هنوز منتظر توست!";
+
+}
+
+document.getElementById("finalMessage")
+.innerText=text;
+
+fireworks();
+
+}
+
+
+/* =========================================
+   RESTART
+========================================= */
+
+function restartGame(){
+
+clearInterval(timer);
+
+current=0;
+
+score=0;
+
+correct=0;
+
+streak=0;
+
+document.getElementById("score").innerText=0;
+
+document.getElementById("correct").innerText=0;
+
+document.getElementById("streak").innerText=0;
+
+document.getElementById("panel")
+.style.display="block";
+
+document.getElementById("result")
+.style.display="none";
+
+loadQuestion();
+
+}
+
+
+/* =========================================
+   RUN
+========================================= */
+
+startGame();
+
+</script>
+
+</body>
+</html>
