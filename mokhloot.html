@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>آزمایشگاه اسرارآمیز - مخلوط‌ها</title>
+
+<style>
+*{
+ box-sizing:border-box;
+ user-select:none;
+}
+
+body{
+ margin:0;
+ font-family:Tahoma,Arial,sans-serif;
+ color:#fff;
+ overflow-x:hidden;
+ background:
+ radial-gradient(circle at 15% 15%,#263b78 0%,transparent 28%),
+ radial-gradient(circle at 85% 20%,#164d58 0%,transparent 28%),
+ linear-gradient(#070d27,#0b1732 55%,#061a20);
+ min-height:100vh;
+}
+
+/* آسمان */
+
+.sky{
+ position:fixed;
+ inset:0 0 auto 0;
+ height:230px;
+ overflow:hidden;
+ pointer-events:none;
+ z-index:0;
+}
+
+.star{
+ position:absolute;
+ width:4px;
+ height:4px;
+ border-radius:50%;
+ background:#fff7bf;
+ box-shadow:0 0 12px #fff;
+ animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+ from{opacity:.25}
+ to{opacity:1}
+}
+
+.moon{
+ position:absolute;
+ right:8%;
+ top:35px;
+ width:90px;
+ height:90px;
+ border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#fffbdc,#e1c969 60%,#8d7432);
+ box-shadow:0 0 45px #f4dc7a88;
+}
+
+.cloud{
+ position:absolute;
+ width:170px;
+ height:55px;
+ border-radius:50px;
+ background:linear-gradient(#ffffffaa,#bcd9e688);
+ opacity:.55;
+ animation:cloudMove linear infinite;
+}
+
+.cloud:before,
+.cloud:after{
+ content:"";
+ position:absolute;
+ border-radius:50%;
+ background:inherit;
+}
+
+.cloud:before{
+ width:70px;
+ height:70px;
+ left:25px;
+ top:-30px;
+}
+
+.cloud:after{
+ width:85px;
+ height:85px;
+ right:18px;
+ top:-40px;
+}
+
+.cloud1{
+ top:65px;
+ left:-200px;
+ animation-duration:38s;
+}
+
+.cloud2{
+ top:125px;
+ left:-350px;
+ animation-duration:52s;
+ animation-delay:-20s;
+ transform:scale(.7);
+}
+
+@keyframes cloudMove{
+ from{transform:translateX(0)}
+ to{transform:translateX(1450px)}
+}
+
+/* صفحه */
+
+.game{
+ position:relative;
+ z-index:2;
+ width:96%;
+ max-width:1200px;
+ margin:auto;
+ padding:15px 0 40px;
+}
+
+/* عنوان */
+
+header{
+ padding:18px;
+ text-align:center;
+ border-radius:28px;
+ background:linear-gradient(145deg,#171b45dd,#103b45dd);
+ border:1px solid #d4b85f;
+ box-shadow:0 0 30px #d2ad4d33,0 15px 40px #0009;
+}
+
+header h1{
+ margin:0;
+ color:#f5d774;
+ font-size:31px;
+ text-shadow:0 0 15px #f0cb5b;
+}
+
+header p{
+ margin:7px 0 0;
+ color:#c8d8ee;
+}
+
+/* آمار */
+
+.stats{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:14px 0;
+}
+
+.stat{
+ min-width:120px;
+ padding:9px 15px;
+ border-radius:18px;
+ text-align:center;
+ background:linear-gradient(145deg,#252650,#123846);
+ border:1px solid #806e3d;
+ box-shadow:0 7px 20px #0008;
+}
+
+.stat span{
+ display:block;
+ color:#bdc8df;
+ font-size:12px;
+}
+
+.stat strong{
+ display:block;
+ color:#f4d56e;
+ font-size:21px;
+ margin-top:3px;
+}
+
+/* جهان بازی */
+
+.world{
+ position:relative;
+ min-height:820px;
+ overflow:hidden;
+ margin-top:15px;
+ border-radius:35px;
+ background:
+ linear-gradient(
+ 180deg,
+ #101946 0%,
+ #162d4e 46%,
+ #1d503f 73%,
+ #073239 100%
+ );
+ border:1px solid #c3a451;
+ box-shadow:0 25px 70px #000c;
+}
+
+/* جنگل */
+
+.forest{
+ position:absolute;
+ left:0;
+ right:0;
+ bottom:145px;
+ height:180px;
+ display:flex;
+ justify-content:space-around;
+ align-items:end;
+ opacity:.8;
+}
+
+.tree{
+ position:relative;
+ width:55px;
+ height:145px;
+}
+
+.trunk{
+ position:absolute;
+ bottom:0;
+ left:22px;
+ width:13px;
+ height:70px;
+ border-radius:6px;
+ background:linear-gradient(90deg,#3b241c,#825035,#352018);
+}
+
+.leaf{
+ position:absolute;
+ width:75px;
+ height:75px;
+ border-radius:50%;
+ background:radial-gradient(circle at 30% 25%,#63d59b,#176c54 60%,#083e36);
+ box-shadow:0 0 22px #27c99144;
+}
+
+.l1{top:10px;left:-10px}
+.l2{top:45px;left:-27px}
+.l3{top:40px;left:5px}
+
+/* آزمایشگاه */
+
+.lab{
+ position:absolute;
+ z-index:3;
+ left:50%;
+ transform:translateX(-50%);
+ bottom:130px;
+ width:min(700px,88%);
+ height:270px;
+ border-radius:30px 30px 15px 15px;
+ background:linear-gradient(145deg,#553b2b,#2b211f);
+ border:3px solid #b9914d;
+ box-shadow:
+ 0 18px 30px #000b,
+ inset 0 0 30px #0007;
+}
+
+.labRoof{
+ position:absolute;
+ left:-30px;
+ right:-30px;
+ top:-55px;
+ height:75px;
+ background:linear-gradient(145deg,#6c4932,#33241e);
+ clip-path:polygon(50% 0,100% 100%,0 100%);
+ border-bottom:4px solid #b9914d;
+}
+
+.labSign{
+ position:absolute;
+ top:18px;
+ left:50%;
+ transform:translateX(-50%);
+ padding:7px 18px;
+ border-radius:12px;
+ color:#f7d875;
+ background:#17182d;
+ border:1px solid #c7a95b;
+ box-shadow:0 0 20px #e3c35d44;
+ font-size:14px;
+}
+
+.window{
+ position:absolute;
+ top:78px;
+ width:125px;
+ height:100px;
+ border:8px solid #65442c;
+ background:
+ radial-gradient(circle,#55e4e1,#173e5c);
+ box-shadow:0 0 25px #43e6df77;
+}
+
+.window.left{left:40px}
+.window.right{right:40px}
+
+.window:after{
+ content:"";
+ position:absolute;
+ inset:0;
+ background:
+ linear-gradient(90deg,transparent 47%,#61452d 48%,#61452d 52%,transparent 53%),
+ linear-gradient(0deg,transparent 47%,#61452d 48%,#61452d 52%,transparent 53%);
+}
+
+.labDoor{
+ position:absolute;
+ bottom:0;
+ left:50%;
+ transform:translateX(-50%);
+ width:125px;
+ height:155px;
+ border-radius:65px 65px 0 0;
+ background:linear-gradient(145deg,#30241e,#17151a);
+ border:5px solid #725033;
+}
+
+/* میز */
+
+.table{
+ position:absolute;
+ z-index:5;
+ left:50%;
+ transform:translateX(-50%);
+ bottom:50px;
+ width:min(780px,92%);
+ height:85px;
+ border-radius:20px;
+ background:linear-gradient(#845a36,#4c3124);
+ border:3px solid #b4834d;
+ box-shadow:0 15px 25px #000b;
+}
+
+/* پنل */
+
+.panel{
+ position:relative;
+ z-index:10;
+ width:94%;
+ max-width:900px;
+ margin:25px auto;
+ padding:22px;
+ border-radius:28px;
+ background:linear-gradient(145deg,#171b3bee,#102e39ee);
+ border:1px solid #c5a95b;
+ box-shadow:0 18px 50px #000c;
+}
+
+/* ربات */
+
+.robot{
+ position:absolute;
+ z-index:8;
+ left:18px;
+ bottom:95px;
+ width:100px;
+ height:125px;
+}
+
+.robotHead{
+ width:85px;
+ height:70px;
+ margin:auto;
+ border-radius:22px;
+ background:linear-gradient(145deg,#a6d6d8,#517c91);
+ border:3px solid #d7c66b;
+ box-shadow:0 0 25px #50e1e055;
+}
+
+.eye{
+ position:absolute;
+ top:25px;
+ width:13px;
+ height:13px;
+ border-radius:50%;
+ background:#6ffff1;
+ box-shadow:0 0 15px #58fff0;
+}
+
+.eye.e1{left:30px}
+.eye.e2{right:30px}
+
+.robotBody{
+ width:65px;
+ height:60px;
+ margin:-3px auto;
+ border-radius:16px;
+ background:linear-gradient(145deg,#617e9a,#273b58);
+ border:2px solid #c6b76a;
+}
+
+/* تایمر */
+
+.timerArea{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:15px;
+ margin-bottom:12px;
+}
+
+.timer{
+ width:75px;
+ height:75px;
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:conic-gradient(#f4d66d var(--time),#252a4a var(--time));
+ box-shadow:0 0 25px #e5c45b66;
+ position:relative;
+}
+
+.timer:after{
+ content:"";
+ position:absolute;
+ width:58px;
+ height:58px;
+ border-radius:50%;
+ background:#10152e;
+}
+
+#timerNumber{
+ position:relative;
+ z-index:2;
+ color:#f7d76c;
+ font-size:22px;
+ font-weight:bold;
+}
+
+/* سؤال */
+
+.stageTitle{
+ text-align:center;
+ color:#f3d46d;
+ margin:5px;
+}
+
+.question{
+ min-height:90px;
+ text-align:center;
+ font-size:22px;
+ line-height:1.9;
+}
+
+.highlight{
+ color:#f4d66c;
+ text-shadow:0 0 12px #f0c958;
+}
+
+/* ظرف */
+
+.experiment{
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ min-height:210px;
+ position:relative;
+}
+
+.beaker{
+ position:relative;
+ width:170px;
+ height:180px;
+ border:5px solid #b7e8edaa;
+ border-top:0;
+ border-radius:8px 8px 35px 35px;
+ background:#ffffff0b;
+ box-shadow:
+ inset 0 0 25px #65e5e744,
+ 0 0 30px #43cfd944;
+ overflow:hidden;
+}
+
+.liquid{
+ position:absolute;
+ bottom:0;
+ left:0;
+ right:0;
+ height:55%;
+ background:linear-gradient(#35d7d688,#087d9d99);
+ animation:liquidMove 2s infinite alternate ease-in-out;
+}
+
+@keyframes liquidMove{
+ from{transform:skewX(-2deg)}
+ to{transform:skewX(2deg)}
+}
+
+.bubble{
+ position:absolute;
+ bottom:25px;
+ width:9px;
+ height:9px;
+ border-radius:50%;
+ background:#c4ffffaa;
+ animation:bubbleUp 3s infinite;
+}
+
+@keyframes bubbleUp{
+ from{transform:translateY(0);opacity:.8}
+ to{transform:translateY(-130px);opacity:0}
+}
+
+.particle{
+ position:absolute;
+ width:12px;
+ height:12px;
+ border-radius:50%;
+ background:#d9b15c;
+ box-shadow:0 0 12px #e8c867;
+ animation:particleMove 3s infinite alternate;
+}
+
+@keyframes particleMove{
+ from{transform:translateY(0)}
+ to{transform:translateY(75px)}
+}
+
+/* گزینه ها */
+
+.answers{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:12px;
+}
+
+.answer{
+ min-width:145px;
+ padding:13px 18px;
+ border-radius:17px;
+ border:1px solid #877546;
+ background:linear-gradient(145deg,#38315d,#164552);
+ color:#fff;
+ font-family:Tahoma;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+ box-shadow:0 6px 0 #101329;
+ transition:.2s;
+}
+
+.answer:hover{
+ transform:translateY(-4px) scale(1.02);
+ box-shadow:0 10px 22px #0008;
+}
+
+/* ابزار */
+
+.tools{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:15px;
+ margin:15px 0;
+}
+
+.tool{
+ width:100px;
+ height:100px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ border-radius:22px;
+ background:linear-gradient(145deg,#333052,#123e48);
+ border:1px solid #a9904d;
+ box-shadow:0 9px 20px #0008;
+ cursor:pointer;
+ transition:.25s;
+}
+
+.tool:hover{
+ transform:
+ translateY(-7px)
+ rotate(-2deg);
+ box-shadow:0 12px 30px #39d6d655;
+}
+
+.tool .icon{
+ font-size:37px;
+}
+
+.tool span{
+ font-size:12px;
+ margin-top:5px;
+}
+
+/* پیام */
+
+.message{
+ min-height:45px;
+ text-align:center;
+ font-size:18px;
+ font-weight:bold;
+}
+
+/* نوار پیشرفت */
+
+.progress{
+ width:80%;
+ height:9px;
+ margin:15px auto;
+ background:#090e24;
+ border-radius:20px;
+ overflow:hidden;
+}
+
+.progressBar{
+ width:0;
+ height:100%;
+ background:linear-gradient(90deg,#36e0bd,#f4d46c);
+ box-shadow:0 0 15px #55e5d0;
+ transition:.4s;
+}
+
+/* رودخانه */
+
+.river{
+ position:absolute;
+ left:0;
+ right:0;
+ bottom:0;
+ height:135px;
+ background:linear-gradient(#2ec5ce,#11658a 60%,#063b60);
+ border-top:3px solid #6ee8e0;
+ overflow:hidden;
+}
+
+.wave{
+ position:absolute;
+ top:-15px;
+ left:-50%;
+ width:220%;
+ height:60px;
+ background:
+ radial-gradient(ellipse,transparent 36%,#b4f8f2 37%,#b4f8f2 40%,transparent 41%);
+ opacity:.4;
+ animation:river 6s linear infinite;
+}
+
+@keyframes river{
+ from{transform:translateX(0)}
+ to{transform:translateX(180px)}
+}
+
+/* نورافشانی */
+
+.firework{
+ position:fixed;
+ width:7px;
+ height:7px;
+ border-radius:50%;
+ z-index:100;
+ pointer-events:none;
+ animation:explode .9s forwards;
+ box-shadow:0 0 15px #fff;
+}
+
+@keyframes explode{
+ 0%{
+  transform:translate(0,0) scale(1);
+  opacity:1;
+ }
+ 100%{
+  transform:
+   translate(
+    calc(var(--x)*1px),
+    calc(var(--y)*1px)
+   )
+   scale(.1);
+  opacity:0;
+ }
+}
+
+/* پایان */
+
+.result{
+ display:none;
+ position:relative;
+ z-index:20;
+ width:94%;
+ max-width:700px;
+ margin:80px auto;
+ padding:40px;
+ text-align:center;
+ border-radius:30px;
+ background:linear-gradient(145deg,#27264e,#123944);
+ border:1px solid #c8aa58;
+ box-shadow:0 25px 60px #000c;
+}
+
+.result h2{
+ color:#f5d66e;
+}
+
+.finalScore{
+ font-size:65px;
+ color:#f5d66e;
+ text-shadow:0 0 25px #e6bd4c;
+}
+
+.restart{
+ padding:13px 30px;
+ border:0;
+ border-radius:18px;
+ font-family:Tahoma;
+ font-weight:bold;
+ cursor:pointer;
+ background:linear-gradient(145deg,#f4d66d,#a66d22);
+}
+
+/* موبایل */
+
+@media(max-width:700px){
+
+ header h1{font-size:24px}
+
+ .world{min-height:850px}
+
+ .panel{padding:14px}
+
+ .question{font-size:18px}
+
+ .lab{
+  height:220px;
+ }
+
+ .window{
+  width:90px;
+  height:70px;
+ }
+
+ .window.left{left:15px}
+ .window.right{right:15px}
+
+ .robot{
+  transform:scale(.75);
+  transform-origin:bottom left;
+ }
+
+ .answer{
+  min-width:110px;
+  font-size:14px;
+ }
+
+ .tool{
+  width:82px;
+  height:82px;
+ }
+
+ .tool .icon{
+  font-size:30px;
+ }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="sky">
+
+<div class="moon"></div>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+
+<div class="star" style="top:8%;left:8%"></div>
+<div class="star" style="top:15%;left:20%"></div>
+<div class="star" style="top:25%;left:34%"></div>
+<div class="star" style="top:11%;left:51%"></div>
+<div class="star" style="top:28%;left:68%"></div>
+<div class="star" style="top:16%;left:83%"></div>
+
+</div>
+
+<div class="game">
+
+<header>
+
+<h1>🔬 آزمایشگاه اسرارآمیز</h1>
+
+<p>
+ماجراجویی بزرگ در سرزمین «مخلوط‌ها»
+</p>
+
+</header>
+
+<div class="stats">
+
+<div class="stat">
+<span>⭐ امتیاز</span>
+<strong id="score">0</strong>
+</div>
+
+<div class="stat">
+<span>🔥 زنجیره</span>
+<strong id="streak">0</strong>
+</div>
+
+<div class="stat">
+<span>🧪 آزمایش</span>
+<strong id="stage">1</strong>
+</div>
+
+<div class="stat">
+<span>🏆 درست</span>
+<strong id="correct">0</strong>
+</div>
+
+</div>
+
+<div class="world">
+
+<div class="forest">
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+<div class="tree">
+<div class="leaf l1"></div>
+<div class="leaf l2"></div>
+<div class="leaf l3"></div>
+<div class="trunk"></div>
+</div>
+
+</div>
+
+<div class="lab">
+
+<div class="labRoof"></div>
+
+<div class="labSign">
+🔬 آزمایشگاه مخلوط‌ها
+</div>
+
+<div class="window left"></div>
+<div class="window right"></div>
+
+<div class="labDoor"></div>
+
+</div>
+
+<div class="robot">
+
+<div class="robotHead">
+
+<div class="eye e1"></div>
+<div class="eye e2"></div>
+
+</div>
+
+<div class="robotBody"></div>
+
+</div>
+
+<div class="table"></div>
+
+<div class="panel">
+
+<div class="timerArea">
+
+<div class="timer" id="timerCircle">
+
+<div id="timerNumber">
+30
+</div>
+
+</div>
+
+<div>
+زمان آزمایش:
+<br>
+<strong>۳۰ ثانیه</strong>
+</div>
+
+</div>
+
+<div class="stageTitle" id="stageTitle">
+آزمایش ۱ از ۲۰
+</div>
+
+<div class="question" id="question"></div>
+
+<div class="experiment" id="experiment">
+
+<div class="beaker">
+
+<div class="liquid"></div>
+
+<div class="bubble" style="left:25%"></div>
+<div class="bubble" style="left:50%;animation-delay:1s"></div>
+<div class="bubble" style="left:70%;animation-delay:1.8s"></div>
+
+<div class="particle" style="left:30%;top:30%"></div>
+<div class="particle" style="left:60%;top:45%"></div>
+
+</div>
+
+</div>
+
+<div class="tools" id="tools"></div>
+
+<div class="answers" id="answers"></div>
+
+<div class="message" id="message"></div>
+
+<div class="progress">
+<div class="progressBar" id="progress"></div>
+</div>
+
+</div>
+
+<div class="river">
+
+<div class="wave"></div>
+
+</div>
+
+</div>
+
+<div class="result" id="result">
+
+<h2>🏆 مأموریت کامل شد!</h2>
+
+<p>
+تو توانستی آزمایشگاه اسرارآمیز را فتح کنی.
+</p>
+
+<div class="finalScore" id="finalScore">
+0
+</div>
+
+<p>
+پاسخ درست:
+<strong id="finalCorrect">0</strong>
+از ۲۰
+</p>
+
+<h3 id="finalMessage"></h3>
+
+<button class="restart" onclick="restartGame()">
+🔄 شروع دوباره
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* =====================================
+   QUESTIONS
+===================================== */
+
+const questions=[
+
+{
+type:"choice",
+q:"کدام گزینه یک <b class='highlight'>مخلوط</b> است؟",
+options:[
+"آب خالص",
+"نمک",
+"آب و شکر",
+"اکسیژن"
+],
+correct:"آب و شکر"
+},
+
+{
+type:"choice",
+q:"کدام مورد را می‌توان به عنوان مخلوط در نظر گرفت؟",
+options:[
+"سالاد",
+"آب خالص",
+"آهن خالص",
+"اکسیژن"
+],
+correct:"سالاد"
+},
+
+{
+type:"choice",
+q:"در کدام گزینه دو ماده با هم مخلوط شده‌اند؟",
+options:[
+"آب",
+"آب و روغن",
+"نمک",
+"آهن"
+],
+correct:"آب و روغن"
+},
+
+{
+type:"truefalse",
+q:"«آب و شن یک مخلوط هستند.»",
+options:[
+"درست",
+"نادرست"
+],
+correct:"درست"
+},
+
+{
+type:"truefalse",
+q:"«آب خالص یک مخلوط است.»",
+options:[
+"درست",
+"نادرست"
+],
+correct:"نادرست"
+},
+
+{
+type:"choice",
+q:"کدام مخلوط را می‌توان با <b class='highlight'>صافی</b> جدا کرد؟",
+options:[
+"آب و نمک",
+"آب و شن",
+"آب و شکر",
+"نمک و شکر"
+],
+correct:"آب و شن"
+},
+
+{
+type:"choice",
+q:"برای جدا کردن براده آهن از شن از چه وسیله‌ای استفاده می‌کنیم؟",
+options:[
+"صافی",
+"تبخیر",
+"آهن‌ربا",
+"قاشق"
+],
+correct:"آهن‌ربا"
+},
+
+{
+type:"choice",
+q:"برای جدا کردن نمک از آب کدام روش مناسب‌تر است؟",
+options:[
+"صافی",
+"آهن‌ربا",
+"تبخیر آب",
+"الک"
+],
+correct:"تبخیر آب"
+},
+
+{
+type:"choice",
+q:"وقتی آب و روغن را مخلوط می‌کنیم، چه اتفاقی می‌افتد؟",
+options:[
+"کاملاً یکدست می‌شوند",
+"دو لایه تشکیل می‌شود",
+"روغن ناپدید می‌شود",
+"آب جامد می‌شود"
+],
+correct:"دو لایه تشکیل می‌شود"
+},
+
+{
+type:"truefalse",
+q:"«صافی می‌تواند نمک حل‌شده در آب را جدا کند.»",
+options:[
+"درست",
+"نادرست"
+],
+correct:"نادرست"
+},
+
+{
+type:"choice",
+q:"کدام مورد یک مخلوط غیر یکنواخت است؟",
+options:[
+"آب و نمک",
+"آب و شکر",
+"آب و شن",
+"شربت صاف"
+],
+correct:"آب و شن"
+},
+
+{
+type:"choice",
+q:"کدام مورد در آب به صورت یکنواخت پخش می‌شود؟",
+options:[
+"شن",
+"سنگ",
+"نمک",
+"براده آهن"
+],
+correct:"نمک"
+},
+
+{
+type:"tool",
+q:"برای جدا کردن <b>شن و آب</b> کدام ابزار را انتخاب می‌کنی؟",
+tools:[
+["🧺","صافی"],
+["🧲","آهن‌ربا"],
+["☀️","تبخیر"],
+["🥄","قاشق"]
+],
+correct:"صافی"
+},
+
+{
+type:"tool",
+q:"برای جدا کردن <b>براده آهن و شن</b> کدام ابزار مناسب است؟",
+tools:[
+["🧲","آهن‌ربا"],
+["🧺","صافی"],
+["💧","آب"],
+["🔥","گرم‌کن"]
+],
+correct:"آهن‌ربا"
+},
+
+{
+type:"tool",
+q:"برای جدا کردن <b>نمک از آب نمک</b> کدام روش مناسب است؟",
+tools:[
+["☀️","تبخیر"],
+["🧲","آهن‌ربا"],
+["🧺","صافی"],
+["🥄","قاشق"]
+],
+correct:"تبخیر"
+},
+
+{
+type:"choice",
+q:"اگر شن، آب و براده آهن داشته باشیم، اولین کار مناسب چیست؟",
+options:[
+"تبخیر آب",
+"استفاده از آهن‌ربا",
+"استفاده از صافی",
+"اضافه کردن نمک"
+],
+correct:"استفاده از آهن‌ربا"
+},
+
+{
+type:"choice",
+q:"پس از جدا کردن براده آهن از مخلوط شن و آب، برای جدا کردن شن چه کاری انجام می‌دهیم؟",
+options:[
+"آهن‌ربا",
+"صافی",
+"تبخیر",
+"انجماد"
+],
+correct:"صافی"
+},
+
+{
+type:"truefalse",
+q:"«در یک مخلوط ممکن است هر ماده ویژگی‌های خودش را حفظ کند.»",
+options:[
+"درست",
+"نادرست"
+],
+correct:"درست"
+},
+
+{
+type:"choice",
+q:"کدام گزینه بهترین مثال برای مخلوطی است که اجزای آن به راحتی دیده می‌شوند؟",
+options:[
+"آب و نمک",
+"آب و شکر",
+"سالاد",
+"شربت صاف"
+],
+correct:"سالاد"
+},
+
+{
+type:"final",
+q:"🌟 <b>چالش نهایی دانشمند</b> 🌟<br><br>مخلوطی شامل <b>براده آهن + شن + آب</b> داریم. بهترین ترتیب جداسازی کدام است؟",
+options:[
+"آهن‌ربا ← صافی",
+"صافی ← آهن‌ربا",
+"تبخیر ← آهن‌ربا",
+"صافی ← تبخیر"
+],
+correct:"آهن‌ربا ← صافی"
+}
+
+];
+
+let current=0;
+let score=0;
+let correct=0;
+let streak=0;
+let time=30;
+let timer;
+
+
+/* =====================================
+   LOAD
+===================================== */
+
+function loadQuestion(){
+
+clearInterval(timer);
+
+time=30;
+
+document.getElementById("timerNumber").innerText=time;
+
+document
+.getElementById("timerCircle")
+.style.setProperty("--time","100%");
+
+document.getElementById("stage").innerText=current+1;
+
+document.getElementById("stageTitle").innerText=
+"آزمایش "+(current+1)+" از ۲۰";
+
+document.getElementById("question").innerHTML=
+questions[current].q;
+
+document.getElementById("answers").innerHTML="";
+
+document.getElementById("tools").innerHTML="";
+
+document.getElementById("message").innerHTML="";
+
+updateProgress();
+
+if(questions[current].type==="tool"){
+
+createTools();
+
+}else{
+
+createAnswers();
+
+}
+
+startTimer();
+
+}
+
+
+/* =====================================
+   ANSWERS
+===================================== */
+
+function createAnswers(){
+
+const box=document.getElementById("answers");
+
+questions[current].options.forEach(option=>{
+
+const button=document.createElement("button");
+
+button.className="answer";
+
+button.innerText=option;
+
+button.onclick=()=>{
+
+if(option===questions[current].correct){
+
+correctAnswer();
+
+}else{
+
+wrongAnswer();
+
+}
+
+};
+
+box.appendChild(button);
+
+});
+
+}
+
+
+/* =====================================
+   TOOLS
+===================================== */
+
+function createTools(){
+
+const box=document.getElementById("tools");
+
+questions[current].tools.forEach(item=>{
+
+const button=document.createElement("div");
+
+button.className="tool";
+
+button.innerHTML=`
+
+<div class="icon">${item[0]}</div>
+
+<span>${item[1]}</span>
+
+`;
+
+button.onclick=()=>{
+
+if(item[1]===questions[current].correct){
+
+correctAnswer();
+
+}else{
+
+wrongAnswer();
+
+}
+
+};
+
+box.appendChild(button);
+
+});
+
+}
+
+
+/* =====================================
+   CORRECT
+===================================== */
+
+function correctAnswer(){
+
+clearInterval(timer);
+
+correct++;
+
+streak++;
+
+let points=
+40+
+time+
+(streak*5);
+
+score+=points;
+
+document.getElementById("score").innerText=score;
+
+document.getElementById("correct").innerText=correct;
+
+document.getElementById("streak").innerText=streak;
+
+document.getElementById("message").innerHTML=
+"✨ عالی! آزمایش موفق بود! +"+points+" امتیاز";
+
+document.getElementById("message").style.color=
+"#f7d66d";
+
+fireworks();
+
+setTimeout(()=>{
+
+nextQuestion();
+
+},1300);
+
+}
+
+
+/* =====================================
+   WRONG
+===================================== */
+
+function wrongAnswer(){
+
+streak=0;
+
+document.getElementById("streak").innerText=0;
+
+document.getElementById("message").innerHTML=
+"🤔 دوباره بررسی کن؛ دانشمندها عجله نمی‌کنند!";
+
+document.getElementById("message").style.color=
+"#ff9d9d";
+
+}
+
+
+/* =====================================
+   TIMER
+===================================== */
+
+function startTimer(){
+
+timer=setInterval(()=>{
+
+time--;
+
+document.getElementById("timerNumber").innerText=time;
+
+document
+.getElementById("timerCircle")
+.style.setProperty(
+"--time",
+(time/30*100)+"%"
+);
+
+if(time<=10){
+
+document
+.getElementById("timerCircle")
+.style.boxShadow=
+"0 0 35px #ff5264";
+
+}
+
+if(time<=0){
+
+clearInterval(timer);
+
+timeOut();
+
+}
+
+},1000);
+
+}
+
+
+/* =====================================
+   TIME OUT
+===================================== */
+
+function timeOut(){
+
+document.getElementById("message").innerHTML=
+"⏰ زمان آزمایش تمام شد!<br>آزمایشگاه دوباره از ابتدا شروع می‌شود.";
+
+document.getElementById("message").style.color=
+"#ff6b76";
+
+setTimeout(()=>{
+
+restartGame();
+
+},1800);
+
+}
+
+
+/* =====================================
+   NEXT
+===================================== */
+
+function nextQuestion(){
+
+current++;
+
+if(current>=questions.length){
+
+finish();
+
+}else{
+
+loadQuestion();
+
+}
+
+}
+
+
+/* =====================================
+   PROGRESS
+===================================== */
+
+function updateProgress(){
+
+document.getElementById("progress").style.width=
+((current)/20*100)+"%";
+
+}
+
+
+/* =====================================
+   FIREWORKS
+===================================== */
+
+function fireworks(){
+
+const colors=[
+"#ffe16b",
+"#6ef7df",
+"#ff78c8",
+"#a78bff",
+"#ffffff"
+];
+
+for(let i=0;i<60;i++){
+
+const f=document.createElement("div");
+
+f.className="firework";
+
+f.style.left=(35+Math.random()*30)+"%";
+
+f.style.top=(25+Math.random()*30)+"%";
+
+f.style.background=
+colors[
+Math.floor(Math.random()*colors.length)
+];
+
+const angle=Math.random()*Math.PI*2;
+
+const distance=80+Math.random()*230;
+
+f.style.setProperty(
+"--x",
+Math.cos(angle)*distance
+);
+
+f.style.setProperty(
+"--y",
+Math.sin(angle)*distance
+);
+
+document.body.appendChild(f);
+
+setTimeout(()=>f.remove(),1000);
+
+}
+
+}
+
+
+/* =====================================
+   FINISH
+===================================== */
+
+function finish(){
+
+clearInterval(timer);
+
+document.querySelector(".panel").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("finalScore").innerText=score;
+
+document.getElementById("finalCorrect").innerText=correct;
+
+let text;
+
+if(correct>=18){
+
+text="🏆 دانشمند ارشد آزمایشگاه!";
+
+}else if(correct>=14){
+
+text="🥇 دانشمند کوچک!";
+
+}else if(correct>=10){
+
+text="🥈 کاوشگر علوم!";
+
+}else{
+
+text="🔬 دستیار کوچک آزمایشگاه!";
+
+}
+
+document.getElementById("finalMessage").innerText=text;
+
+fireworks();
+
+}
+
+
+/* =====================================
+   RESTART
+===================================== */
+
+function restartGame(){
+
+clearInterval(timer);
+
+current=0;
+score=0;
+correct=0;
+streak=0;
+
+document.getElementById("score").innerText=0;
+
+document.getElementById("correct").innerText=0;
+
+document.getElementById("streak").innerText=0;
+
+document.querySelector(".panel").style.display="block";
+
+document.getElementById("result").style.display="none";
+
+loadQuestion();
+
+}
+
+
+/* شروع */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
