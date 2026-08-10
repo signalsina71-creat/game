@@ -3,1283 +3,580 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>شهر ارزش مکانی</title>
+<title>شهر ارزش مکانی 2</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    user-select:none;
-}
+*{box-sizing:border-box;user-select:none}
 
 body{
-    margin:0;
-    min-height:100vh;
-    overflow-x:hidden;
-
-    font-family:
-    Tahoma,
-    Arial,
-    sans-serif;
-
-    color:#fff;
-
-    background:
-    radial-gradient(
-        circle at 20% 10%,
-        #40306b 0,
-        transparent 28%
-    ),
-    radial-gradient(
-        circle at 80% 20%,
-        #154f65 0,
-        transparent 25%
-    ),
-    linear-gradient(
-        180deg,
-        #080b20,
-        #11152e 55%,
-        #090c1c
-    );
+margin:0;
+font-family:Tahoma,Arial,sans-serif;
+color:#fff;
+background:
+radial-gradient(circle at 20% 10%,#433b73 0,transparent 25%),
+radial-gradient(circle at 85% 20%,#14566b 0,transparent 25%),
+linear-gradient(#070b20,#111936,#060914);
+min-height:100vh;
 }
-
-
-/* =========================
-   GAME
-========================= */
 
 .game{
-    width:96%;
-    max-width:1200px;
-    margin:auto;
-    padding:15px 0 30px;
+width:96%;
+max-width:1200px;
+margin:auto;
+padding:12px 0 30px;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-
-    position:relative;
-
-    padding:18px 20px;
-
-    border-radius:25px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #191d42,
-        #27204b
-    );
-
-    border:2px solid #514a91;
-
-    box-shadow:
-    0 15px 40px #0008,
-    inset 0 1px #ffffff22;
-
-    text-align:center;
-
-    overflow:hidden;
+header{
+text-align:center;
+padding:18px;
+border-radius:25px;
+background:linear-gradient(145deg,#1c2247,#29234c);
+border:2px solid #58629a;
+box-shadow:0 15px 40px #0008;
 }
 
-.header:before{
-
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    background:#5e55d422;
-
-    border-radius:50%;
-
-    top:-180px;
-    right:-70px;
+header h1{
+margin:0;
+font-size:32px;
+color:#ffe27a;
 }
 
-.header h1{
-
-    position:relative;
-
-    margin:0;
-
-    font-size:36px;
-
-    color:#ffe27a;
-
-    text-shadow:
-    0 0 10px #ffdc5c77,
-    0 3px 0 #171329;
+header p{
+margin:8px 0 0;
+color:#c9d3fa;
 }
-
-.header p{
-
-    position:relative;
-
-    margin:7px 0 0;
-
-    color:#c9d4ff;
-
-}
-
-
-/* =========================
-   STATS
-========================= */
 
 .stats{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin:15px 0;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+margin:14px 0;
 }
 
 .stat{
-
-    min-width:135px;
-
-    padding:9px 15px;
-
-    border-radius:17px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #191d3d,
-        #25284c
-    );
-
-    border:1px solid #555b91;
-
-    box-shadow:
-    0 7px 15px #0005,
-    inset 0 1px #ffffff16;
-
-    text-align:center;
-
-    color:#aeb8ef;
+min-width:125px;
+padding:8px 14px;
+border-radius:17px;
+background:linear-gradient(145deg,#191e3f,#292d54);
+border:1px solid #596293;
+text-align:center;
 }
 
 .stat strong{
-
-    display:block;
-
-    margin-top:3px;
-
-    font-size:21px;
-
-    color:#ffe27a;
+display:block;
+font-size:20px;
+color:#ffe27a;
 }
-
-
-/* =========================
-   CITY
-========================= */
 
 .city{
-
-    position:relative;
-
-    min-height:700px;
-
-    overflow:hidden;
-
-    border-radius:30px;
-
-    border:2px solid #414875;
-
-    background:
-
-    radial-gradient(
-        circle at 50% 10%,
-        #313d72,
-        transparent 35%
-    ),
-
-    linear-gradient(
-        180deg,
-        #10152f 0%,
-        #111832 45%,
-        #080b1c 100%
-    );
-
-    box-shadow:
-    0 25px 60px #0009,
-    inset 0 0 80px #0007;
+position:relative;
+min-height:760px;
+overflow:hidden;
+border-radius:30px;
+background:
+radial-gradient(circle at 50% 15%,#35477b,transparent 30%),
+linear-gradient(#111735,#0e1530 55%,#070b1d);
+border:2px solid #48527f;
+box-shadow:0 25px 60px #0009;
 }
 
-
-/* stars */
-
 .star{
-
-    position:absolute;
-
-    width:3px;
-    height:3px;
-
-    background:#fff;
-
-    border-radius:50%;
-
-    opacity:.7;
-
-    animation:
-    twinkle 2s infinite alternate;
+position:absolute;
+width:3px;
+height:3px;
+background:#fff;
+border-radius:50%;
+animation:twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-
-    from{
-        opacity:.25;
-        transform:scale(.7);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.4);
-    }
+from{opacity:.2}
+to{opacity:1}
 }
 
-
-/* =========================
-   BUILDINGS
-========================= */
-
 .buildings{
-
-    position:absolute;
-
-    bottom:150px;
-
-    left:0;
-    right:0;
-
-    height:260px;
-
-    display:flex;
-
-    align-items:end;
-
-    justify-content:center;
-
-    gap:10px;
-
-    opacity:.75;
+position:absolute;
+bottom:145px;
+left:0;
+right:0;
+height:250px;
+display:flex;
+justify-content:center;
+align-items:end;
+gap:9px;
+opacity:.65;
 }
 
 .building{
-
-    position:relative;
-
-    width:75px;
-
-    border-radius:
-    8px 8px 0 0;
-
-    background:
-    linear-gradient(
-        90deg,
-        #171b3c,
-        #30375d,
-        #12162f
-    );
-
-    border:
-    1px solid #56608e;
-
-    box-shadow:
-    8px 0 15px #0005;
+width:70px;
+background:linear-gradient(90deg,#151a39,#333b62,#12162f);
+border:1px solid #56608b;
+border-radius:7px 7px 0 0;
+position:relative;
 }
 
 .building:after{
-
-    content:"";
-
-    position:absolute;
-
-    top:15px;
-    left:10px;
-    right:10px;
-
-    height:160px;
-
-    background:
-    repeating-linear-gradient(
-        to bottom,
-        #f5d56c 0 7px,
-        transparent 8px 25px
-    );
-
-    opacity:.5;
+content:"";
+position:absolute;
+top:15px;
+left:10px;
+right:10px;
+bottom:10px;
+background:repeating-linear-gradient(
+to bottom,#f5d56b 0 7px,transparent 8px 25px);
+opacity:.4;
 }
 
-.b1{height:130px}
-.b2{height:190px}
-.b3{height:155px}
-.b4{height:230px}
-.b5{height:170px}
-.b6{height:210px}
-.b7{height:145px}
-
-
-/* =========================
-   QUESTION PANEL
-========================= */
+.b1{height:120px}
+.b2{height:180px}
+.b3{height:145px}
+.b4{height:220px}
+.b5{height:165px}
+.b6{height:200px}
+.b7{height:140px}
 
 .panel{
-
-    position:relative;
-
-    z-index:5;
-
-    width:88%;
-
-    max-width:850px;
-
-    margin:35px auto;
-
-    padding:25px;
-
-    border-radius:28px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #242750eF,
-        #171b3feF
-    );
-
-    border:
-    2px solid #5a64a3;
-
-    box-shadow:
-    0 25px 45px #0008,
-    inset 0 1px #ffffff18;
-
-    text-align:center;
-
-    backdrop-filter:blur(7px);
+position:relative;
+z-index:5;
+width:94%;
+max-width:1000px;
+margin:25px auto;
+padding:22px;
+border-radius:28px;
+background:#202546eF;
+border:2px solid #5b65a0;
+box-shadow:0 25px 45px #0009;
+backdrop-filter:blur(7px);
+text-align:center;
 }
-
-
-/* =========================
-   LEVEL
-========================= */
-
-.level{
-
-    display:inline-block;
-
-    padding:7px 18px;
-
-    border-radius:20px;
-
-    background:#3b3672;
-
-    color:#bfcaff;
-
-    font-size:15px;
-
-    margin-bottom:10px;
-}
-
-
-/* =========================
-   QUESTION
-========================= */
-
-.question{
-
-    font-size:24px;
-
-    line-height:2;
-
-    color:#fff;
-
-    margin:10px;
-}
-
-.number-big{
-
-    display:inline-block;
-
-    padding:10px 22px;
-
-    margin:8px;
-
-    border-radius:16px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #ffd965,
-        #b67c22
-    );
-
-    color:#171328;
-
-    font-size:34px;
-
-    font-weight:bold;
-
-    box-shadow:
-    0 7px 0 #76501d,
-    0 10px 25px #0006;
-}
-
-
-/* =========================
-   WATER TIMER
-========================= */
 
 .timer-area{
-
-    position:absolute;
-
-    top:20px;
-
-    left:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:5px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:12px;
 }
 
 .tank{
-
-    position:relative;
-
-    width:60px;
-
-    height:100px;
-
-    border:4px solid #91c9dc;
-
-    border-radius:
-    12px 12px 18px 18px;
-
-    background:#10243a;
-
-    overflow:hidden;
-
-    box-shadow:
-    0 0 15px #54d5ff44,
-    inset 0 0 10px #0008;
-
-    transition:.3s;
-}
-
-.tank:before{
-
-    content:"";
-
-    position:absolute;
-
-    left:10px;
-    right:10px;
-
-    top:4px;
-
-    height:5px;
-
-    border-radius:5px;
-
-    background:#d9f6ff;
+width:55px;
+height:90px;
+position:relative;
+overflow:hidden;
+border:4px solid #9bd5e6;
+border-radius:12px 12px 18px 18px;
+background:#11253b;
 }
 
 .water{
-
-    position:absolute;
-
-    bottom:0;
-
-    left:0;
-    right:0;
-
-    height:100%;
-
-    background:
-    linear-gradient(
-        180deg,
-        #64ddff,
-        #1676ba
-    );
-
-    transition:
-    height .8s linear;
-
-    box-shadow:
-    inset 0 5px 8px #ffffff44;
-}
-
-.water:before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-20%;
-
-    width:140%;
-
-    height:12px;
-
-    background:#a5eeff66;
-
-    border-radius:50%;
-
-    animation:
-    wave 2s infinite linear;
-}
-
-@keyframes wave{
-
-    from{
-        transform:translateX(-20%);
-    }
-
-    to{
-        transform:translateX(20%);
-    }
-}
-
-.timer-text{
-
-    color:#d9f6ff;
-
-    font-weight:bold;
-
-    font-size:16px;
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+height:100%;
+background:linear-gradient(#66e1ff,#1974b8);
+transition:height .8s linear;
 }
 
 .tank.warning{
-
-    animation:
-    shake .15s infinite alternate;
-
-    border-color:#ff6d73;
-
-    box-shadow:
-    0 0 20px #ff4e5555;
+animation:shake .12s infinite alternate;
+border-color:#ff6972;
 }
 
 .tank.warning .water{
-
-    background:
-    linear-gradient(
-        180deg,
-        #ff8b68,
-        #d93453
-    );
+background:linear-gradient(#ff8e68,#d63250);
 }
 
 @keyframes shake{
-
-    from{
-        transform:rotate(-3deg);
-    }
-
-    to{
-        transform:rotate(3deg);
-    }
+from{transform:rotate(-3deg)}
+to{transform:rotate(3deg)}
 }
 
-
-/* =========================
-   CAT
-========================= */
-
-.cat{
-
-    position:absolute;
-
-    bottom:135px;
-
-    right:-180px;
-
-    width:150px;
-
-    height:170px;
-
-    z-index:10;
-
-    transition:
-    right .8s cubic-bezier(.2,.8,.2,1);
-
-    filter:
-    drop-shadow(0 12px 10px #0008);
+.timer-text{
+font-size:20px;
+font-weight:bold;
 }
 
-.cat.show{
-
-    right:20px;
+.level{
+display:inline-block;
+margin:12px;
+padding:7px 18px;
+border-radius:20px;
+background:#403a76;
+color:#d7ddff;
 }
 
-.cat-body{
-
-    position:absolute;
-
-    bottom:0;
-
-    left:30px;
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:
-    50% 50% 45% 45%;
-
-    background:
-    linear-gradient(
-        145deg,
-        #f0b17d,
-        #bd714f
-    );
-
-    border:3px solid #673e3c;
+.question{
+font-size:22px;
+line-height:1.8;
+min-height:70px;
 }
 
-.cat-head{
-
-    position:absolute;
-
-    top:20px;
-
-    left:28px;
-
-    width:95px;
-
-    height:85px;
-
-    border-radius:
-    45% 45% 42% 42%;
-
-    background:
-    linear-gradient(
-        145deg,
-        #f4c18b,
-        #bd714f
-    );
-
-    border:3px solid #673e3c;
+.board{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+margin:20px auto;
+perspective:900px;
 }
 
-.ear{
-
-    position:absolute;
-
-    width:35px;
-    height:35px;
-
-    top:0;
-
-    background:#d99069;
-
-    border:
-    3px solid #673e3c;
-
-    transform:rotate(45deg);
-
-    z-index:-1;
+.place{
+width:120px;
+padding:10px;
+border-radius:20px;
+background:linear-gradient(145deg,#313763,#191d40);
+border:2px solid #59649c;
+box-shadow:0 12px 20px #0008;
 }
 
-.ear.left{
-    left:3px;
+.place-name{
+font-size:14px;
+color:#b9c3ef;
+margin-bottom:10px;
 }
 
-.ear.right{
-    right:3px;
+.drop{
+width:85px;
+height:70px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:15px;
+border:2px dashed #707ab0;
+background:#0c1028;
+font-size:34px;
+font-weight:bold;
+color:#6773aa;
 }
 
-.eye{
-
-    position:absolute;
-
-    top:32px;
-
-    width:10px;
-    height:13px;
-
-    border-radius:50%;
-
-    background:#1a1830;
+.drop.over{
+border-color:#ffe06d;
+background:#39365a;
 }
 
-.eye.left{
-    left:23px;
+.drop.filled{
+border-style:solid;
+background:linear-gradient(145deg,#f2c957,#a86d1c);
+color:#181529;
+box-shadow:0 6px 0 #694719;
 }
 
-.eye.right{
-    right:23px;
+.digits{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:13px;
+min-height:70px;
+margin:15px 0;
 }
 
-.nose{
-
-    position:absolute;
-
-    top:49px;
-
-    left:42px;
-
-    width:12px;
-    height:9px;
-
-    background:#8f3e52;
-
-    border-radius:50%;
+.digit{
+width:58px;
+height:58px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:17px;
+background:linear-gradient(145deg,#625da8,#37336e);
+border:2px solid #817ed0;
+font-size:27px;
+font-weight:bold;
+cursor:grab;
+box-shadow:0 7px 0 #171832;
+transition:.2s;
 }
 
-.mouth{
-
-    position:absolute;
-
-    top:58px;
-
-    left:34px;
-
-    width:28px;
-
-    height:15px;
-
-    border-bottom:
-    3px solid #5c3232;
-
-    border-radius:50%;
+.digit:hover{
+transform:translateY(-5px) rotate(-3deg);
 }
 
-.paw{
-
-    position:absolute;
-
-    width:35px;
-    height:65px;
-
-    background:#d99069;
-
-    border-radius:20px;
-
-    bottom:45px;
-
-    border:3px solid #673e3c;
-
-    transform-origin:bottom center;
+.digit.used{
+opacity:.18;
+pointer-events:none;
 }
 
-.paw.left{
-
-    left:15px;
-
-    transform:rotate(20deg);
+.answers{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:12px;
+margin:20px 0;
 }
 
-.paw.right{
-
-    right:0;
-
-    transform:rotate(-25deg);
+.answer{
+min-width:120px;
+padding:12px 18px;
+border-radius:16px;
+border:2px solid #626ba5;
+background:#292e55;
+color:#fff;
+font-family:Tahoma;
+font-size:17px;
+cursor:pointer;
 }
 
-.cat.happy .paw.right{
-
-    animation:
-    wavepaw .45s infinite alternate;
+.answer:hover{
+background:#3a4070;
+transform:translateY(-3px);
 }
-
-@keyframes wavepaw{
-
-    from{
-        transform:rotate(-25deg);
-    }
-
-    to{
-        transform:rotate(-55deg);
-    }
-}
-
-.cat.angry .eye{
-
-    height:4px;
-
-    transform:
-    rotate(12deg);
-}
-
-.cat.angry .mouth{
-
-    border-bottom:0;
-
-    border-top:
-    3px solid #5c3232;
-
-}
-
-.cat.angry{
-
-    animation:
-    angrycat .25s infinite alternate;
-}
-
-@keyframes angrycat{
-
-    from{
-        transform:translateX(-2px);
-    }
-
-    to{
-        transform:translateX(3px);
-    }
-}
-
-
-/* =========================
-   OPTIONS
-========================= */
-
-.options{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(2,1fr);
-
-    gap:14px;
-
-    margin-top:20px;
-}
-
-.option{
-
-    min-height:65px;
-
-    border-radius:18px;
-
-    border:
-    2px solid #59639c;
-
-    background:
-    linear-gradient(
-        145deg,
-        #292e5a,
-        #1b2044
-    );
-
-    color:#fff;
-
-    font-family:Tahoma;
-
-    font-size:19px;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 6px 0 #101329,
-    0 10px 18px #0004;
-
-    transition:.2s;
-}
-
-.option:hover{
-
-    transform:
-    translateY(-4px)
-    scale(1.01);
-
-    border-color:#ffe17a;
-
-    box-shadow:
-    0 8px 0 #101329,
-    0 0 20px #ffe17a33;
-}
-
-.option.correct{
-
-    background:
-    linear-gradient(
-        145deg,
-        #2d805e,
-        #18533f
-    );
-
-    border-color:#65e4b1;
-
-    box-shadow:
-    0 6px 0 #103c2e,
-    0 0 25px #55e5ac55;
-}
-
-.option.wrong{
-
-    background:
-    linear-gradient(
-        145deg,
-        #913f56,
-        #5b263a
-    );
-
-    border-color:#ff7a86;
-
-    animation:
-    wrong .25s;
-}
-
-@keyframes wrong{
-
-    25%{
-        transform:translateX(7px);
-    }
-
-    50%{
-        transform:translateX(-7px);
-    }
-
-    75%{
-        transform:translateX(5px);
-    }
-}
-
-
-/* =========================
-   MESSAGE
-========================= */
 
 .message{
-
-    min-height:35px;
-
-    margin-top:15px;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    color:#c9d4ff;
+min-height:35px;
+font-size:18px;
+font-weight:bold;
+margin:12px;
 }
 
-
-/* =========================
-   NEXT
-========================= */
-
-.next{
-
-    display:none;
-
-    margin:10px auto;
-
-    padding:12px 30px;
-
-    border:0;
-
-    border-radius:18px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #e7b84d,
-        #a9701e
-    );
-
-    color:#171328;
-
-    font-family:Tahoma;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 6px 0 #704919,
-    0 0 20px #e4b64c33;
+.next,.restart{
+display:none;
+margin:10px auto;
+padding:12px 28px;
+border:0;
+border-radius:18px;
+font-family:Tahoma;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+background:linear-gradient(145deg,#e7bb4d,#a86f1d);
+color:#17152a;
+box-shadow:0 6px 0 #684619;
 }
-
-
-/* =========================
-   MOVING NUMBERS
-========================= */
-
-.number-road{
-
-    position:absolute;
-
-    bottom:0;
-
-    left:0;
-
-    right:0;
-
-    height:120px;
-
-    overflow:hidden;
-
-    background:
-    linear-gradient(
-        180deg,
-        transparent,
-        #050714
-    );
-
-    border-top:
-    2px solid #242b52;
-}
-
-.moving-number{
-
-    position:absolute;
-
-    bottom:15px;
-
-    font-size:35px;
-
-    font-weight:bold;
-
-    color:#6d79b7;
-
-    text-shadow:
-    0 0 10px #6576e555;
-
-    animation:
-    moveNumber linear infinite;
-
-    opacity:.65;
-}
-
-@keyframes moveNumber{
-
-    from{
-        transform:
-        translateX(120vw)
-        rotate(-5deg);
-    }
-
-    to{
-        transform:
-        translateX(-150px)
-        rotate(5deg);
-    }
-}
-
-
-/* =========================
-   PROGRESS
-========================= */
 
 .progress{
-
-    width:80%;
-
-    height:12px;
-
-    margin:18px auto;
-
-    background:#10142d;
-
-    border:
-    1px solid #454d7d;
-
-    border-radius:20px;
-
-    overflow:hidden;
+height:10px;
+width:80%;
+margin:18px auto;
+background:#0d1129;
+border-radius:20px;
+overflow:hidden;
 }
 
 .progress-bar{
-
-    width:0;
-
-    height:100%;
-
-    background:
-    linear-gradient(
-        90deg,
-        #54dfb2,
-        #ffe16b
-    );
-
-    transition:.5s;
+height:100%;
+width:0;
+background:linear-gradient(90deg,#51dcae,#ffe16c);
+transition:.4s;
 }
 
+.cat{
+position:absolute;
+right:-190px;
+bottom:135px;
+width:150px;
+height:170px;
+z-index:20;
+transition:right .7s;
+filter:drop-shadow(0 12px 10px #0008);
+}
 
-/* =========================
-   RESULT
-========================= */
+.cat.show{right:20px}
+
+.cat-head{
+position:absolute;
+top:15px;
+left:28px;
+width:95px;
+height:85px;
+border-radius:45%;
+background:linear-gradient(145deg,#f4c18b,#bd714f);
+border:3px solid #673e3c;
+}
+
+.cat-body{
+position:absolute;
+bottom:0;
+left:30px;
+width:90px;
+height:90px;
+border-radius:50%;
+background:linear-gradient(145deg,#efb17d,#b96e4d);
+border:3px solid #673e3c;
+}
+
+.ear{
+position:absolute;
+top:-4px;
+width:34px;
+height:34px;
+background:#d78c67;
+border:3px solid #673e3c;
+transform:rotate(45deg);
+}
+
+.ear.left{left:5px}
+.ear.right{right:5px}
+
+.eye{
+position:absolute;
+top:32px;
+width:10px;
+height:13px;
+border-radius:50%;
+background:#19172b;
+}
+
+.eye.left{left:22px}
+.eye.right{right:22px}
+
+.nose{
+position:absolute;
+top:49px;
+left:42px;
+width:12px;
+height:9px;
+border-radius:50%;
+background:#913e52;
+}
+
+.mouth{
+position:absolute;
+top:58px;
+left:34px;
+width:28px;
+height:15px;
+border-bottom:3px solid #5c3232;
+border-radius:50%;
+}
+
+.paw{
+position:absolute;
+bottom:45px;
+width:35px;
+height:65px;
+border-radius:20px;
+background:#d99069;
+border:3px solid #673e3c;
+}
+
+.paw.left{
+left:15px;
+transform:rotate(20deg);
+}
+
+.paw.right{
+right:0;
+transform:rotate(-25deg);
+}
+
+.cat.happy .paw.right{
+animation:wave .4s infinite alternate;
+}
+
+@keyframes wave{
+from{transform:rotate(-25deg)}
+to{transform:rotate(-55deg)}
+}
+
+.cat.angry{
+animation:angry .12s infinite alternate;
+}
+
+.cat.angry .mouth{
+border-bottom:0;
+border-top:3px solid #5c3232;
+}
+
+@keyframes angry{
+from{transform:translateX(-2px)}
+to{transform:translateX(3px)}
+}
+
+.number-road{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+height:120px;
+overflow:hidden;
+background:linear-gradient(transparent,#050714);
+border-top:2px solid #272d52;
+}
+
+.moving-number{
+position:absolute;
+bottom:15px;
+color:#6875b4;
+font-size:34px;
+font-weight:bold;
+opacity:.55;
+animation:moveNumber linear infinite;
+}
+
+@keyframes moveNumber{
+from{transform:translateX(120vw)}
+to{transform:translateX(-150px)}
+}
 
 .result{
-
-    display:none;
-
-    padding:50px 25px;
-
-    text-align:center;
-
-    border-radius:30px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #242750,
-        #14182f
-    );
-
-    border:
-    2px solid #626ba9;
-
-    box-shadow:
-    0 25px 50px #0009;
+display:none;
+padding:45px 20px;
+text-align:center;
+border-radius:30px;
+background:linear-gradient(145deg,#252950,#14182f);
+border:2px solid #626ba9;
 }
 
 .result h2{
-
-    color:#ffe27a;
-
-    font-size:32px;
+color:#ffe27a;
+font-size:31px;
 }
 
 .final-score{
-
-    font-size:70px;
-
-    font-weight:bold;
-
-    color:#ffe27a;
-
-    text-shadow:
-    0 0 25px #ffe27a55;
+font-size:65px;
+font-weight:bold;
+color:#ffe27a;
 }
-
-.restart{
-
-    border:0;
-
-    padding:15px 35px;
-
-    border-radius:18px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #55c9a1,
-        #2c8066
-    );
-
-    color:white;
-
-    font-family:Tahoma;
-
-    font-size:18px;
-
-    cursor:pointer;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
 
 @media(max-width:700px){
 
-    .header h1{
-        font-size:27px;
-    }
+header h1{font-size:26px}
 
-    .city{
-        min-height:760px;
-    }
+.city{min-height:900px}
 
-    .panel{
-        width:94%;
-        padding:18px;
-        margin-top:45px;
-    }
+.panel{
+width:96%;
+padding:15px;
+}
 
-    .timer-area{
-        position:relative;
-        top:auto;
-        left:auto;
-        flex-direction:row;
-        justify-content:center;
-        margin-bottom:10px;
-    }
+.question{
+font-size:18px;
+}
 
-    .tank{
-        width:50px;
-        height:80px;
-    }
+.place{
+width:23%;
+}
 
-    .question{
-        font-size:19px;
-    }
+.place-name{
+font-size:11px;
+}
 
-    .number-big{
-        font-size:28px;
-    }
+.drop{
+width:60px;
+height:60px;
+font-size:28px;
+}
 
-    .options{
-        grid-template-columns:1fr;
-    }
+.cat{
+transform:scale(.75);
+transform-origin:bottom right;
+}
 
-    .buildings{
-        transform:scale(.75);
-        transform-origin:bottom center;
-    }
-
-    .cat{
-        transform:scale(.8);
-        transform-origin:bottom right;
-    }
-
-    .cat.show{
-        right:-5px;
-    }
+.cat.show{right:-5px}
 }
 
 </style>
 </head>
 
-
 <body>
-
 
 <div class="game">
 
-
-<!-- HEADER -->
-
-<div class="header">
-
-<h1>
-🏙️ شهر ارزش مکانی
-</h1>
-
-<p>
-در شهر اعداد، هر رقم خانه مخصوص خودش را دارد!
-</p>
-
-</div>
-
-
-<!-- STATS -->
+<header>
+<h1>🏙️ شهر ارزش مکانی</h1>
+<p>رقم‌ها را پیدا کن و شهر اعداد را نجات بده!</p>
+</header>
 
 <div class="stats">
 
@@ -1299,35 +596,23 @@ body{
 </div>
 
 <div class="stat">
-🎯 پاسخ درست
+🎯 درست
 <strong id="correct">0</strong>
 </div>
 
 </div>
 
-
-<!-- CITY -->
-
 <div class="city" id="city">
 
-
-<!-- STARS -->
-
 <div class="star" style="top:8%;left:8%"></div>
-<div class="star" style="top:16%;left:23%"></div>
-<div class="star" style="top:9%;left:40%"></div>
-<div class="star" style="top:20%;left:60%"></div>
-<div class="star" style="top:11%;left:78%"></div>
+<div class="star" style="top:15%;left:20%"></div>
+<div class="star" style="top:9%;left:39%"></div>
+<div class="star" style="top:18%;left:61%"></div>
+<div class="star" style="top:10%;left:79%"></div>
 <div class="star" style="top:25%;left:90%"></div>
-<div class="star" style="top:32%;left:13%"></div>
-<div class="star" style="top:28%;left:48%"></div>
-<div class="star" style="top:37%;left:73%"></div>
-
-
-<!-- BUILDINGS -->
+<div class="star" style="top:31%;left:13%"></div>
 
 <div class="buildings">
-
 <div class="building b1"></div>
 <div class="building b2"></div>
 <div class="building b3"></div>
@@ -1335,127 +620,79 @@ body{
 <div class="building b5"></div>
 <div class="building b6"></div>
 <div class="building b7"></div>
-
 </div>
-
-
-<!-- CAT -->
 
 <div class="cat" id="cat">
 
 <div class="cat-head">
-
 <div class="ear left"></div>
 <div class="ear right"></div>
-
 <div class="eye left"></div>
 <div class="eye right"></div>
-
 <div class="nose"></div>
 <div class="mouth"></div>
-
 </div>
 
 <div class="cat-body"></div>
-
 <div class="paw left"></div>
 <div class="paw right"></div>
 
 </div>
 
-
-<!-- QUESTION PANEL -->
-
 <div class="panel">
-
 
 <div class="timer-area">
 
 <div class="tank" id="tank">
-
 <div class="water" id="water"></div>
-
 </div>
 
 <div class="timer-text">
-
-⏱️
-<span id="timer">30</span>
-
+💧 <span id="timer">30</span> ثانیه
 </div>
 
 </div>
-
 
 <div class="level" id="level">
-مرحله ۱ | خانه‌های شهر
+مرحله ۱
 </div>
 
+<div class="question" id="question"></div>
 
-<div class="question" id="question">
+<div class="board" id="board"></div>
 
-</div>
+<div class="digits" id="digits"></div>
 
-
-<div class="options" id="options"></div>
-
+<div class="answers" id="answers"></div>
 
 <div class="message" id="message"></div>
 
-
-<button class="next"
-id="next"
-onclick="nextQuestion()">
-
-🏙️ ورود به بخش بعدی شهر
-
+<button class="next" id="next" onclick="nextQuestion()">
+➡️ مرحله بعد
 </button>
 
-
 <div class="progress">
-
-<div class="progress-bar"
-id="progress">
+<div class="progress-bar" id="progress"></div>
 </div>
 
 </div>
 
-</div>
-
-
-<!-- MOVING NUMBERS -->
-
-<div class="number-road"
-id="numberRoad">
-</div>
-
+<div class="number-road" id="road"></div>
 
 </div>
 
+<div class="result" id="result">
 
-<!-- RESULT -->
+<h2>🏆 مأموریت کامل شد!</h2>
 
-<div class="result"
-id="result">
+<p>تو توانستی شهر ارزش مکانی را نجات بدهی.</p>
 
-<h2>
-🏆 شهروند افتخاری شهر اعداد!
-</h2>
+<div class="final-score" id="finalScore">0</div>
 
 <p>
-تو تمام مأموریت‌های شهر ارزش مکانی را پشت سر گذاشتی.
-</p>
-
-<div class="final-score"
-id="finalScore">
-0
-</div>
-
-<p>
-پاسخ‌های درست:
+تعداد پاسخ‌های درست:
 <strong id="finalCorrect">0</strong>
-از
-<strong>15</strong>
+از ۱۰
 </p>
 
 <p>
@@ -1465,728 +702,775 @@ id="finalScore">
 
 <h3 id="finalMessage"></h3>
 
-<button
-class="restart"
-onclick="restartGame()">
-
+<button class="restart" id="restart" onclick="restartGame()">
 🔄 دوباره بازی کن
-
 </button>
 
 </div>
 
-
 </div>
-
 
 <script>
 
-
-/* =====================================
-   QUESTIONS
-===================================== */
+/* =========================================
+   داده‌های بازی
+========================================= */
 
 const questions=[
 
-/* مرحله ۱ */
-
 {
-level:"مرحله ۱ | آشنایی با خانه‌ها",
-q:"در عدد ۴۵۶، رقم ۶ در کدام خانه قرار دارد؟",
-options:["یکان","دهگان","صدگان","هزارگان"],
-answer:"یکان"
+type:"drag",
+number:["۴","۷","۳","۲"],
+places:["هزارگان","صدگان","دهگان","یکان"]
 },
 
 {
-level:"مرحله ۱ | آشنایی با خانه‌ها",
-q:"در عدد ۷۸۲، رقم ۸ در کدام خانه است؟",
-options:["یکان","دهگان","صدگان","هزارگان"],
-answer:"دهگان"
+type:"drag",
+number:["۲","۲","۴","۲"],
+places:["هزارگان","صدگان","دهگان","یکان"]
 },
 
 {
-level:"مرحله ۱ | آشنایی با خانه‌ها",
-q:"در عدد ۳۲۵، رقم ۳ چه ارزشی دارد؟",
-options:["۳","۳۰","۳۰۰","۳۰۰۰"],
-answer:"۳۰۰"
-},
-
-
-/* مرحله ۲ */
-
-{
-level:"مرحله ۲ | ارزش رقم",
-q:"ارزش رقم ۵ در عدد ۵۴۲ چیست؟",
-options:["۵","۵۰","۵۰۰","۵۰۰۰"],
-answer:"۵۰۰"
+type:"value",
+number:"۵۸۳۶",
+digit:"۸",
+correct:"صدگان",
+options:["هزارگان","صدگان","دهگان","یکان"]
 },
 
 {
-level:"مرحله ۲ | ارزش رقم",
-q:"ارزش رقم ۷ در عدد ۲۷۶ چیست؟",
-options:["۷","۷۰","۷۰۰","۷۰۰۰"],
-answer:"۷۰"
+type:"value",
+number:"۷۴۲۹",
+digit:"۲",
+correct:"دهگان",
+options:["هزارگان","صدگان","دهگان","یکان"]
 },
 
 {
-level:"مرحله ۲ | ارزش رقم",
-q:"در عدد ۸۴۳، ارزش رقم ۳ چند است؟",
-options:["۳","۳۰","۳۰۰","۸۳"],
-answer:"۳"
-},
-
-
-/* مرحله ۳ */
-
-{
-level:"مرحله ۳ | ساخت عدد",
-q:"با رقم‌های ۳، ۵ و ۸، کدام عدد ساخته می‌شود؟",
-options:["۳۵۸","۵۳۸","۸۳۵","همه موارد"],
-answer:"همه موارد"
-},
-
-{
-level:"مرحله ۳ | ساخت عدد",
-q:"کدام عدد بزرگ‌تر است؟",
-options:["۴۵۶","۴۶۵","۴۵۹","۴۵۰"],
-answer:"۴۶۵"
-},
-
-{
-level:"مرحله ۳ | ساخت عدد",
-q:"کدام عدد کوچک‌تر است؟",
-options:["۷۸۹","۷۹۸","۷۷۹","۷۸۰"],
-answer:"۷۷۹"
-},
-
-
-/* مرحله ۴ */
-
-{
-level:"مرحله ۴ | مقایسه عددها",
-q:"کدام رابطه درست است؟",
+type:"expanded",
+number:"۶۳۵۲",
+correct:"۶۰۰۰ + ۳۰۰ + ۵۰ + ۲",
 options:[
-"۴۵۶ > ۴۶۵",
-"۵۶۷ > ۵۶۶",
-"۳۴۵ < ۳۴۰",
-"۷۸۰ < ۷۷۹"
-],
-answer:"۵۶۷ > ۵۶۶"
+"۶۰۰۰ + ۳۰۰ + ۵۰ + ۲",
+"۶۰۰ + ۳۰ + ۵ + ۲",
+"۶۰۰۰ + ۳۰ + ۵ + ۲",
+"۶۰۰ + ۳۰۰ + ۵۰ + ۲"
+]
 },
 
 {
-level:"مرحله ۴ | مقایسه عددها",
-q:"عدد ۶۰۰ + ۴۰ + ۵ کدام است؟",
-options:["۶۴۵","۶۰۴۵","۶۵۴","۶۰۵"],
-answer:"۶۴۵"
+type:"number",
+correct:"۴۰۷۵",
+options:["۴۰۷۵","۴۷۰۵","۴۰۵۷","۴۷۵۰"]
 },
 
 {
-level:"مرحله ۴ | مقایسه عددها",
-q:"عدد ۸۰۰ + ۷۰ + ۲ کدام است؟",
-options:["۸۷۲","۸۰۷۲","۸۲۷","۸۷۰"],
-answer:"۸۷۲"
-},
-
-
-/* مرحله ۵ */
-
-{
-level:"مرحله ۵ | مأموریت نهایی",
-q:"در عدد ۹۸۷، رقم ۹ چه ارزشی دارد؟",
-options:["۹","۹۰","۹۰۰","۹۰۰۰"],
-answer:"۹۰۰"
+type:"compare",
+a:"۵۷۲۴",
+b:"۵۲۷۴",
+correct:">",
+options:[">","<","=","≠"]
 },
 
 {
-level:"مرحله ۵ | مأموریت نهایی",
-q:"کدام عدد از همه بزرگ‌تر است؟",
-options:["۹۸۷","۹۷۸","۸۹۷","۹۸۹"],
-answer:"۹۸۹"
+type:"missing",
+number:"۶ _ ۲۵",
+correct:"۷",
+options:["۳","۵","۷","۹"]
 },
 
 {
-level:"مرحله ۵ | مأموریت نهایی",
-q:"عدد ۷۰۰ + ۲۰ + ۶ را پیدا کن.",
-options:["۷۲۶","۷۶۲","۷۰۲۶","۷۲۰"],
-answer:"۷۲۶"
+type:"valueNumber",
+number:"۸۴۳۶",
+digit:"۴",
+correct:"۴۰۰",
+options:["۴۰","۴۰۰","۴۰۰۰","۴"]
+},
+
+{
+type:"final",
+number:"۷۲۵۴",
+correct:"۷۰۰۰ + ۲۰۰ + ۵۰ + ۴",
+options:[
+"۷۰۰۰ + ۲۰۰ + ۵۰ + ۴",
+"۷۰۰ + ۲۰۰ + ۵۰ + ۴",
+"۷۰۰۰ + ۲۰ + ۵۰ + ۴",
+"۷۰۰۰ + ۲۰۰ + ۵ + ۴"
+]
+
 }
-
 ];
 
-
-/* =====================================
-   VARIABLES
-===================================== */
-
 let current=0;
-
 let score=0;
-
 let correct=0;
-
 let streak=0;
-
 let time=30;
+let timer=null;
+let placed={};
 
-let timerInterval=null;
 
-let answered=false;
+/* =========================================
+   شروع
+========================================= */
 
-
-/* =====================================
-   MOVING NUMBERS
-===================================== */
-
-function createMovingNumbers(){
-
-    const road=
-    document.getElementById("numberRoad");
-
-    road.innerHTML="";
-
-    const nums=[
-        "۳",
-        "۷",
-        "۵",
-        "۲",
-        "۹",
-        "۴",
-        "۱",
-        "۸",
-        "۶",
-        "۰",
-        "۳۵",
-        "۷۲",
-        "۴۸",
-        "۹۱"
-    ];
-
-    nums.forEach((num,i)=>{
-
-        const el=
-        document.createElement("div");
-
-        el.className="moving-number";
-
-        el.innerText=num;
-
-        el.style.left=
-        (-100-i*70)+"px";
-
-        el.style.animationDuration=
-        (12+i%6)+"s";
-
-        el.style.animationDelay=
-        (-i*1.4)+"s";
-
-        el.style.fontSize=
-        (25+(i%4)*8)+"px";
-
-        road.appendChild(el);
-
-    });
-
-}
-
-
-/* =====================================
-   LOAD QUESTION
-===================================== */
-
-function loadQuestion(){
-
-    clearInterval(timerInterval);
-
-    answered=false;
-
-    time=30;
-
-    const q=
-    questions[current];
-
-
-    document.getElementById("stage")
-    .innerText=current+1;
-
-
-    document.getElementById("level")
-    .innerText=q.level;
-
-
-    document.getElementById("question")
-    .innerHTML=
-    q.q;
-
-
-    document.getElementById("message")
-    .innerText="";
-
-
-    document.getElementById("next")
-    .style.display="none";
-
-
-    document.getElementById("timer")
-    .innerText="30";
-
-
-    document.getElementById("tank")
-    .classList.remove("warning");
-
-
-    document.getElementById("water")
-    .style.height="100%";
-
-
-    document.getElementById("cat")
-    .className="cat";
-
-
-    createOptions(q);
-
-    updateProgress();
-
-    startTimer();
-
-}
-
-
-/* =====================================
-   OPTIONS
-===================================== */
-
-function createOptions(q){
-
-    const area=
-    document.getElementById("options");
-
-    area.innerHTML="";
-
-
-    let opts=
-    [...q.options];
-
-    opts.sort(
-        ()=>Math.random()-.5
-    );
-
-
-    opts.forEach(text=>{
-
-        const btn=
-        document.createElement("button");
-
-        btn.className="option";
-
-        btn.innerText=text;
-
-        btn.onclick=()=>{
-
-            checkAnswer(btn,text);
-
-        };
-
-        area.appendChild(btn);
-
-    });
-
-}
-
-
-/* =====================================
-   TIMER
-===================================== */
-
-function startTimer(){
-
-    timerInterval=
-    setInterval(()=>{
-
-        time--;
-
-
-        document.getElementById("timer")
-        .innerText=time;
-
-
-        document.getElementById("water")
-        .style.height=
-        (time/30*100)+"%";
-
-
-        if(time<=10){
-
-            document.getElementById("tank")
-            .classList.add("warning");
-
-        }
-
-
-        if(time<=0){
-
-            clearInterval(timerInterval);
-
-            if(!answered){
-
-                answered=true;
-
-                streak=0;
-
-                document.getElementById("streak")
-                .innerText=streak;
-
-                document.getElementById("message")
-                .innerText=
-                "⏰ آب مخزن تمام شد! پاسخ درست را ببین و دوباره تلاش کن.";
-
-                document.getElementById("message")
-                .style.color="#ff8990";
-
-                showCorrect();
-
-                showCat(false);
-
-                document.getElementById("next")
-                .style.display="block";
-
-            }
-
-        }
-
-    },1000);
-
-}
-
-
-/* =====================================
-   CHECK
-===================================== */
-
-function checkAnswer(button,text){
-
-    if(answered)return;
-
-
-    const q=
-    questions[current];
-
-
-    if(text===q.answer){
-
-        answered=true;
-
-        clearInterval(timerInterval);
-
-        button.classList.add("correct");
-
-
-        correct++;
-
-        streak++;
-
-
-        let points=
-        20+(time*2)+(streak*5);
-
-
-        score+=points;
-
-
-        document.getElementById("score")
-        .innerText=score;
-
-
-        document.getElementById("correct")
-        .innerText=correct;
-
-
-        document.getElementById("streak")
-        .innerText=streak;
-
-
-        document.getElementById("message")
-        .innerText=
-        "🐱 آفرین! گربه شهر اعداد از پاسخ تو خوشحال شد. +"+
-        points+
-        " سکه";
-
-
-        document.getElementById("message")
-        .style.color="#68e0b2";
-
-
-        showCat(true);
-
-        disableOptions();
-
-
-        document.getElementById("next")
-        .style.display="block";
-
-    }
-
-
-    else{
-
-        button.classList.add("wrong");
-
-
-        streak=0;
-
-
-        document.getElementById("streak")
-        .innerText=streak;
-
-
-        document.getElementById("message")
-        .innerText=
-        "😾 اوه! گربه عصبانی شد. دوباره با دقت فکر کن.";
-
-
-        document.getElementById("message")
-        .style.color="#ff8990";
-
-
-        showCat(false);
-
-
-        setTimeout(()=>{
-
-            button.classList.remove("wrong");
-
-        },500);
-
-    }
-
-}
-
-
-/* =====================================
-   CAT
-===================================== */
-
-function showCat(happy){
-
-    const cat=
-    document.getElementById("cat");
-
-    cat.className=
-    "cat show "+
-    (happy ? "happy":"angry");
-
-}
-
-
-/* =====================================
-   SHOW CORRECT
-===================================== */
-
-function showCorrect(){
-
-    const answer=
-    questions[current].answer;
-
-
-    document
-    .querySelectorAll(".option")
-    .forEach(btn=>{
-
-        if(btn.innerText===answer){
-
-            btn.classList.add("correct");
-
-        }
-
-        btn.disabled=true;
-
-    });
-
-}
-
-
-/* =====================================
-   DISABLE
-===================================== */
-
-function disableOptions(){
-
-    document
-    .querySelectorAll(".option")
-    .forEach(btn=>{
-
-        btn.disabled=true;
-
-    });
-
-}
-
-
-/* =====================================
-   NEXT
-===================================== */
-
-function nextQuestion(){
-
-    clearInterval(timerInterval);
-
-
-    current++;
-
-
-    if(current>=questions.length){
-
-        finishGame();
-
-        return;
-
-    }
-
-
-    loadQuestion();
-
-}
-
-
-/* =====================================
-   PROGRESS
-===================================== */
-
-function updateProgress(){
-
-    const percent=
-    ((current+1)/
-    questions.length)*100;
-
-
-    document.getElementById("progress")
-    .style.width=
-    percent+"%";
-
-}
-
-
-/* =====================================
-   FINISH
-===================================== */
-
-function finishGame(){
-
-    clearInterval(timerInterval);
-
-
-    document.getElementById("city")
-    .style.display="none";
-
-
-    document.getElementById("result")
-    .style.display="block";
-
-
-    document.getElementById("finalScore")
-    .innerText=score;
-
-
-    document.getElementById("finalCorrect")
-    .innerText=correct;
-
-
-    const percent=
-    Math.round(
-        correct/
-        questions.length*
-        100
-    );
-
-
-    document.getElementById("finalPercent")
-    .innerText=
-    percent+"%";
-
-
-    let msg;
-
-
-    if(percent>=90){
-
-        msg=
-        "🏆 فوق‌العاده! تو استاد ارزش مکانی هستی.";
-
-    }
-
-    else if(percent>=75){
-
-        msg=
-        "🌟 عالی بود! شهر اعداد به تو افتخار می‌کند.";
-
-    }
-
-    else if(percent>=50){
-
-        msg=
-        "👏 خوب بود! با کمی تمرین بهتر هم می‌شوی.";
-
-    }
-
-    else{
-
-        msg=
-        "📚 دوباره به شهر اعداد برگرد و تمرین کن.";
-
-    }
-
-
-    document.getElementById("finalMessage")
-    .innerText=msg;
-
-}
-
-
-/* =====================================
-   RESTART
-===================================== */
-
-function restartGame(){
-
-    current=0;
-
-    score=0;
-
-    correct=0;
-
-    streak=0;
-
-
-    document.getElementById("score")
-    .innerText=0;
-
-    document.getElementById("correct")
-    .innerText=0;
-
-    document.getElementById("streak")
-    .innerText=0;
-
-
-    document.getElementById("city")
-    .style.display="block";
-
-
-    document.getElementById("result")
-    .style.display="none";
-
-
-    loadQuestion();
-
-}
-
-
-/* =====================================
-   START
-===================================== */
+function start(){
 
 createMovingNumbers();
 
 loadQuestion();
+
+}
+
+
+/* =========================================
+   اعداد متحرک
+========================================= */
+
+function createMovingNumbers(){
+
+const road=document.getElementById("road");
+
+const nums=[
+"۰","۱","۲","۳","۴","۵",
+"۶","۷","۸","۹",
+"۱۲","۲۵","۴۸","۷۳","۹۱"
+];
+
+nums.forEach((n,i)=>{
+
+let x=document.createElement("div");
+
+x.className="moving-number";
+
+x.innerText=n;
+
+x.style.left=(-100-i*90)+"px";
+
+x.style.animationDuration=(10+i%5)+"s";
+
+x.style.animationDelay=(-i)+"s";
+
+road.appendChild(x);
+
+});
+
+}
+
+
+/* =========================================
+   بارگذاری سوال
+========================================= */
+
+function loadQuestion(){
+
+clearInterval(timer);
+
+time=30;
+
+placed={};
+
+document.getElementById("timer").innerText=30;
+
+document.getElementById("water").style.height="100%";
+
+document.getElementById("tank").classList.remove("warning");
+
+document.getElementById("message").innerText="";
+
+document.getElementById("next").style.display="none";
+
+document.getElementById("cat").className="cat";
+
+document.getElementById("stage").innerText=current+1;
+
+document.getElementById("level").innerText=
+"مرحله "+(current+1)+" از "+questions.length;
+
+updateProgress();
+
+const q=questions[current];
+
+if(q.type==="drag") createDragQuestion(q);
+else createChoiceQuestion(q);
+
+startTimer();
+
+}
+
+
+/* =========================================
+   سوال Drag
+========================================= */
+
+function createDragQuestion(q){
+
+document.getElementById("question").innerHTML=
+"🔢 عدد <b>"+q.number.join("")+
+"</b> را بساز. هر رقم را در خانه‌ی درست قرار بده.";
+
+const board=document.getElementById("board");
+
+board.innerHTML="";
+
+q.places.forEach((place,index)=>{
+
+const p=document.createElement("div");
+
+p.className="place";
+
+p.innerHTML=`
+<div class="place-name">${place}</div>
+<div class="drop" data-index="${index}">?</div>
+`;
+
+board.appendChild(p);
+
+});
+
+document.getElementById("answers").innerHTML="";
+
+const digits=document.getElementById("digits");
+
+digits.innerHTML="";
+
+q.number.forEach((digit,index)=>{
+
+const d=document.createElement("div");
+
+d.className="digit";
+
+d.innerText=digit;
+
+d.draggable=true;
+
+d.dataset.index=index;
+
+d.dataset.digit=digit;
+
+/*
+هر رقم شناسه مستقل دارد.
+حتی اگر چند رقم یکسان باشند.
+*/
+
+d.addEventListener("dragstart",e=>{
+
+e.dataTransfer.setData(
+"digitIndex",
+index
+);
+
+e.dataTransfer.setData(
+"digit",
+digit
+);
+
+d.classList.add("dragging");
+
+});
+
+d.addEventListener("dragend",()=>{
+
+d.classList.remove("dragging");
+
+});
+
+digits.appendChild(d);
+
+});
+
+
+document.querySelectorAll(".drop").forEach(zone=>{
+
+zone.addEventListener("dragover",e=>{
+
+e.preventDefault();
+
+zone.classList.add("over");
+
+});
+
+zone.addEventListener("dragleave",()=>{
+
+zone.classList.remove("over");
+
+});
+
+zone.addEventListener("drop",e=>{
+
+e.preventDefault();
+
+zone.classList.remove("over");
+
+const digitIndex=
+Number(e.dataTransfer.getData("digitIndex"));
+
+const digit=
+e.dataTransfer.getData("digit");
+
+const target=
+Number(zone.dataset.index);
+
+placeDigit(
+digitIndex,
+digit,
+target,
+zone
+);
+
+});
+
+});
+
+}
+
+
+/* =========================================
+   قرار دادن رقم
+========================================= */
+
+function placeDigit(
+digitIndex,
+digit,
+target,
+zone
+){
+
+const q=questions[current];
+
+if(q.number[target]===digit){
+
+zone.innerText=digit;
+
+zone.classList.add("filled");
+
+placed[target]=digitIndex;
+
+/*
+فقط همان رقم استفاده شده
+غیرفعال می‌شود.
+*/
+
+const digitElements=
+document.querySelectorAll(".digit");
+
+digitElements.forEach(d=>{
+
+if(
+Number(d.dataset.index)===digitIndex
+){
+
+d.classList.add("used");
+
+}
+
+});
+
+checkDragComplete();
+
+}else{
+
+wrongAnswer();
+
+}
+
+}
+
+
+/* =========================================
+   بررسی کامل شدن Drag
+========================================= */
+
+function checkDragComplete(){
+
+const q=questions[current];
+
+if(
+Object.keys(placed).length===
+q.number.length
+){
+
+finishCorrect();
+
+}
+
+}
+
+
+/* =========================================
+   سوالات چهارگزینه‌ای
+========================================= */
+
+function createChoiceQuestion(q){
+
+document.getElementById("digits").innerHTML="";
+
+document.getElementById("board").innerHTML="";
+
+let text="";
+
+if(q.type==="value"){
+
+text=
+"🔎 در عدد <b>"+q.number+
+"</b>، ارزش مکانی رقم <b>"+
+q.digit+
+"</b> چیست؟";
+
+}
+
+else if(q.type==="expanded"){
+
+text=
+"🧩 عدد <b>"+q.number+
+"</b> را به صورت گسترده پیدا کن.";
+
+}
+
+else if(q.type==="number"){
+
+text=
+"🔢 کدام گزینه عدد موردنظر را نشان می‌دهد؟";
+
+}
+
+else if(q.type==="compare"){
+
+text=
+"⚖️ کدام علامت رابطه‌ی درست را نشان می‌دهد؟<br>"+
+"<b>"+q.a+" &nbsp; ? &nbsp; "+q.b+"</b>";
+
+}
+
+else if(q.type==="missing"){
+
+text=
+"🕵️ رقم گمشده را پیدا کن:<br>"+
+"<b>"+q.number+"</b>";
+
+}
+
+else if(q.type==="valueNumber"){
+
+text=
+"💰 ارزش رقم <b>"+q.digit+
+"</b> در عدد <b>"+q.number+
+"</b> چقدر است؟";
+
+}
+
+else{
+
+text=
+"🏆 مأموریت نهایی: شکل گسترده‌ی عدد <b>"+
+q.number+"</b> را پیدا کن.";
+
+}
+
+document.getElementById("question").innerHTML=text;
+
+const answers=
+document.getElementById("answers");
+
+answers.innerHTML="";
+
+q.options.forEach(option=>{
+
+const button=
+document.createElement("button");
+
+button.className="answer";
+
+button.innerText=option;
+
+button.onclick=()=>{
+
+checkChoice(option,q.correct);
+
+};
+
+answers.appendChild(button);
+
+});
+
+}
+
+
+/* =========================================
+   بررسی گزینه
+========================================= */
+
+function checkChoice(answer,correctAnswer){
+
+if(answer===correctAnswer){
+
+finishCorrect();
+
+}else{
+
+wrongAnswer();
+
+}
+
+}
+
+
+/* =========================================
+   پاسخ درست
+========================================= */
+
+function finishCorrect(){
+
+clearInterval(timer);
+
+correct++;
+
+streak++;
+
+let points=
+30+
+time+
+streak*5;
+
+score+=points;
+
+document.getElementById("score").innerText=score;
+
+document.getElementById("correct").innerText=correct;
+
+document.getElementById("streak").innerText=streak;
+
+document.getElementById("message").innerText=
+"🎉 آفرین! "+points+
+" سکه به دست آوردی.";
+
+document.getElementById("message").style.color="#65e0b0";
+
+showHappyCat();
+
+document.getElementById("next").style.display="block";
+
+document.querySelectorAll(".answer").forEach(b=>{
+b.disabled=true;
+});
+
+document.querySelectorAll(".digit").forEach(d=>{
+d.draggable=false;
+});
+
+}
+
+
+/* =========================================
+   پاسخ غلط
+========================================= */
+
+function wrongAnswer(){
+
+streak=0;
+
+document.getElementById("streak").innerText=0;
+
+document.getElementById("message").innerText=
+"😾 اشتباه شد! دوباره فکر کن.";
+
+document.getElementById("message").style.color="#ff8990";
+
+showAngryCat();
+
+}
+
+
+/* =========================================
+   گربه
+========================================= */
+
+function showHappyCat(){
+
+const cat=document.getElementById("cat");
+
+cat.className="cat show happy";
+
+}
+
+function showAngryCat(){
+
+const cat=document.getElementById("cat");
+
+cat.className="cat show angry";
+
+}
+
+
+/* =========================================
+   زمان
+========================================= */
+
+function startTimer(){
+
+timer=setInterval(()=>{
+
+time--;
+
+document.getElementById("timer").innerText=time;
+
+document.getElementById("water").style.height=
+(time/30*100)+"%";
+
+if(time<=10){
+
+document.getElementById("tank").classList.add("warning");
+
+}
+
+if(time<=0){
+
+clearInterval(timer);
+
+streak=0;
+
+document.getElementById("streak").innerText=0;
+
+document.getElementById("message").innerText=
+"⏰ زمان تمام شد!";
+
+document.getElementById("message").style.color="#ff8990";
+
+showAngryCat();
+
+document.getElementById("next").style.display="block";
+
+document.querySelectorAll(".answer").forEach(b=>{
+b.disabled=true;
+});
+
+document.querySelectorAll(".digit").forEach(d=>{
+d.draggable=false;
+});
+
+}
+
+},1000);
+
+}
+
+
+/* =========================================
+   مرحله بعد
+========================================= */
+
+function nextQuestion(){
+
+current++;
+
+if(current>=questions.length){
+
+finishGame();
+
+}else{
+
+loadQuestion();
+
+}
+
+}
+
+
+/* =========================================
+   نوار پیشرفت
+========================================= */
+
+function updateProgress(){
+
+document.getElementById("progress").style.width=
+(current/questions.length*100)+"%";
+
+}
+
+
+/* =========================================
+   پایان
+========================================= */
+
+function finishGame(){
+
+clearInterval(timer);
+
+document.getElementById("city").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("finalScore").innerText=score;
+
+document.getElementById("finalCorrect").innerText=correct;
+
+let percent=
+Math.round(correct/questions.length*100);
+
+document.getElementById("finalPercent").innerText=
+percent+"%";
+
+let message="";
+
+if(percent>=90){
+
+message=
+"🏆 فوق‌العاده! تو فرمانروای شهر ارزش مکانی هستی!";
+
+}else if(percent>=70){
+
+message=
+"🌟 عالی بود! فقط کمی تمرین بیشتر لازم داری.";
+
+}else if(percent>=50){
+
+message=
+"👏 خوب بود؛ با تمرین بیشتر قوی‌تر می‌شوی.";
+
+}else{
+
+message=
+"📚 دوباره تلاش کن؛ شهر اعداد منتظر توست!";
+
+}
+
+document.getElementById("finalMessage").innerText=
+message;
+
+document.getElementById("restart").style.display="inline-block";
+
+}
+
+
+/* =========================================
+   شروع دوباره
+========================================= */
+
+function restartGame(){
+
+current=0;
+
+score=0;
+
+correct=0;
+
+streak=0;
+
+document.getElementById("score").innerText=0;
+
+document.getElementById("correct").innerText=0;
+
+document.getElementById("streak").innerText=0;
+
+document.getElementById("city").style.display="block";
+
+document.getElementById("result").style.display="none";
+
+loadQuestion();
+
+}
+
+start();
 
 </script>
 
