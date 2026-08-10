@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>شکارچی واژه‌ها 2.2</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    min-height:100vh;
+    background:
+        linear-gradient(rgba(15,55,35,.70),rgba(5,30,20,.90)),
+        radial-gradient(circle at top,#68a75d,#163c29 65%,#071b13);
+    color:white;
+}
+
+.container{
+    width:94%;
+    max-width:1050px;
+    margin:20px auto;
+}
+
+/* HEADER */
+
+.header{
+    background:linear-gradient(135deg,#214f34,#102f22);
+    border:3px solid #78a85f;
+    border-radius:30px;
+    padding:24px;
+    text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.4);
+}
+
+.header h1{
+    margin:0;
+    color:#e0f7ad;
+    font-size:36px;
+    text-shadow:0 3px 8px #000;
+}
+
+.header p{
+    color:#e5f4d8;
+    font-size:17px;
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:18px 0;
+}
+
+.stat{
+    min-width:145px;
+    padding:10px 20px;
+    text-align:center;
+    border-radius:18px;
+    background:#173c2b;
+    border:2px solid #628c54;
+    box-shadow:0 6px 15px rgba(0,0,0,.3);
+}
+
+.stat strong{
+    display:block;
+    margin-top:5px;
+    font-size:23px;
+    color:#e0f7ad;
+}
+
+/* GAME */
+
+.game{
+    background:rgba(13,48,32,.96);
+    border:3px solid #628f55;
+    border-radius:30px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+}
+
+.level{
+    display:inline-block;
+    padding:8px 20px;
+    border-radius:20px;
+    background:#315d3d;
+    border:2px solid #83b66c;
+    color:#e5f8c8;
+    font-weight:bold;
+}
+
+.instruction{
+    font-size:22px;
+    font-weight:bold;
+    margin:20px auto;
+    line-height:2;
+    max-width:850px;
+}
+
+.story{
+    background:rgba(68,104,59,.5);
+    border:1px solid #70945e;
+    border-radius:20px;
+    padding:15px;
+    max-width:850px;
+    margin:auto;
+    line-height:2;
+}
+
+/* TARGET */
+
+.target-box{
+    margin:20px auto;
+    max-width:650px;
+    background:#102d20;
+    border:3px solid #8ebd68;
+    border-radius:25px;
+    padding:20px;
+}
+
+.target-title{
+    color:#cce99e;
+    font-size:17px;
+}
+
+.target{
+    font-size:38px;
+    font-weight:bold;
+    color:#fff4b5;
+    margin-top:10px;
+}
+
+/* WORD GRID */
+
+.word-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    max-width:850px;
+    margin:25px auto;
+}
+
+.word{
+    min-height:70px;
+    border-radius:18px;
+    border:2px solid #67985a;
+    background:#28563a;
+    color:#f5f8e9;
+    font-family:Tahoma;
+    font-size:21px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 5px 0 #173525;
+}
+
+.word:hover{
+    transform:translateY(-4px) scale(1.02);
+    background:#376e49;
+}
+
+.word.correct{
+    background:#3e874b;
+    border-color:#b8e986;
+    box-shadow:0 5px 0 #275d32;
+}
+
+.word.wrong{
+    background:#843f3f;
+    border-color:#e69383;
+    box-shadow:0 5px 0 #592929;
+}
+
+/* IMAGE */
+
+.image-box{
+    font-size:85px;
+    padding:15px;
+}
+
+/* MESSAGE */
+
+.message{
+    min-height:45px;
+    margin:15px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* NEXT */
+
+.next{
+    display:none;
+    border:2px solid #b5db83;
+    background:#4d7c42;
+    color:white;
+    padding:14px 30px;
+    border-radius:18px;
+    font-family:Tahoma;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 5px 0 #2c5028;
+}
+
+.next:hover{
+    background:#639c50;
+}
+
+/* PROGRESS */
+
+.progress-title{
+    margin-top:25px;
+    color:#d8efbd;
+}
+
+.progress{
+    height:14px;
+    background:#0c2419;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid #537748;
+    margin-top:7px;
+}
+
+.progress-bar{
+    width:0;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #6d9e53,
+        #b3d876,
+        #e2f6a2
+    );
+    transition:.5s;
+}
+
+/* RESULT */
+
+.result{
+    display:none;
+    text-align:center;
+    background:#143b29;
+    border:3px solid #79a961;
+    border-radius:30px;
+    padding:35px;
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+}
+
+.result h2{
+    color:#e0f7ad;
+}
+
+.final-score{
+    font-size:55px;
+    font-weight:bold;
+    color:#fff1a6;
+    margin:15px;
+}
+
+.restart{
+    border:2px solid #afd27c;
+    background:#4d7c42;
+    color:white;
+    padding:15px 30px;
+    border-radius:18px;
+    font-family:Tahoma;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .header h1{
+        font-size:28px;
+    }
+
+    .word-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .instruction{
+        font-size:19px;
+    }
+
+    .word{
+        font-size:17px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<div class="header">
+
+<h1>🌳🔎 شکارچی واژه‌ها 2.2</h1>
+
+<p>
+به جنگل واژه‌ها خوش آمدی!
+واژه هدف را پیدا کن و نشان شکارچی بگیر.
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+🔎 امتیاز
+<strong id="score">0</strong>
+</div>
+
+<div class="stat">
+🏅 نشان شکارچی
+<strong id="badges">0</strong>
+</div>
+
+<div class="stat">
+🔦 انرژی
+<strong id="energy">5</strong>
+</div>
+
+<div class="stat">
+🗺️ مرحله
+<strong id="stage">1</strong>
+</div>
+
+</div>
+
+
+<div class="game" id="game">
+
+
+<div class="level" id="level">
+مرحله ۱
+</div>
+
+
+<div class="instruction" id="instruction"></div>
+
+
+<div class="story" id="story"></div>
+
+
+<div class="image-box" id="image"></div>
+
+
+<div class="target-box">
+
+<div class="target-title">
+🎯 واژه هدف
+</div>
+
+<div class="target" id="target"></div>
+
+</div>
+
+
+<div class="word-grid" id="wordGrid"></div>
+
+
+<div class="message" id="message"></div>
+
+
+<button class="next" id="next" onclick="nextStage()">
+🌿 ادامه شکار
+</button>
+
+
+<div class="progress-title">
+🗺️ مسیر شکارچی
+</div>
+
+<div class="progress">
+
+<div class="progress-bar" id="progress"></div>
+
+</div>
+
+
+</div>
+
+
+<div class="result" id="result">
+
+<h2>
+🏆 مأموریت به پایان رسید!
+</h2>
+
+<p>
+تو تمام جنگل واژه‌ها را جست‌وجو کردی.
+</p>
+
+<div class="final-score" id="finalScore">
+0
+</div>
+
+<p>
+🔎 پاسخ‌های درست:
+<strong id="finalCorrect">0</strong>
+از ۲۵
+</p>
+
+<p>
+📊 درصد موفقیت:
+<strong id="finalPercent">0%</strong>
+</p>
+
+<h3 id="finalMessage"></h3>
+
+<button class="restart" onclick="restartGame()">
+🔄 شروع دوباره
+</button>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* ===================================
+   مراحل
+=================================== */
+
+const levels=[
+
+
+{
+type:"آسان",
+instruction:"واژه‌ای را پیدا کن که با واژه هدف کاملاً یکسان است.",
+story:"🌱 در اولین بخش جنگل، واژه‌ها هنوز آرام هستند. واژه هدف را پیدا کن.",
+image:"🌳",
+target:"مداد",
+words:["مداد","دفتر","مدادک","کتاب","مداد","پاک‌کن"],
+answer:["مداد"]
+},
+
+
+{
+type:"آسان",
+instruction:"واژه هدف را از میان واژه‌ها پیدا کن.",
+story:"🍎 چند واژه روی برگ‌های جنگل افتاده‌اند. واژه درست را پیدا کن.",
+image:"🍎",
+target:"سیب",
+words:["سیر","سیب","سبد","سیب","ساعت","سیب"],
+answer:["سیب"]
+},
+
+
+{
+type:"آسان",
+instruction:"تمام واژه‌های هدف را پیدا کن.",
+story:"🐰 سه واژه هدف در جنگل پنهان شده‌اند.",
+image:"🐰",
+target:"خرگوش",
+words:["خرگوش","گربه","خرگوش","پرنده","خرگوش","ماهی"],
+answer:["خرگوش"]
+},
+
+
+{
+type:"آسان",
+instruction:"واژه درست را پیدا کن.",
+story:"📚 کتابخانه جنگل پر از واژه‌های شبیه به هم شده است.",
+image:"📚",
+target:"کتاب",
+words:["کتاب","کتابک","کتاب","کتابچه","دفتر","کتاب"],
+answer:["کتاب"]
+},
+
+
+{
+type:"آسان",
+instruction:"واژه هدف را شکار کن.",
+story:"🌸 گل‌ها روی زمین افتاده‌اند و هر کدام یک واژه دارند.",
+image:"🌸",
+target:"گل",
+words:["گلاب","گل","گلدان","گل","گربه","گل"],
+answer:["گل"]
+},
+
+
+{
+type:"متوسط",
+instruction:"واژه هدف را از میان واژه‌های شبیه پیدا کن.",
+story:"🔎 حالا واژه‌ها شبیه‌تر شده‌اند. با دقت بیشتری نگاه کن.",
+image:"🔍",
+target:"باران",
+words:["باران","بارانک","باران","بهاران","باران","بار"],
+answer:["باران"]
+},
+
+
+{
+type:"متوسط",
+instruction:"همه واژه‌های هدف را پیدا کن.",
+story:"🌧️ قطره‌های باران واژه‌ها را جابه‌جا کرده‌اند.",
+image:"🌧️",
+target:"ابر",
+words:["ابر","آبر","ابر","ابرک","ابر","ابرو"],
+answer:["ابر"]
+},
+
+
+{
+type:"متوسط",
+instruction:"واژه درست را پیدا کن.",
+story:"🐦 پرنده‌ها واژه‌های مختلفی روی شاخه‌ها گذاشته‌اند.",
+image:"🐦",
+target:"پرنده",
+words:["پرنده","پرواز","پرنده","پرچم","پرنده","پرنده‌"],
+answer:["پرنده"]
+},
+
+
+{
+type:"متوسط",
+instruction:"واژه هدف را پیدا کن.",
+story:"🌲 بین درختان چند واژه تقریباً مشابه پنهان شده است.",
+image:"🌲",
+target:"درخت",
+words:["درخت","درختک","درخت","درد","درخت","در"],
+answer:["درخت"]
+},
+
+
+{
+type:"متوسط",
+instruction:"سه واژه هدف را پیدا کن.",
+story:"🦋 پروانه‌ها روی برگ‌ها نشسته‌اند. واژه‌های درست را شکار کن.",
+image:"🦋",
+target:"پروانه",
+words:["پروانه","پروانه","پرنده","پروانه","پروانه","پرویز"],
+answer:["پروانه"]
+},
+
+
+{
+type:"سخت",
+instruction:"واژه هدف را با دقت بسیار زیاد پیدا کن.",
+story:"🌙 جنگل تاریک‌تر شده و واژه‌ها شبیه‌تر هستند.",
+image:"🌙",
+target:"ماه",
+words:["ماه","ماهک","ماه","ماه","ماد","مهر"],
+answer:["ماه"]
+},
+
+
+{
+type:"سخت",
+instruction:"واژه هدف را پیدا کن.",
+story:"⭐ ستاره‌های جنگل هر کدام یک واژه دارند.",
+image:"⭐",
+target:"ستاره",
+words:["ستاره","ستاره","ستاره","ستاره‌وار","ستاره","ستون"],
+answer:["ستاره"]
+},
+
+
+{
+type:"سخت",
+instruction:"تمام واژه‌های هدف را شکار کن.",
+story:"🌊 صدای رودخانه حواس شکارچی را پرت می‌کند.",
+image:"🌊",
+target:"رود",
+words:["رود","رودخانه","رود","روز","رود","رودک"],
+answer:["رود"]
+},
+
+
+{
+type:"سخت",
+instruction:"واژه هدف را پیدا کن.",
+story:"🍃 برگ‌های جنگل روی واژه‌ها افتاده‌اند.",
+image:"🍃",
+target:"برگ",
+words:["برگ","برگ","برگ","برف","برگچه","برگ"],
+answer:["برگ"]
+},
+
+
+{
+type:"سخت",
+instruction:"واژه هدف را پیدا کن.",
+story:"🐿️ سنجاب‌ها چند واژه را بین درختان پنهان کرده‌اند.",
+image:"🐿️",
+target:"سنجاب",
+words:["سنجاب","سنگ","سنجاق","سنجاب","سنجاب","سنج"],
+answer:["سنجاب"]
+},
+
+
+{
+type:"چالش",
+instruction:"واژه هدف را در میان واژه‌های بسیار شبیه پیدا کن.",
+story:"🌲 مرحله چالش شروع شد. چشم‌های شکارچی را تیز کن!",
+image:"🌲",
+target:"جنگل",
+words:["جنگل","جنگ","جنگل","جنگلی","جنگل","جنگجو","جنگل"],
+answer:["جنگل"]
+},
+
+
+{
+type:"چالش",
+instruction:"تمام واژه‌های هدف را پیدا کن.",
+story:"🦊 روباه جنگل واژه‌های زیادی را مخفی کرده است.",
+image:"🦊",
+target:"روباه",
+words:["روباه","روباه","رود","روباه","روستا","روباه","روباه"],
+answer:["روباه"]
+},
+
+
+{
+type:"چالش",
+instruction:"واژه هدف را پیدا کن.",
+story:"🌿 در این مرحله باید به شکل کامل واژه دقت کنی.",
+image:"🌿",
+target:"سبزه",
+words:["سبز","سبزه","سبزه","سبزی","سبزه","سبزه‌زار","سبزه"],
+answer:["سبزه"]
+},
+
+
+{
+type:"چالش",
+instruction:"واژه هدف را شکار کن.",
+story:"🦌 حیوانات جنگل تو را به یک آزمون جدید دعوت کرده‌اند.",
+image:"🦌",
+target:"آهو",
+words:["آهو","آهو","آهو","آب","آهو","آهن","آهو"],
+answer:["آهو"]
+},
+
+
+{
+type:"چالش",
+instruction:"واژه هدف را پیدا کن.",
+story:"🏞️ به عمیق‌ترین قسمت جنگل رسیده‌ای.",
+image:"🏞️",
+target:"کوه",
+words:["کوه","کوه","کود","کوهستان","کوه","کور","کوه"],
+answer:["کوه"]
+},
+
+
+{
+type:"خیلی سخت",
+instruction:"واژه هدف را از میان واژه‌های بسیار شبیه پیدا کن.",
+story:"🌫️ مه جنگل زیاد شده است. فقط شکارچی دقیق موفق می‌شود.",
+image:"🌫️",
+target:"مهتاب",
+words:["مهتاب","مهتاب","مهتابی","مهتاب","مهتاب","مهتاب","مه"],
+answer:["مهتاب"]
+},
+
+
+{
+type:"خیلی سخت",
+instruction:"همه واژه‌های هدف را شکار کن.",
+story:"🦉 جغد جنگل تو را به آخرین بخش مأموریت راهنمایی می‌کند.",
+image:"🦉",
+target:"دانش",
+words:["دانش","دانش","دانشمند","دانش","دانشگاه","دانش","دانش"],
+answer:["دانش"]
+},
+
+
+{
+type:"خیلی سخت",
+instruction:"واژه هدف را پیدا کن.",
+story:"📖 اکنون واژه‌های مربوط به یادگیری وارد بازی شده‌اند.",
+image:"📖",
+target:"یادگیری",
+words:["یادگیری","یادگار","یادگیری","یادگیری","یادداشت","یادگیری","یاد"],
+answer:["یادگیری"]
+},
+
+
+{
+type:"خیلی سخت",
+instruction:"واژه هدف را پیدا کن.",
+story:"🧠 تقریباً به پایان رسیده‌ای. با دقت کامل نگاه کن.",
+image:"🧠",
+target:"تمرکز",
+words:["تمرکز","تمرین","تمرکز","تمرکز","تمرکز","تکلیف","تمرکز"],
+answer:["تمرکز"]
+},
+
+
+{
+type:"نهایی",
+instruction:"آخرین مأموریت! همه واژه‌های هدف را پیدا کن.",
+story:"🏆 دروازه طلایی جنگل باز شده است. اگر این مرحله را درست انجام دهی، استاد شکار واژه‌ها می‌شوی.",
+image:"🏆",
+target:"شکارچی",
+words:["شکارچی","شکار","شکارچی","شکارچی","شکارچی","شکارگاه","شکارچی"],
+answer:["شکارچی"]
+}
+
+];
+
+
+/* ===================================
+   متغیرها
+=================================== */
+
+let current=0;
+let score=0;
+let correct=0;
+let badges=0;
+let energy=5;
+
+
+/* ===================================
+   نمایش مرحله
+=================================== */
+
+function loadLevel(){
+
+    const level=levels[current];
+
+    document.getElementById("stage").innerText=current+1;
+
+    document.getElementById("level").innerText=
+        "🌿 "+level.type+
+        " | مرحله "+(current+1);
+
+    document.getElementById("instruction").innerText=
+        level.instruction;
+
+    document.getElementById("story").innerText=
+        level.story;
+
+    document.getElementById("image").innerText=
+        level.image;
+
+    document.getElementById("target").innerText=
+        level.target;
+
+    document.getElementById("message").innerText="";
+
+    document.getElementById("next").style.display=
+        "none";
+
+    createWords(level);
+
+    updateProgress();
+
+}
+
+
+/* ===================================
+   ساخت واژه‌ها
+=================================== */
+
+function createWords(level){
+
+    const grid=
+        document.getElementById("wordGrid");
+
+    grid.innerHTML="";
+
+    let words=[...level.words];
+
+    words.sort(
+        ()=>Math.random()-0.5
+    );
+
+    words.forEach(word=>{
+
+        const button=
+            document.createElement("button");
+
+        button.className="word";
+
+        button.innerText=word;
+
+        button.onclick=()=>{
+
+            selectWord(button,word);
+
+        };
+
+        grid.appendChild(button);
+
+    });
+
+}
+
+
+/* ===================================
+   انتخاب واژه
+=================================== */
+
+function selectWord(button,word){
+
+    const level=levels[current];
+
+    const buttons=
+        document.querySelectorAll(".word");
+
+    if(word===level.target){
+
+        if(button.classList.contains("correct")){
+            return;
+        }
+
+        button.classList.add("correct");
+
+        score+=10;
+
+        correct++;
+
+        badges++;
+
+        document.getElementById("score")
+            .innerText=score;
+
+        document.getElementById("badges")
+            .innerText=badges;
+
+        document.getElementById("message")
+            .innerText=
+            "🎯 آفرین! واژه هدف را شکار کردی.";
+
+        document.getElementById("message")
+            .style.color="#dff6a8";
+
+        /*
+        در این نسخه برای جلوگیری از سخت شدن
+        بیش از حد بازی، با اولین واژه صحیح
+        مرحله تمام می‌شود.
+        */
+
+        buttons.forEach(b=>{
+            b.disabled=true;
+        });
+
+        document.getElementById("next")
+            .style.display="inline-block";
+
+    }
+
+    else{
+
+        button.classList.add("wrong");
+
+        energy--;
+
+        document.getElementById("energy")
+            .innerText=energy;
+
+        document.getElementById("message")
+            .innerText=
+            "🔎 این واژه نیست. دوباره دقت کن!";
+
+        document.getElementById("message")
+            .style.color="#ffb3a7";
+
+        setTimeout(()=>{
+
+            button.classList.remove("wrong");
+
+        },700);
+
+
+        if(energy<=0){
+
+            document.getElementById("message")
+                .innerText=
+                "🔦 انرژی جست‌وجو تمام شد، اما می‌توانی ادامه بدهی.";
+
+            energy=1;
+
+            document.getElementById("energy")
+                .innerText=energy;
+
+        }
+
+    }
+
+}
+
+
+/* ===================================
+   مرحله بعد
+=================================== */
+
+function nextStage(){
+
+    current++;
+
+    if(current>=levels.length){
+
+        finishGame();
+
+    }else{
+
+        loadLevel();
+
+    }
+
+}
+
+
+/* ===================================
+   پیشرفت
+=================================== */
+
+function updateProgress(){
+
+    const percent=
+        ((current+1)/levels.length)*100;
+
+    document.getElementById("progress")
+        .style.width=
+        percent+"%";
+
+}
+
+
+/* ===================================
+   پایان
+=================================== */
+
+function finishGame(){
+
+    document.getElementById("game")
+        .style.display="none";
+
+    document.getElementById("result")
+        .style.display="block";
+
+    document.getElementById("finalScore")
+        .innerText=score;
+
+    document.getElementById("finalCorrect")
+        .innerText=correct;
+
+    const percent=
+        Math.round(
+            correct/levels.length*100
+        );
+
+    document.getElementById("finalPercent")
+        .innerText=percent+"%";
+
+
+    let message="";
+
+    if(percent>=90){
+
+        message=
+        "🏆 استاد شکار واژه‌ها! فوق‌العاده عمل کردی.";
+
+    }
+
+    else if(percent>=75){
+
+        message=
+        "🌟 شکارچی حرفه‌ای! دقتت بسیار خوب است.";
+
+    }
+
+    else if(percent>=50){
+
+        message=
+        "🌿 شکارچی خوب! با تمرین بیشتر بهتر می‌شوی.";
+
+    }
+
+    else{
+
+        message=
+        "🔎 دوباره جنگل را جست‌وجو کن و مهارتت را بیشتر کن.";
+
+    }
+
+    document.getElementById("finalMessage")
+        .innerText=message;
+
+}
+
+
+/* ===================================
+   شروع دوباره
+=================================== */
+
+function restartGame(){
+
+    current=0;
+
+    score=0;
+
+    correct=0;
+
+    badges=0;
+
+    energy=5;
+
+    document.getElementById("score")
+        .innerText=0;
+
+    document.getElementById("badges")
+        .innerText=0;
+
+    document.getElementById("energy")
+        .innerText=5;
+
+    document.getElementById("game")
+        .style.display="block";
+
+    document.getElementById("result")
+        .style.display="none";
+
+    loadLevel();
+
+}
+
+
+/* شروع بازی */
+
+loadLevel();
+
+</script>
+
+</body>
+</html>
