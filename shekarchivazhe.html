@@ -2,274 +2,446 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>شکارچی واژه‌ها 2.2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>شکارچی واژه</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
-    min-height:100vh;
     font-family:Tahoma,Arial,sans-serif;
-    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+    color:#3f3025;
     background:
-        linear-gradient(rgba(9,43,28,.72),rgba(4,24,16,.94)),
-        radial-gradient(circle at top,#69a75e,#183d2b 65%,#061a11);
+        radial-gradient(circle at 15% 15%,#fff8df 0 8%,transparent 9%),
+        linear-gradient(135deg,#d7e8d2,#f4e4c4);
 }
 
-.container{
-    width:94%;
-    max-width:1050px;
+.game{
+    width:95%;
+    max-width:1100px;
     margin:20px auto;
 }
 
+/* ---------- عنوان ---------- */
+
 .header{
-    background:linear-gradient(135deg,#245337,#102f22);
-    border:3px solid #82ae68;
-    border-radius:30px;
-    padding:25px;
+    background:linear-gradient(135deg,#fffaf0,#f1dfbc);
+    border:3px solid #9b7951;
+    border-radius:25px;
+    padding:18px;
     text-align:center;
-    box-shadow:0 12px 30px rgba(0,0,0,.4);
+    box-shadow:0 8px 20px #0003;
 }
 
 .header h1{
     margin:0;
-    color:#e2f7ad;
     font-size:36px;
-    text-shadow:0 3px 7px #000;
+    color:#70451f;
 }
 
 .header p{
-    margin:10px 0 0;
-    color:#e8f5dc;
-    font-size:17px;
+    margin:8px 0 0;
+    font-size:16px;
 }
+
+/* ---------- اطلاعات ---------- */
 
 .stats{
     display:flex;
     justify-content:center;
     gap:12px;
     flex-wrap:wrap;
-    margin:18px 0;
+    margin:15px 0;
 }
 
 .stat{
-    min-width:145px;
-    padding:10px 20px;
+    background:#fff8e8;
+    border:2px solid #b9996d;
+    border-radius:16px;
+    padding:8px 20px;
+    min-width:140px;
     text-align:center;
-    border-radius:18px;
-    background:#173d2c;
-    border:2px solid #648e56;
-    box-shadow:0 6px 15px rgba(0,0,0,.3);
+    box-shadow:0 4px 10px #0002;
 }
 
 .stat strong{
     display:block;
-    margin-top:5px;
-    font-size:23px;
-    color:#e2f7ad;
+    font-size:22px;
+    color:#74461f;
 }
 
-.game{
-    background:rgba(12,47,31,.97);
-    border:3px solid #638f55;
-    border-radius:30px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 15px 35px rgba(0,0,0,.45);
-}
+/* ---------- دفتر ---------- */
 
-.level{
-    display:inline-block;
-    padding:8px 20px;
+.notebook{
+    position:relative;
+    background:#fffdf5;
+    border:5px solid #b89b72;
     border-radius:20px;
-    background:#315f40;
-    border:2px solid #86b66b;
-    color:#e7f8c9;
+    min-height:650px;
+    padding:35px 45px;
+    box-shadow:0 15px 35px #0004;
+    overflow:hidden;
+}
+
+/* خط دفتر */
+
+.notebook:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 38px,
+        #c8d9ed 39px,
+        transparent 40px
+      );
+    opacity:.6;
+    pointer-events:none;
+}
+
+.margin-line{
+    position:absolute;
+    right:70px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:#efaaa0;
+    opacity:.7;
+}
+
+.page{
+    position:relative;
+    z-index:2;
+}
+
+/* ---------- ورق خوردن ---------- */
+
+.page.turn{
+    animation:turnPage .7s ease;
+}
+
+@keyframes turnPage{
+    0%{
+        transform:rotateY(0deg);
+        opacity:1;
+    }
+    45%{
+        transform:rotateY(-75deg);
+        opacity:.2;
+    }
+    100%{
+        transform:rotateY(0deg);
+        opacity:1;
+    }
+}
+
+.chapter{
+    text-align:center;
+    color:#76502c;
     font-weight:bold;
+    font-size:18px;
 }
 
 .instruction{
-    font-size:23px;
+    text-align:center;
+    font-size:22px;
     font-weight:bold;
     line-height:2;
-    margin:20px auto;
-    max-width:850px;
+    margin:18px auto;
+    max-width:800px;
 }
 
-.story{
-    max-width:850px;
-    margin:auto;
-    padding:15px;
-    line-height:2;
-    background:rgba(69,106,60,.5);
-    border:1px solid #709660;
+/* ---------- ساعت شنی ---------- */
+
+.timer-area{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    margin:10px;
+}
+
+.timer-number{
+    font-size:25px;
+    font-weight:bold;
+    color:#76502c;
+}
+
+.hourglass{
+    width:58px;
+    height:76px;
+    position:relative;
+}
+
+.glass{
+    position:absolute;
+    width:58px;
+    height:76px;
+    border:4px solid #76502c;
+    border-radius:8px;
+    overflow:hidden;
+    background:#fff;
+    clip-path:polygon(
+        0 0,100% 0,100% 10%,
+        58% 45%,100% 90%,100% 100%,
+        0 100%,0 90%,42% 45%,0 10%
+    );
+}
+
+.sand-top{
+    position:absolute;
+    top:6px;
+    left:8px;
+    right:8px;
+    height:29px;
+    background:#d69a45;
+    border-radius:3px;
+    transition:.4s;
+}
+
+.sand-bottom{
+    position:absolute;
+    bottom:6px;
+    left:8px;
+    right:8px;
+    height:0;
+    background:#d69a45;
+    border-radius:50%;
+    transition:.4s;
+}
+
+.sand-stream{
+    position:absolute;
+    top:35px;
+    left:27px;
+    width:4px;
+    height:25px;
+    background:#d69a45;
+    transition:.4s;
+}
+
+.hourglass.warning .sand-top,
+.hourglass.warning .sand-bottom,
+.hourglass.warning .sand-stream{
+    background:#df4d42;
+}
+
+.hourglass.warning{
+    animation:shake .5s infinite;
+}
+
+@keyframes shake{
+    0%,100%{transform:rotate(0)}
+    25%{transform:rotate(-3deg)}
+    75%{transform:rotate(3deg)}
+}
+
+/* ---------- تصویر ---------- */
+
+.picture{
+    text-align:center;
+    font-size:90px;
+    margin:5px;
+}
+
+/* ---------- سؤال ---------- */
+
+.question-box{
+    background:rgba(255,255,255,.68);
+    border:2px dashed #aa8b60;
     border-radius:20px;
-}
-
-.image-box{
-    font-size:75px;
-    margin:15px;
-    filter:drop-shadow(0 5px 3px rgba(0,0,0,.5));
-}
-
-.target-box{
-    max-width:650px;
-    margin:15px auto 25px;
-    padding:18px;
-    border-radius:25px;
-    background:#102d20;
-    border:3px solid #8cba68;
-}
-
-.target-title{
-    color:#cce99d;
-    font-size:16px;
+    padding:20px;
+    max-width:850px;
+    margin:10px auto 20px;
 }
 
 .target{
-    margin-top:8px;
-    font-size:38px;
+    text-align:center;
+    font-size:29px;
     font-weight:bold;
-    color:#fff2aa;
+    color:#74461f;
+    margin:10px;
 }
 
-.word-grid{
+.blank{
+    display:inline-block;
+    min-width:150px;
+    border-bottom:4px solid #74461f;
+    margin:0 8px;
+    color:#327050;
+}
+
+/* ---------- گزینه‌ها ---------- */
+
+.options{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:16px;
+    gap:15px;
     max-width:800px;
     margin:20px auto;
 }
 
-.word{
-    min-height:75px;
-    padding:15px;
-    border-radius:20px;
-    border:2px solid #6c9c5c;
-    background:#29583c;
-    color:#fff;
+.option{
+    border:3px solid #b08d62;
+    background:#fff8e8;
+    color:#513a26;
+    border-radius:18px;
+    min-height:70px;
+    padding:12px;
     font-family:Tahoma;
-    font-size:21px;
+    font-size:20px;
     font-weight:bold;
     cursor:pointer;
-    box-shadow:0 5px 0 #173526;
+    box-shadow:0 5px 0 #9b7951;
     transition:.2s;
 }
 
-.word:hover{
+.option:hover{
     transform:translateY(-4px);
-    background:#39724b;
+    background:#fff1ce;
 }
 
-.word.correct{
-    background:#3d874b;
-    border-color:#bce990;
-    box-shadow:0 5px 0 #245d31;
+.option.correct{
+    background:#bfe4b8;
+    border-color:#4d9852;
+    box-shadow:0 5px 0 #39753d;
 }
 
-.word.wrong{
-    background:#873f3f;
-    border-color:#ed9988;
-    box-shadow:0 5px 0 #5a2929;
+.option.wrong{
+    background:#f2b5aa;
+    border-color:#c94d42;
+    box-shadow:0 5px 0 #96372f;
 }
 
-.word:disabled{
-    cursor:default;
+/* ---------- جورچین ---------- */
+
+.puzzle{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:20px;
 }
+
+.letter{
+    width:58px;
+    height:58px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:3px solid #b08d62;
+    border-radius:14px;
+    background:#fff6d9;
+    font-size:25px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 4px 0 #9b7951;
+}
+
+.letter.selected{
+    background:#d4e9c7;
+    transform:translateY(-5px);
+}
+
+/* ---------- پیام ---------- */
 
 .message{
-    min-height:48px;
-    margin:15px;
-    font-size:20px;
+    min-height:45px;
+    text-align:center;
+    font-size:19px;
     font-weight:bold;
 }
 
+/* ---------- دکمه ---------- */
+
 .next{
     display:none;
-    border:2px solid #b8dd84;
-    background:#4e7d43;
-    color:#fff;
-    padding:14px 30px;
+    margin:10px auto;
+    border:0;
+    background:#5d8750;
+    color:white;
+    padding:14px 35px;
     border-radius:18px;
     font-family:Tahoma;
     font-size:18px;
     cursor:pointer;
-    box-shadow:0 5px 0 #2d5228;
+    box-shadow:0 5px 0 #3c5e35;
 }
 
 .next:hover{
-    background:#639b50;
+    background:#719f61;
 }
 
-.progress-title{
-    margin-top:25px;
-    color:#d9efbd;
-}
+/* ---------- پیشرفت ---------- */
 
 .progress{
-    height:14px;
-    margin-top:7px;
-    background:#0b2418;
-    border-radius:20px;
-    overflow:hidden;
-    border:1px solid #537748;
+    margin-top:20px;
 }
 
 .progress-bar{
+    height:13px;
     width:0;
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        #6e9f55,
-        #b7d979,
-        #e3f7a4
-    );
+    background:linear-gradient(90deg,#6e9d5e,#e0b65d);
+    border-radius:20px;
     transition:.5s;
 }
+
+/* ---------- پایان ---------- */
 
 .result{
     display:none;
     text-align:center;
-    background:#143c29;
-    border:3px solid #7eaa63;
-    border-radius:30px;
+    background:#fffaf0;
+    border:4px solid #a48259;
+    border-radius:25px;
     padding:35px;
-    box-shadow:0 15px 35px rgba(0,0,0,.45);
+    box-shadow:0 12px 30px #0004;
 }
 
 .result h2{
-    color:#e2f7ad;
+    color:#70451f;
+    font-size:30px;
 }
 
 .final-score{
     font-size:55px;
+    color:#a36b28;
     font-weight:bold;
-    color:#fff1a7;
-    margin:15px;
 }
 
 .restart{
-    border:2px solid #afd57d;
-    background:#4d7c42;
-    color:#fff;
+    border:0;
+    background:#5d8750;
+    color:white;
     padding:15px 30px;
-    border-radius:18px;
+    border-radius:16px;
     font-family:Tahoma;
     font-size:18px;
     cursor:pointer;
 }
 
+/* ---------- موبایل ---------- */
+
 @media(max-width:650px){
+
+    .notebook{
+        padding:25px 20px;
+    }
+
+    .margin-line{
+        right:35px;
+    }
 
     .header h1{
         font-size:28px;
     }
 
-    .word-grid{
+    .options{
         grid-template-columns:1fr;
     }
 
@@ -277,29 +449,21 @@ body{
         font-size:19px;
     }
 
-    .word{
-        font-size:18px;
-    }
-
-    .target{
-        font-size:31px;
+    .picture{
+        font-size:70px;
     }
 }
 </style>
 </head>
 
+
 <body>
 
-<div class="container">
+<div class="game">
 
 <div class="header">
-
-<h1>🌳🔎 شکارچی واژه‌ها ۲.۲</h1>
-
-<p>
-واژه هدف را پیدا کن، مهارتت را تقویت کن و به یک شکارچی حرفه‌ای تبدیل شو!
-</p>
-
+    <h1>📒 شکارچی واژه</h1>
+    <p>دفتر اسرارآمیز واژه‌ها را باز کن و مأموریت‌ها را کامل کن!</p>
 </div>
 
 
@@ -311,54 +475,76 @@ body{
 </div>
 
 <div class="stat">
-🏅 نشان شکارچی
+🏅 نشان
 <strong id="badges">0</strong>
 </div>
 
 <div class="stat">
-🔦 انرژی
-<strong id="energy">5</strong>
-</div>
-
-<div class="stat">
-🗺️ مرحله
+📖 صفحه
 <strong id="stage">1</strong>
 </div>
 
+<div class="stat">
+🎯 درست
+<strong id="correct">0</strong>
+</div>
+
 </div>
 
 
-<div class="game" id="game">
+<div class="notebook">
 
-<div class="level" id="level"></div>
+<div class="margin-line"></div>
+
+<div class="page" id="page">
+
+<div class="chapter" id="chapter">
+مأموریت اول
+</div>
+
+<div class="timer-area">
+
+<div class="hourglass" id="hourglass">
+
+<div class="glass"></div>
+
+<div class="sand-top" id="sandTop"></div>
+
+<div class="sand-stream" id="sandStream"></div>
+
+<div class="sand-bottom" id="sandBottom"></div>
+
+</div>
+
+<div class="timer-number">
+<span id="timer">30</span> ثانیه
+</div>
+
+</div>
+
 
 <div class="instruction" id="instruction"></div>
 
-<div class="story" id="story"></div>
+<div class="picture" id="picture"></div>
 
-<div class="image-box" id="image"></div>
+<div class="question-box">
 
-<div class="target-box">
-
-<div class="target-title">
-🎯 واژه هدف
-</div>
+<div id="question"></div>
 
 <div class="target" id="target"></div>
 
 </div>
 
-<div class="word-grid" id="wordGrid"></div>
+<div id="puzzleArea"></div>
+
+<div class="options" id="options"></div>
 
 <div class="message" id="message"></div>
 
-<button class="next" id="next" onclick="nextStage()">
-🌿 ادامه شکار
+<button class="next" id="next" onclick="nextQuestion()">
+📖 ورق بعدی
 </button>
 
-<div class="progress-title">
-🗺️ مسیر شکارچی
-</div>
 
 <div class="progress">
 
@@ -368,25 +554,25 @@ body{
 
 </div>
 
+</div>
+
 
 <div class="result" id="result">
 
-<h2>🏆 مأموریت کامل شد!</h2>
+<h2>🏆 دفتر واژه‌ها کامل شد!</h2>
 
-<p>
-تو تمام ۲۵ مرحله جنگل واژه‌ها را پشت سر گذاشتی.
-</p>
+<p>تو با موفقیت تمام مأموریت‌های شکارچی واژه را انجام دادی.</p>
 
 <div class="final-score" id="finalScore">0</div>
 
 <p>
-🔎 پاسخ‌های درست:
+پاسخ‌های درست:
 <strong id="finalCorrect">0</strong>
-از ۲۵
+از ۲۰
 </p>
 
 <p>
-📊 درصد موفقیت:
+درصد موفقیت:
 <strong id="finalPercent">0%</strong>
 </p>
 
@@ -403,479 +589,543 @@ body{
 
 <script>
 
-/* ==========================================
-   ۲۵ مرحله
-========================================== */
+/* =================================================
+   اطلاعات بازی
+================================================= */
 
-const levels = [
+const questions=[
+
+/* ---------- مأموریت ۱ ---------- */
 
 {
-type:"مرحله ۱ | آسان",
-instruction:"واژه‌ای را پیدا کن که دقیقاً با واژه هدف یکسان است.",
-story:"🌱 اولین مأموریت ساده است. با دقت نگاه کن و واژه هدف را پیدا کن.",
-image:"🌳",
-target:"مداد",
-options:["مداد","مدرسه","مدادک","مداد"],
+type:"تصویر",
+chapter:"مأموریت ۱ | کارآگاه تصویر",
+instruction:"به تصویر نگاه کن و واژه مناسب را پیدا کن.",
+picture:"✏️",
+question:"این تصویر کدام واژه را نشان می‌دهد؟",
+options:["مداد","کتاب","دفتر","پاک‌کن"],
 answer:"مداد"
 },
 
 {
-type:"مرحله ۲ | آسان",
-instruction:"واژه هدف را از میان سه واژه نزدیک پیدا کن.",
-story:"🍎 واژه‌ها روی برگ‌های جنگل پخش شده‌اند.",
-image:"🍎",
-target:"سیب",
-options:["سیر","سیب","سبد","سیبک"],
-answer:"سیب"
-},
-
-{
-type:"مرحله ۳ | آسان",
-instruction:"واژه هدف را پیدا کن.",
-story:"🐰 خرگوش جنگل یک واژه را پنهان کرده است.",
-image:"🐰",
-target:"خرگوش",
-options:["خرگوش","خرگوشک","خرگوشی","خرگوشان"],
-answer:"خرگوش"
-},
-
-{
-type:"مرحله ۴ | آسان",
-instruction:"واژه درست را شکار کن.",
-story:"📚 وارد کتابخانه جنگل شده‌ای.",
-image:"📚",
-target:"کتاب",
-options:["کتاب","کتابک","کتابه","کباب"],
+type:"تصویر",
+chapter:"مأموریت ۱ | کارآگاه تصویر",
+instruction:"به تصویر نگاه کن.",
+picture:"📚",
+question:"کدام واژه با تصویر ارتباط دارد؟",
+options:["کتاب","مداد","کیف","میز"],
 answer:"کتاب"
 },
 
 {
-type:"مرحله ۵ | آسان",
-instruction:"واژه هدف را پیدا کن.",
-story:"🌸 گل‌های جنگل چهار واژه را روی برگ‌های خود دارند.",
-image:"🌸",
-target:"گل",
-options:["گل","گِل","گلاب","گلدان"],
-answer:"گل"
-},
-
-{
-type:"مرحله ۶ | متوسط",
-instruction:"واژه هدف را از میان واژه‌های شبیه پیدا کن.",
-story:"🔎 حالا تفاوت‌ها کمی ظریف‌تر شده‌اند.",
-image:"🔍",
-target:"باران",
-options:["باران","بهاران","بارون","بار"],
-answer:"باران"
-},
-
-{
-type:"مرحله ۷ | متوسط",
-instruction:"واژه هدف را پیدا کن.",
-story:"🌧️ قطره‌های باران واژه‌ها را روی زمین پخش کرده‌اند.",
-image:"🌧️",
-target:"ابر",
-options:["ابر","ابرو","آبر","ابرک"],
-answer:"ابر"
-},
-
-{
-type:"مرحله ۸ | متوسط",
-instruction:"واژه درست را پیدا کن.",
-story:"🐦 پرنده‌ها روی شاخه‌ها منتظر پاسخ تو هستند.",
-image:"🐦",
-target:"پرنده",
-options:["پرنده","پرواز","پرنده‌","پرچم"],
-answer:"پرنده"
-},
-
-{
-type:"مرحله ۹ | متوسط",
-instruction:"واژه هدف را شکار کن.",
-story:"🌲 بین درختان واژه‌های مشابه پنهان شده‌اند.",
-image:"🌲",
-target:"درخت",
-options:["درخت","درد","در","درختک"],
+type:"تصویر",
+chapter:"مأموریت ۱ | کارآگاه تصویر",
+instruction:"واژه مناسب تصویر را شکار کن.",
+picture:"🌳",
+question:"این تصویر چیست؟",
+options:["درخت","گل","جنگل","برگ"],
 answer:"درخت"
 },
 
 {
-type:"مرحله ۱۰ | متوسط",
-instruction:"واژه هدف را پیدا کن.",
-story:"🦋 پروانه‌ها چهار واژه روی برگ‌ها نوشته‌اند.",
-image:"🦋",
-target:"پروانه",
-options:["پروانه","پرنده","پروانه‌وار","پرویز"],
-answer:"پروانه"
+type:"تصویر",
+chapter:"مأموریت ۱ | کارآگاه تصویر",
+instruction:"با دقت تصویر را بررسی کن.",
+picture:"🐟",
+question:"کدام واژه درست است؟",
+options:["ماهی","پرنده","خرگوش","اسب"],
+answer:"ماهی"
+},
+
+/* ---------- مأموریت ۲ ---------- */
+
+{
+type:"جورچین",
+chapter:"مأموریت ۲ | دفتر به‌هم‌ریخته",
+instruction:"حروف واژه به‌هم ریخته‌اند. واژه درست را پیدا کن.",
+picture:"🍎",
+question:"کدام گزینه واژه درست را می‌سازد؟",
+target:"س ـ ی ـ ب",
+options:["سیب","سبی","سیبک","سب"],
+answer:"سیب"
 },
 
 {
-type:"مرحله ۱۱ | سخت",
-instruction:"واژه هدف را با دقت زیاد پیدا کن.",
-story:"🌙 هوا تاریک شده است؛ تمرکزت را بیشتر کن.",
-image:"🌙",
-target:"ماه",
-options:["ماه","ماهک","ماد","مهر"],
-answer:"ماه"
+type:"جورچین",
+chapter:"مأموریت ۲ | دفتر به‌هم‌ریخته",
+instruction:"حروف را در ذهنت مرتب کن.",
+picture:"🌸",
+question:"واژه درست کدام است؟",
+target:"گ ـ ل",
+options:["گل","گِل","گال","گول"],
+answer:"گل"
 },
 
 {
-type:"مرحله ۱۲ | سخت",
-instruction:"واژه هدف را پیدا کن.",
-story:"⭐ ستاره‌ها چهار واژه شبیه به هم ساخته‌اند.",
-image:"⭐",
-target:"ستاره",
-options:["ستاره","ستاره‌وار","ستون","ستاره‌گون"],
-answer:"ستاره"
+type:"جورچین",
+chapter:"مأموریت ۲ | دفتر به‌هم‌ریخته",
+instruction:"جورچین واژه را حل کن.",
+picture:"🐰",
+question:"واژه درست کدام است؟",
+target:"خ ـ ر ـ گ ـ و ـ ش",
+options:["خرگوش","خرگوشک","گرگوش","خرگوشی"],
+answer:"خرگوش"
 },
 
 {
-type:"مرحله ۱۳ | سخت",
-instruction:"واژه هدف را پیدا کن.",
-story:"🌊 صدای رودخانه حواس شکارچی را پرت می‌کند.",
-image:"🌊",
-target:"رود",
-options:["رود","رودخانه","روز","رودک"],
-answer:"رود"
+type:"جورچین",
+chapter:"مأموریت ۲ | دفتر به‌هم‌ریخته",
+instruction:"حروف را مرتب کن و پاسخ را پیدا کن.",
+picture:"🌧️",
+question:"کدام واژه درست است؟",
+target:"ب ـ ا ـ ر ـ ا ـ ن",
+options:["باران","بهاران","بارون","بار"],
+answer:"باران"
+},
+
+/* ---------- مأموریت ۳ ---------- */
+
+{
+type:"جای خالی",
+chapter:"مأموریت ۳ | جای خالی",
+instruction:"جای خالی را با واژه مناسب کامل کن.",
+picture:"🌳",
+question:"در حیاط مدرسه یک ______ بزرگ وجود دارد.",
+target:"درخت",
+options:["درخت","درد","دریا","در"],
+answer:"درخت"
 },
 
 {
-type:"مرحله ۱۴ | سخت",
-instruction:"واژه هدف را پیدا کن.",
-story:"🍃 برگ‌ها روی واژه‌ها افتاده‌اند. با دقت نگاه کن.",
-image:"🍃",
-target:"برگ",
-options:["برگ","برف","برگچه","بر"],
-answer:"برگ"
+type:"جای خالی",
+chapter:"مأموریت ۳ | جای خالی",
+instruction:"واژه مناسب را انتخاب کن.",
+picture:"☔",
+question:"امروز ______ می‌بارد.",
+target:"باران",
+options:["باران","بارانک","ابر","باد"],
+answer:"باران"
 },
 
 {
-type:"مرحله ۱۵ | سخت",
-instruction:"واژه هدف را شکار کن.",
-story:"🐿️ سنجاب چند واژه را در میان درختان پنهان کرده است.",
-image:"🐿️",
-target:"سنجاب",
-options:["سنجاب","سنگ","سنجاق","سنج"],
-answer:"سنجاب"
+type:"جای خالی",
+chapter:"مأموریت ۳ | جای خالی",
+instruction:"جمله را کامل کن.",
+picture:"📖",
+question:"من هر شب یک ______ می‌خوانم.",
+target:"کتاب",
+options:["کتاب","کباب","کتابی","کتابچه"],
+answer:"کتاب"
 },
 
 {
-type:"مرحله ۱۶ | چالش",
-instruction:"واژه هدف را در میان واژه‌های بسیار نزدیک پیدا کن.",
-story:"🌲 وارد قسمت چالش جنگل شده‌ای.",
-image:"🌲",
-target:"جنگل",
-options:["جنگل","جنگ","جنگلی","جنگجو"],
-answer:"جنگل"
+type:"جای خالی",
+chapter:"مأموریت ۳ | جای خالی",
+instruction:"واژه مناسب را شکار کن.",
+picture:"🐦",
+question:"یک ______ روی شاخه نشست.",
+target:"پرنده",
+options:["پرنده","پرواز","پرچم","پروانه"],
+answer:"پرنده"
 },
 
-{
-type:"مرحله ۱۷ | چالش",
-instruction:"واژه هدف را پیدا کن.",
-story:"🦊 روباه جنگل این بار مأموریت سخت‌تری برایت آماده کرده است.",
-image:"🦊",
-target:"روباه",
-options:["روباه","رود","روستا","روباهی"],
-answer:"روباه"
-},
+/* ---------- مأموریت ۴ ---------- */
 
 {
-type:"مرحله ۱۸ | چالش",
-instruction:"واژه هدف را پیدا کن.",
-story:"🌿 در این مرحله باید به پایان دقیق واژه توجه کنی.",
-image:"🌿",
-target:"سبزه",
-options:["سبز","سبزه","سبزی","سبزه‌زار"],
-answer:"سبزه"
-},
-
-{
-type:"مرحله ۱۹ | چالش",
-instruction:"واژه هدف را شکار کن.",
-story:"🦌 حیوانات جنگل تو را به چالش کشیده‌اند.",
-image:"🦌",
-target:"آهو",
-options:["آهو","آب","آهن","آهوچه"],
-answer:"آهو"
-},
-
-{
-type:"مرحله ۲۰ | چالش",
-instruction:"واژه هدف را پیدا کن.",
-story:"🏞️ به بخش کوهستانی جنگل رسیده‌ای.",
-image:"🏞️",
-target:"کوه",
-options:["کوه","کود","کور","کوهستان"],
-answer:"کوه"
-},
-
-{
-type:"مرحله ۲۱ | خیلی سخت",
-instruction:"واژه هدف را از میان واژه‌های بسیار شبیه پیدا کن.",
-story:"🌫️ مه جنگل زیاد شده است. چشم‌های شکارچی را تیز کن.",
-image:"🌫️",
-target:"مهتاب",
-options:["مهتاب","مه","مهتابی","مهتاب‌وار"],
-answer:"مهتاب"
-},
-
-{
-type:"مرحله ۲۲ | خیلی سخت",
-instruction:"واژه هدف را پیدا کن.",
-story:"🦉 جغد جنگل تو را به بخش پایانی مأموریت راهنمایی می‌کند.",
-image:"🦉",
-target:"دانش",
-options:["دانش","دانشمند","دانشگاه","دان"],
-answer:"دانش"
-},
-
-{
-type:"مرحله ۲۳ | خیلی سخت",
-instruction:"واژه هدف را پیدا کن.",
-story:"📖 اکنون واژه‌های مربوط به یادگیری وارد بازی شده‌اند.",
-image:"📖",
+type:"تشخیص واژه",
+chapter:"مأموریت ۴ | شکار اشتباه",
+instruction:"واژه درست را با دقت از میان واژه‌های مشابه پیدا کن.",
+picture:"🔎",
+question:"کدام واژه دقیقاً «یادگیری» است؟",
 target:"یادگیری",
 options:["یادگیری","یادگار","یادداشت","یادگیر"],
 answer:"یادگیری"
 },
 
 {
-type:"مرحله ۲۴ | خیلی سخت",
-instruction:"واژه هدف را پیدا کن.",
-story:"🧠 تقریباً به پایان رسیده‌ای. تمرکز کامل داشته باش.",
-image:"🧠",
+type:"تشخیص واژه",
+chapter:"مأموریت ۴ | شکار اشتباه",
+instruction:"به ساختار واژه دقت کن.",
+picture:"🧠",
+question:"کدام واژه دقیقاً «تمرکز» است؟",
 target:"تمرکز",
 options:["تمرکز","تمرین","تکلیف","تمرکزگر"],
 answer:"تمرکز"
 },
 
 {
-type:"مرحله ۲۵ | نهایی",
-instruction:"🏆 آخرین مأموریت! واژه هدف را پیدا کن.",
-story:"دروازه طلایی جنگل باز شده است. اگر درست انتخاب کنی، استاد شکار واژه‌ها می‌شوی!",
-image:"🏆",
+type:"تشخیص واژه",
+chapter:"مأموریت ۴ | شکار اشتباه",
+instruction:"فقط واژه هدف را انتخاب کن.",
+picture:"🌙",
+question:"کدام واژه دقیقاً «ماهتاب» نیست، بلکه واژه هدف «مهتاب» است؟",
+target:"مهتاب",
+options:["مهتاب","ماهتاب","مهتابی","مه"],
+answer:"مهتاب"
+},
+
+{
+type:"تشخیص واژه",
+chapter:"مأموریت ۴ | شکار اشتباه",
+instruction:"چشم شکارچی را تیز کن.",
+picture:"🌿",
+question:"کدام واژه دقیقاً «سبزه» است؟",
+target:"سبزه",
+options:["سبزه","سبز","سبزی","سبزه‌زار"],
+answer:"سبزه"
+},
+
+/* ---------- مأموریت ۵ ---------- */
+
+{
+type:"ترکیبی",
+chapter:"مأموریت ۵ | آزمون نهایی",
+instruction:"آخرین مأموریت این صفحه را حل کن.",
+picture:"🦋",
+question:"پروانه روی گل نشست. واژه مناسب کدام است؟",
+target:"پروانه",
+options:["پروانه","پرنده","پروانه‌وار","پرویز"],
+answer:"پروانه"
+},
+
+{
+type:"ترکیبی",
+chapter:"مأموریت ۵ | آزمون نهایی",
+instruction:"تصویر و جمله را با هم بررسی کن.",
+picture:"🏫",
+question:"دانش‌آموزان وارد ______ شدند.",
+target:"مدرسه",
+options:["مدرسه","مدرس","مداد","مسجد"],
+answer:"مدرسه"
+},
+
+{
+type:"ترکیبی",
+chapter:"مأموریت ۵ | آزمون نهایی",
+instruction:"به تصویر و واژه‌ها دقت کن.",
+picture:"🏞️",
+question:"در دوردست یک ______ بلند دیده می‌شود.",
+target:"کوه",
+options:["کوه","کود","کور","کوهستان"],
+answer:"کوه"
+},
+
+{
+type:"ترکیبی",
+chapter:"مأموریت ۵ | آزمون نهایی",
+instruction:"آخرین واژه را شکار کن!",
+picture:"🏆",
+question:"دانش‌آموزی که واژه‌ها را پیدا می‌کند یک ______ است.",
 target:"شکارچی",
-options:["شکارچی","شکار","شکارگاه","شکاری"],
+options:["شکارچی","شکار","شکاری","شکارگاه"],
 answer:"شکارچی"
 }
 
 ];
 
 
-/* ==========================================
+/* =================================================
    متغیرها
-========================================== */
+================================================= */
 
 let current=0;
 let score=0;
 let correct=0;
 let badges=0;
-let energy=5;
+let time=30;
+let timerInterval=null;
+let answered=false;
 
 
-/* ==========================================
-   نمایش مرحله
-========================================== */
+/* =================================================
+   بارگذاری سؤال
+================================================= */
 
-function loadLevel(){
+function loadQuestion(){
 
-    const level=levels[current];
+    clearInterval(timerInterval);
 
-    document.getElementById("stage").innerText=
-        current+1;
+    answered=false;
+    time=30;
 
-    document.getElementById("level").innerText=
-        level.type;
+    const q=questions[current];
+
+    document.getElementById("stage").innerText=current+1;
+
+    document.getElementById("chapter").innerText=q.chapter;
 
     document.getElementById("instruction").innerText=
-        level.instruction;
+        q.instruction;
 
-    document.getElementById("story").innerText=
-        level.story;
+    document.getElementById("picture").innerText=
+        q.picture;
 
-    document.getElementById("image").innerText=
-        level.image;
+    document.getElementById("question").innerText=
+        q.question;
 
     document.getElementById("target").innerText=
-        level.target;
+        q.target ? "🎯 واژه هدف: "+q.target : "";
 
     document.getElementById("message").innerText="";
 
-    document.getElementById("next").style.display=
-        "none";
+    document.getElementById("next").style.display="none";
 
-    createOptions(level);
+    document.getElementById("timer").innerText="30";
+
+    document.getElementById("hourglass")
+        .classList.remove("warning");
+
+    document.getElementById("sandTop").style.height="29px";
+
+    document.getElementById("sandBottom").style.height="0";
+
+    createOptions(q);
 
     updateProgress();
+
+    startTimer();
+
 }
 
 
-/* ==========================================
-   ساخت چهار گزینه
-========================================== */
+/* =================================================
+   ساخت گزینه‌ها
+================================================= */
 
-function createOptions(level){
+function createOptions(q){
 
-    const grid=
-        document.getElementById("wordGrid");
+    const area=document.getElementById("options");
 
-    grid.innerHTML="";
+    area.innerHTML="";
 
-    /*
-       دقیقاً چهار گزینه
-       و بدون تکرار
-    */
+    let options=[...q.options];
 
-    let options=[...level.options];
+    options.sort(()=>Math.random()-0.5);
 
-    options.sort(
-        ()=>Math.random()-0.5
-    );
+    options.forEach(text=>{
 
-    options.forEach(option=>{
+        const button=document.createElement("button");
 
-        const button=
-            document.createElement("button");
+        button.className="option";
 
-        button.className="word";
+        button.innerText=text;
 
-        button.innerText=option;
+        button.onclick=()=>checkAnswer(button,text);
 
-        button.onclick=function(){
-
-            checkAnswer(button,option);
-
-        };
-
-        grid.appendChild(button);
+        area.appendChild(button);
 
     });
+
 }
 
 
-/* ==========================================
-   بررسی پاسخ
-========================================== */
+/* =================================================
+   تایمر
+================================================= */
 
-function checkAnswer(button,answer){
+function startTimer(){
 
-    const level=levels[current];
+    timerInterval=setInterval(()=>{
 
-    const buttons=
-        document.querySelectorAll(".word");
+        time--;
+
+        document.getElementById("timer").innerText=time;
+
+        const top=
+            Math.max(0,(time/30)*29);
+
+        const bottom=
+            Math.min(29,((30-time)/30)*29);
+
+        document.getElementById("sandTop").style.height=
+            top+"px";
+
+        document.getElementById("sandBottom").style.height=
+            bottom+"px";
 
 
-    /* پاسخ صحیح */
+        if(time<=10){
 
-    if(answer===level.answer){
+            document.getElementById("hourglass")
+                .classList.add("warning");
 
-        if(button.classList.contains("correct")){
-            return;
         }
+
+
+        if(time<=0){
+
+            clearInterval(timerInterval);
+
+            if(!answered){
+
+                answered=true;
+
+                document.getElementById("message").innerText=
+                    "⏰ زمان تمام شد! پاسخ درست را ببین و برای صفحه بعد آماده شو.";
+
+                document.getElementById("message").style.color=
+                    "#bd4b3e";
+
+                showCorrect();
+
+                document.getElementById("next").style.display=
+                    "block";
+
+            }
+
+        }
+
+    },1000);
+
+}
+
+
+/* =================================================
+   بررسی پاسخ
+================================================= */
+
+function checkAnswer(button,text){
+
+    if(answered) return;
+
+    const q=questions[current];
+
+    if(text===q.answer){
+
+        answered=true;
+
+        clearInterval(timerInterval);
 
         button.classList.add("correct");
 
-        buttons.forEach(b=>{
-            b.disabled=true;
-        });
+        score+=10+(time);
 
-        score+=10;
         correct++;
+
         badges++;
 
         document.getElementById("score").innerText=
             score;
 
+        document.getElementById("correct").innerText=
+            correct;
+
         document.getElementById("badges").innerText=
             badges;
 
         document.getElementById("message").innerText=
-            "🎯 آفرین! واژه هدف را درست شکار کردی.";
+            "🎯 عالی! واژه را درست شکار کردی.";
 
         document.getElementById("message").style.color=
-            "#dff6a8";
+            "#438047";
+
+        disableOptions();
 
         document.getElementById("next").style.display=
-            "inline-block";
-
-    }
-
-
-    /* پاسخ غلط */
-
-    else{
-
-        if(button.classList.contains("wrong")){
-            return;
-        }
-
-        button.classList.add("wrong");
-
-        energy--;
-
-        document.getElementById("energy").innerText=
-            energy;
-
-        document.getElementById("message").innerText=
-            "🔎 این واژه هدف نیست. دوباره با دقت نگاه کن.";
-
-        document.getElementById("message").style.color=
-            "#ffb3a7";
-
-
-        setTimeout(()=>{
-
-            button.classList.remove("wrong");
-
-        },700);
-
-
-        if(energy<=0){
-
-            document.getElementById("message").innerText=
-                "🔦 انرژی کم شده، اما نگران نباش! می‌توانی ادامه بدهی.";
-
-            energy=1;
-
-            document.getElementById("energy").innerText=
-                energy;
-
-        }
-
-    }
-
-}
-
-
-/* ==========================================
-   مرحله بعد
-========================================== */
-
-function nextStage(){
-
-    current++;
-
-    if(current>=levels.length){
-
-        finishGame();
+            "block";
 
     }else{
 
-        loadLevel();
+        button.classList.add("wrong");
+
+        document.getElementById("message").innerText=
+            "🔎 این پاسخ درست نیست. دوباره با دقت نگاه کن.";
+
+        document.getElementById("message").style.color=
+            "#bd4b3e";
+
+        setTimeout(()=>{
+            button.classList.remove("wrong");
+        },700);
 
     }
 
 }
 
 
-/* ==========================================
-   نوار پیشرفت
-========================================== */
+/* =================================================
+   نمایش پاسخ صحیح در پایان زمان
+================================================= */
+
+function showCorrect(){
+
+    const q=questions[current];
+
+    document.querySelectorAll(".option")
+        .forEach(button=>{
+
+            if(button.innerText===q.answer){
+
+                button.classList.add("correct");
+
+            }
+
+            button.disabled=true;
+
+        });
+
+}
+
+
+/* =================================================
+   غیرفعال کردن گزینه‌ها
+================================================= */
+
+function disableOptions(){
+
+    document.querySelectorAll(".option")
+        .forEach(button=>{
+
+            button.disabled=true;
+
+        });
+
+}
+
+
+/* =================================================
+   صفحه بعد + انیمیشن ورق خوردن
+================================================= */
+
+function nextQuestion(){
+
+    clearInterval(timerInterval);
+
+    const page=document.getElementById("page");
+
+    page.classList.remove("turn");
+
+    void page.offsetWidth;
+
+    page.classList.add("turn");
+
+    setTimeout(()=>{
+
+        current++;
+
+        if(current>=questions.length){
+
+            finishGame();
+
+        }else{
+
+            loadQuestion();
+
+        }
+
+    },500);
+
+}
+
+
+/* =================================================
+   پیشرفت
+================================================= */
 
 function updateProgress(){
 
     const percent=
-        ((current+1)/levels.length)*100;
+        ((current+1)/questions.length)*100;
 
     document.getElementById("progress").style.width=
         percent+"%";
@@ -883,13 +1133,15 @@ function updateProgress(){
 }
 
 
-/* ==========================================
-   پایان بازی
-========================================== */
+/* =================================================
+   پایان
+================================================= */
 
 function finishGame(){
 
-    document.getElementById("game").style.display=
+    clearInterval(timerInterval);
+
+    document.querySelector(".notebook").style.display=
         "none";
 
     document.getElementById("result").style.display=
@@ -901,42 +1153,34 @@ function finishGame(){
     document.getElementById("finalCorrect").innerText=
         correct;
 
-    const percent=
-        Math.round(
-            correct/levels.length*100
-        );
+    const percent=Math.round(
+        (correct/questions.length)*100
+    );
 
     document.getElementById("finalPercent").innerText=
         percent+"%";
-
 
     let message="";
 
     if(percent>=90){
 
         message=
-        "🏆 استاد شکار واژه‌ها! دقت دیداری فوق‌العاده‌ای داری.";
+        "🏆 تو یک استاد واقعی شکار واژه هستی!";
 
-    }
-
-    else if(percent>=75){
+    }else if(percent>=75){
 
         message=
-        "🌟 شکارچی حرفه‌ای! خیلی خوب عمل کردی.";
+        "🌟 خیلی عالی بود! دقت واژه‌ای تو بسیار خوب است.";
 
-    }
-
-    else if(percent>=50){
+    }else if(percent>=50){
 
         message=
-        "🌿 شکارچی خوب! با تمرین بیشتر مهارتت قوی‌تر می‌شود.";
+        "👏 خوب بود! با کمی تمرین بیشتر حرفه‌ای می‌شوی.";
 
-    }
-
-    else{
+    }else{
 
         message=
-        "🔎 دوباره جنگل را جست‌وجو کن و این بار با دقت بیشتری واژه‌ها را بررسی کن.";
+        "📚 دوباره دفتر را باز کن و تمرین کن؛ موفق می‌شوی.";
 
     }
 
@@ -946,9 +1190,9 @@ function finishGame(){
 }
 
 
-/* ==========================================
+/* =================================================
    شروع دوباره
-========================================== */
+================================================= */
 
 function restartGame(){
 
@@ -956,30 +1200,27 @@ function restartGame(){
     score=0;
     correct=0;
     badges=0;
-    energy=5;
 
-    document.getElementById("score").innerText=
-        "0";
+    document.getElementById("score").innerText=0;
+    document.getElementById("correct").innerText=0;
+    document.getElementById("badges").innerText=0;
 
-    document.getElementById("badges").innerText=
-        "0";
-
-    document.getElementById("energy").innerText=
-        "5";
-
-    document.getElementById("game").style.display=
+    document.querySelector(".notebook").style.display=
         "block";
 
     document.getElementById("result").style.display=
         "none";
 
-    loadLevel();
+    loadQuestion();
+
 }
 
 
-/* شروع بازی */
+/* =================================================
+   شروع بازی
+================================================= */
 
-loadLevel();
+loadQuestion();
 
 </script>
 
