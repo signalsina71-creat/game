@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🍎 ماجراجویی در شهر خوراکی‌ها</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    user-select:none;
+}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 10% 10%,#fff7b2 0 7%,transparent 8%),
+        radial-gradient(circle at 90% 15%,#c9f5ff 0 8%,transparent 9%),
+        linear-gradient(135deg,#fff4d8,#dff7e7);
+    color:#354052;
+}
+
+.game{
+    max-width:1100px;
+    margin:auto;
+    padding:12px;
+}
+
+/* HEADER */
+
+.header{
+    background:white;
+    border-radius:25px;
+    padding:14px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 7px 20px rgba(0,0,0,.12);
+    margin-bottom:14px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    color:#ef7d32;
+}
+
+.stats{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.stat{
+    padding:8px 14px;
+    border-radius:20px;
+    background:#fff2bd;
+    font-weight:bold;
+}
+
+.xp{
+    background:#d8f4ff;
+}
+
+.combo{
+    background:#ffe0e0;
+}
+
+/* MAP */
+
+.map{
+    background:white;
+    border-radius:22px;
+    padding:14px;
+    margin-bottom:14px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.map-title{
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.stages{
+    display:flex;
+    gap:7px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.stage{
+    min-width:70px;
+    padding:8px 10px;
+    border-radius:18px;
+    text-align:center;
+    background:#eee;
+    color:#777;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.stage.active{
+    background:#ff9d45;
+    color:white;
+    transform:scale(1.08);
+}
+
+.stage.done{
+    background:#62c987;
+    color:white;
+}
+
+/* STORY */
+
+.story{
+    background:white;
+    border-radius:27px;
+    padding:15px 20px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,.1);
+    margin-bottom:14px;
+}
+
+.character{
+    font-size:72px;
+    min-width:90px;
+    text-align:center;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+}
+
+.speech{
+    flex:1;
+    background:#fff8df;
+    border:3px solid #ffd166;
+    border-radius:22px;
+    padding:13px 17px;
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* MISSION */
+
+.mission{
+    background:linear-gradient(135deg,#ff9664,#ffce6a);
+    color:white;
+    text-align:center;
+    border-radius:24px;
+    padding:15px;
+    margin-bottom:14px;
+}
+
+.mission h2{
+    margin:3px 0 8px;
+}
+
+.mission p{
+    margin:0;
+}
+
+/* TIMER */
+
+.timerBox{
+    background:white;
+    border-radius:20px;
+    padding:10px 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.timer{
+    flex:1;
+    height:17px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.timerFill{
+    height:100%;
+    width:100%;
+    background:#58c986;
+    transition:width 1s linear,background .3s;
+}
+
+.time{
+    min-width:35px;
+    text-align:center;
+    font-weight:bold;
+}
+
+/* GAME */
+
+.gamePanel{
+    background:white;
+    border-radius:30px;
+    padding:24px;
+    box-shadow:0 8px 25px rgba(0,0,0,.1);
+    min-height:400px;
+}
+
+.question{
+    text-align:center;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:22px;
+}
+
+/* FOOD CARDS */
+
+.foodGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.food{
+    background:white;
+    border:4px solid transparent;
+    border-radius:23px;
+    padding:14px 8px;
+    text-align:center;
+    cursor:pointer;
+    box-shadow:0 5px 12px rgba(0,0,0,.09);
+    transition:.2s;
+}
+
+.food:hover{
+    transform:translateY(-6px) scale(1.03);
+    border-color:#ffd166;
+}
+
+.foodIcon{
+    font-size:52px;
+}
+
+.foodName{
+    margin-top:7px;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.correct{
+    background:#e7ffe9 !important;
+    border-color:#55c96b !important;
+    animation:pop .45s;
+}
+
+.wrong{
+    background:#fff0f0 !important;
+    border-color:#ff7070 !important;
+    animation:shake .4s;
+}
+
+@keyframes pop{
+    50%{transform:scale(1.12)}
+}
+
+@keyframes shake{
+    25%{transform:translateX(-8px)}
+    50%{transform:translateX(8px)}
+    75%{transform:translateX(-8px)}
+}
+
+/* DROP ZONE */
+
+.dropZone{
+    margin-top:22px;
+    padding:20px;
+    background:#fff6d9;
+    border:4px dashed #e3a72d;
+    border-radius:24px;
+    text-align:center;
+    font-size:20px;
+}
+
+.dropZone.active{
+    background:#dcffd8;
+    border-color:#4caf50;
+}
+
+/* BUTTON */
+
+.buttons{
+    text-align:center;
+    margin-top:18px;
+}
+
+button{
+    border:none;
+    border-radius:24px;
+    padding:13px 27px;
+    background:#ff8b42;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    font-family:inherit;
+    box-shadow:0 4px 0 #d86b2b;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* FEEDBACK */
+
+.feedback{
+    min-height:48px;
+    text-align:center;
+    padding:10px;
+    font-size:19px;
+    font-weight:bold;
+}
+
+/* PROGRESS */
+
+.progressBox{
+    background:white;
+    border-radius:22px;
+    padding:15px;
+    margin-top:14px;
+}
+
+.progress{
+    height:18px;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progressFill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#66d78d,#4daee8);
+    transition:.5s;
+}
+
+.progressText{
+    text-align:center;
+    margin-top:8px;
+}
+
+/* BADGE */
+
+.badge{
+    display:none;
+    margin-top:15px;
+    padding:20px;
+    text-align:center;
+    background:linear-gradient(135deg,#fff1a5,#ffd166);
+    border-radius:25px;
+}
+
+.badgeIcon{
+    font-size:70px;
+}
+
+/* END */
+
+.endScreen{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(25,35,50,.75);
+    z-index:100;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.endCard{
+    width:min(600px,100%);
+    background:white;
+    border-radius:30px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 15px 50px rgba(0,0,0,.3);
+}
+
+.endEmoji{
+    font-size:85px;
+}
+
+.result{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:20px 0;
+}
+
+.result div{
+    background:#f4f4f4;
+    border-radius:18px;
+    padding:13px;
+    font-weight:bold;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:750px){
+
+    .header{
+        flex-direction:column;
+    }
+
+    .foodGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .story{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .stage{
+        min-width:55px;
+        font-size:11px;
+    }
+
+}
+
+@media(max-width:430px){
+
+    .gamePanel{
+        padding:14px;
+    }
+
+    .foodIcon{
+        font-size:43px;
+    }
+
+    .foodName{
+        font-size:13px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="logo">
+🍎 شهر خوراکی‌ها
+</div>
+
+<div class="stats">
+
+<div class="stat">
+⭐ امتیاز:
+<span id="score">0</span>
+</div>
+
+<div class="stat xp">
+✨ XP:
+<span id="xp">0</span>
+</div>
+
+<div class="stat combo">
+🔥 Combo:
+<span id="combo">0</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MAP -->
+
+<div class="map">
+
+<div class="map-title">
+🗺️ نقشه ماجراجویی
+</div>
+
+<div class="stages">
+
+<div class="stage active" id="s1">1 🍎</div>
+<div class="stage" id="s2">2 🧺</div>
+<div class="stage" id="s3">3 🥕</div>
+<div class="stage" id="s4">4 🍳</div>
+<div class="stage" id="s5">5 🎒</div>
+<div class="stage" id="s6">6 🥤</div>
+<div class="stage" id="s7">7 🌈</div>
+<div class="stage" id="s8">8 🔎</div>
+<div class="stage" id="s9">9 🧠</div>
+<div class="stage" id="s10">10 🏆</div>
+
+</div>
+
+</div>
+
+
+<!-- STORY -->
+
+<div class="story">
+
+<div class="character" id="character">
+🧒
+</div>
+
+<div class="speech" id="speech">
+سلام قهرمان! 👋
+من آرین هستم.
+امروز باید شهر خوراکی‌ها را نجات بدهیم!
+آماده‌ای؟
+</div>
+
+</div>
+
+
+<!-- MISSION -->
+
+<div class="mission">
+
+<h2 id="missionTitle">
+مرحله اول
+</h2>
+
+<p id="missionDescription">
+مأموریت خودت را شروع کن!
+</p>
+
+</div>
+
+
+<!-- TIMER -->
+
+<div class="timerBox">
+
+⏳
+
+<div class="timer">
+
+<div class="timerFill" id="timerFill"></div>
+
+</div>
+
+<div class="time">
+<span id="time">30</span>
+</div>
+
+</div>
+
+
+<!-- GAME -->
+
+<div class="gamePanel">
+
+<div class="question" id="question">
+سؤال
+</div>
+
+<div id="gameContent"></div>
+
+<div class="feedback" id="feedback"></div>
+
+<div class="buttons">
+
+<button id="nextButton">
+مرحله بعد 🚀
+</button>
+
+</div>
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div class="progressBox">
+
+<strong>
+📈 پیشرفت خودت
+</strong>
+
+<div class="progress">
+
+<div class="progressFill" id="progressFill"></div>
+
+</div>
+
+<div class="progressText" id="progressText">
+هنوز بازی را شروع نکرده‌ای.
+</div>
+
+</div>
+
+
+<!-- BADGE -->
+
+<div class="badge" id="badge">
+
+<div class="badgeIcon">
+🏅
+</div>
+
+<h2>
+قهرمان شهر خوراکی‌ها
+</h2>
+
+<p>
+تو توانستی تمام مأموریت‌ها را پشت سر بگذاری!
+</p>
+
+</div>
+
+</div>
+
+
+<!-- END SCREEN -->
+
+<div class="endScreen" id="endScreen">
+
+<div class="endCard">
+
+<div class="endEmoji">
+🥳
+</div>
+
+<h1>
+تبریک قهرمان!
+</h1>
+
+<p id="endMessage">
+تو تمام مراحل را پشت سر گذاشتی.
+</p>
+
+<div class="result">
+
+<div>
+⭐ امتیاز
+<br>
+<span id="finalScore">0</span>
+</div>
+
+<div>
+✨ XP
+<br>
+<span id="finalXP">0</span>
+</div>
+
+<div>
+🎯 دقت
+<br>
+<span id="finalAccuracy">0%</span>
+</div>
+
+</div>
+
+<button onclick="restartGame()">
+🔄 دوباره بازی کن
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+const levels=[
+
+{
+title:"🍎 مرحله ۱: بازار خوراکی‌ها",
+description:"خوراکی‌های مناسب را از بین گزینه‌ها پیدا کن.",
+question:"کدام خوراکی‌ها انتخاب بهتری هستند؟",
+emoji:"🧒",
+type:"click",
+items:[
+["🍎","سیب",true],
+["🍬","آبنبات",false],
+["🥦","بروکلی",true],
+["🥤","نوشابه",false],
+["🥕","هویج",true],
+["🍟","سیب‌زمینی سرخ‌شده",false],
+["🥛","شیر",true],
+["🍫","شکلات",false]
+]
+},
+
+{
+title:"🧺 مرحله ۲: سبد خرید",
+description:"خوراکی‌های مناسب را به داخل سبد بکش.",
+question:"خوراکی‌های مناسب را داخل سبد بینداز.",
+emoji:"🧺",
+type:"drag",
+items:[
+["🍌","موز",true],
+["🍭","آبنبات",false],
+["🍐","گلابی",true],
+["🍩","دونات",false],
+["🥛","شیر",true],
+["🍟","سیب‌زمینی",false],
+["🥜","آجیل",true],
+["🍰","کیک",false]
+]
+},
+
+{
+title:"🥕 مرحله ۳: شکارچی سبزیجات",
+description:"سبزیجات را پیدا کن.",
+question:"کدام گزینه‌ها سبزی هستند؟",
+emoji:"🥕",
+type:"click",
+items:[
+["🥕","هویج",true],
+["🍎","سیب",false],
+["🥒","خیار",true],
+["🍌","موز",false],
+["🥦","بروکلی",true],
+["🍊","پرتقال",false],
+["🌽","ذرت",true],
+["🍪","بیسکویت",false]
+]
+},
+
+{
+title:"🍳 مرحله ۴: صبحانه قهرمان",
+description:"برای صبحانه انتخاب‌های مناسبی پیدا کن.",
+question:"کدام گزینه‌ها می‌توانند بخشی از یک صبحانه مناسب باشند؟",
+emoji:"🍳",
+type:"click",
+items:[
+["🥚","تخم‌مرغ",true],
+["🥛","شیر",true],
+["🍎","میوه",true],
+["🍩","دونات",false],
+["🥖","نان",true],
+["🍭","آبنبات",false],
+["🍫","شکلات زیاد",false],
+["🍊","پرتقال",true]
+]
+},
+
+{
+title:"🎒 مرحله ۵: زنگ تفریح",
+description:"آرین می‌خواهد برای زنگ تفریح خوراکی انتخاب کند.",
+question:"کدام خوراکی‌ها انتخاب‌های بهتری هستند؟",
+emoji:"🎒",
+type:"click",
+items:[
+["🍌","موز",true],
+["💧","آب",true],
+["🍫","شکلات",false],
+["🥪","ساندویچ خانگی",true],
+["🍟","فست‌فود",false],
+["🍐","گلابی",true],
+["🥤","نوشابه",false],
+["🥜","آجیل",true]
+]
+},
+
+{
+title:"🥤 مرحله ۶: نوشیدنی‌ها",
+description:"بین نوشیدنی‌ها انتخاب هوشمندانه‌ای داشته باش.",
+question:"کدام نوشیدنی انتخاب بهتری است؟",
+emoji:"🥤",
+type:"choice",
+items:[
+["💧","آب",true],
+["🥤","نوشابه",false],
+["🥛","شیر",true],
+["🧃","نوشیدنی بسیار شیرین",false]
+]
+},
+
+{
+title:"🌈 مرحله ۷: بشقاب رنگین",
+description:"بشقاب خود را با خوراکی‌های متنوع‌تر کامل کن.",
+question:"کدام گروه‌ها را بهتر است در برنامه غذایی داشته باشیم؟",
+emoji:"🌈",
+type:"click",
+items:[
+["🍎","میوه‌ها",true],
+["🥦","سبزیجات",true],
+["🥛","لبنیات",true],
+["🍬","شیرینی زیاد",false],
+["🍞","غلات و نان",true],
+["🍟","غذاهای خیلی چرب",false],
+["🥚","تخم‌مرغ",true],
+["🍭","آبنبات",false]
+]
+},
+
+{
+title:"🔎 مرحله ۸: شکار اشتباه‌ها",
+description:"خوراکی‌هایی را پیدا کن که بهتر است کمتر مصرف شوند.",
+question:"روی خوراکی‌هایی کلیک کن که مصرف زیادشان مناسب نیست.",
+emoji:"🔎",
+type:"reverse",
+items:[
+["🍬","آبنبات",true],
+["🍟","سیب‌زمینی سرخ‌شده",true],
+["🍎","سیب",false],
+["🥤","نوشابه",true],
+["🥦","بروکلی",false],
+["🍰","کیک",true],
+["🥛","شیر",false],
+["🍭","آبنبات چوبی",true]
+]
+},
+
+{
+title:"🧠 مرحله ۹: تصمیم هوشمند",
+description:"در موقعیت‌های مختلف بهترین انتخاب را پیدا کن.",
+question:"آرین برای زنگ تفریح گرسنه است. کدام انتخاب بهتر است؟",
+emoji:"🧠",
+type:"choice",
+items:[
+["🍎","سیب و آب",true],
+["🍬","آبنبات و نوشابه",false],
+["🍟","فست‌فود و نوشابه",false],
+["🍐","گلابی و آب",true]
+]
+},
+
+{
+title:"🏆 مرحله ۱۰: جشن شهر خوراکی‌ها",
+description:"آخرین مأموریت را با دقت انجام بده!",
+question:"همه خوراکی‌های مناسب را پیدا کن.",
+emoji:"🏆",
+type:"click",
+items:[
+["🍎","سیب",true],
+["🥦","بروکلی",true],
+["💧","آب",true],
+["🍬","آبنبات",false],
+["🥛","شیر",true],
+["🍟","فست‌فود",false],
+["🥕","هویج",true],
+["🍰","کیک",false]
+]
+}
+
+];
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let currentLevel=0;
+let score=0;
+let xp=0;
+let combo=0;
+let correct=0;
+let attempts=0;
+
+let levelCorrect=0;
+let levelTarget=0;
+
+let time=30;
+let timer=null;
+let levelFinished=false;
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const gameContent=
+document.getElementById("gameContent");
+
+const feedback=
+document.getElementById("feedback");
+
+const character=
+document.getElementById("character");
+
+const speech=
+document.getElementById("speech");
+
+const timerFill=
+document.getElementById("timerFill");
+
+const timeEl=
+document.getElementById("time");
+
+const nextButton=
+document.getElementById("nextButton");
+
+
+/* =====================================================
+   START LEVEL
+===================================================== */
+
+function startLevel(){
+
+clearInterval(timer);
+
+levelFinished=false;
+
+const level=levels[currentLevel];
+
+levelCorrect=0;
+
+levelTarget=
+level.items.filter(x=>x[2]===true).length;
+
+
+/* TEXT */
+
+document.getElementById("missionTitle")
+.textContent=level.title;
+
+document.getElementById("missionDescription")
+.textContent=level.description;
+
+document.getElementById("question")
+.textContent=level.question;
+
+character.textContent=level.emoji;
+
+feedback.textContent="";
+
+gameContent.innerHTML="";
+
+nextButton.style.display="none";
+
+
+/* MAP */
+
+updateMap();
+
+
+/* BUILD GAME */
+
+if(level.type==="drag"){
+
+buildDragGame(level);
+
+}
+
+else{
+
+buildFoodGame(level);
+
+}
+
+
+/* TIMER */
+
+time=30;
+
+timeEl.textContent="30";
+
+timerFill.style.width="100%";
+
+timerFill.style.background="#58c986";
+
+startTimer();
+
+}
+
+
+/* =====================================================
+   FOOD GAME
+===================================================== */
+
+function buildFoodGame(level){
+
+const grid=document.createElement("div");
+
+grid.className="foodGrid";
+
+
+level.items.forEach(item=>{
+
+const food=createFood(item);
+
+grid.appendChild(food);
+
+});
+
+
+gameContent.appendChild(grid);
+
+}
+
+
+/* =====================================================
+   CREATE FOOD
+===================================================== */
+
+function createFood(item){
+
+const food=document.createElement("div");
+
+food.className="food";
+
+food.dataset.good=item[2];
+
+food.innerHTML=`
+
+<div class="foodIcon">
+${item[0]}
+</div>
+
+<div class="foodName">
+${item[1]}
+</div>
+
+`;
+
+
+food.addEventListener("click",()=>{
+
+checkAnswer(food);
+
+});
+
+
+return food;
+
+}
+
+
+/* =====================================================
+   DRAG GAME
+===================================================== */
+
+function buildDragGame(level){
+
+const grid=document.createElement("div");
+
+grid.className="foodGrid";
+
+
+level.items.forEach(item=>{
+
+const food=createFood(item);
+
+food.draggable=true;
+
+food.addEventListener("dragstart",e=>{
+
+food.classList.add("dragging");
+
+e.dataTransfer.setData(
+"good",
+food.dataset.good
+);
+
+});
+
+food.addEventListener("dragend",()=>{
+
+food.classList.remove("dragging");
+
+});
+
+grid.appendChild(food);
+
+});
+
+
+gameContent.appendChild(grid);
+
+
+const drop=document.createElement("div");
+
+drop.className="dropZone";
+
+drop.id="dropZone";
+
+drop.innerHTML=`
+🧺
+<br>
+خوراکی‌های مناسب را اینجا بکش
+`;
+
+
+gameContent.appendChild(drop);
+
+
+drop.addEventListener("dragover",e=>{
+
+e.preventDefault();
+
+drop.classList.add("active");
+
+});
+
+
+drop.addEventListener("dragleave",()=>{
+
+drop.classList.remove("active");
+
+});
+
+
+drop.addEventListener("drop",e=>{
+
+e.preventDefault();
+
+drop.classList.remove("active");
+
+const food=
+document.querySelector(".dragging");
+
+if(food){
+
+checkAnswer(food);
+
+}
+
+});
+
+}
+
+
+/* =====================================================
+   ANSWER
+===================================================== */
+
+function checkAnswer(food){
+
+if(
+levelFinished ||
+food.classList.contains("correct")
+){
+
+return;
+
+}
+
+attempts++;
+
+
+const good=
+food.dataset.good==="true";
+
+
+if(good){
+
+food.classList.add("correct");
+
+correct++;
+
+levelCorrect++;
+
+combo++;
+
+score+=10+(combo*2);
+
+xp+=10;
+
+feedback.textContent=
+getGoodMessage();
+
+speech.textContent=
+"آفرین! انتخاب هوشمندانه‌ای بود. 🌟";
+
+character.textContent=
+"😄";
+
+updateStats();
+
+updateProgress();
+
+
+if(levelCorrect>=levelTarget){
+
+completeLevel();
+
+}
+
+}
+
+else{
+
+food.classList.add("wrong");
+
+combo=0;
+
+score=Math.max(0,score-5);
+
+feedback.textContent=
+"🤔 یک بار دیگر فکر کن!";
+
+speech.textContent=
+"این گزینه انتخاب بهتری نیست. گزینه دیگری را امتحان کن.";
+
+character.textContent=
+"🤔";
+
+updateStats();
+
+setTimeout(()=>{
+
+food.classList.remove("wrong");
+
+},500);
+
+}
+
+}
+
+
+/* =====================================================
+   TIMER
+===================================================== */
+
+function startTimer(){
+
+clearInterval(timer);
+
+timer=setInterval(()=>{
+
+if(levelFinished){
+
+clearInterval(timer);
+
+return;
+
+}
+
+time--;
+
+timeEl.textContent=time;
+
+timerFill.style.width=
+(time/30*100)+"%";
+
+
+if(time<=10){
+
+timerFill.style.background="#ff6464";
+
+}
+
+if(time<=5){
+
+speech.textContent=
+"⏰ فقط چند ثانیه مانده!";
+
+character.textContent="😮";
+
+}
+
+
+if(time<=0){
+
+clearInterval(timer);
+
+timeUp();
+
+}
+
+},1000);
+
+}
+
+
+/* =====================================================
+   TIME UP
+===================================================== */
+
+function timeUp(){
+
+if(levelFinished)return;
+
+levelFinished=true;
+
+feedback.textContent=
+"⏰ زمان این مرحله تمام شد!";
+
+speech.textContent=
+"اشکالی ندارد! دفعه بعد می‌توانی بهتر عمل کنی. 💪";
+
+character.textContent="🙂";
+
+nextButton.style.display="inline-block";
+
+nextButton.textContent=
+currentLevel===levels.length-1
+?"🏆 نتیجه نهایی"
+:"مرحله بعد 🚀";
+
+}
+
+
+/* =====================================================
+   LEVEL COMPLETE
+===================================================== */
+
+function completeLevel(){
+
+if(levelFinished)return;
+
+levelFinished=true;
+
+clearInterval(timer);
+
+score+=25;
+
+xp+=20;
+
+feedback.textContent=
+"🎉 مأموریت کامل شد!";
+
+speech.textContent=
+getLevelMessage();
+
+character.textContent="🥳";
+
+updateStats();
+
+updateProgress();
+
+nextButton.style.display="inline-block";
+
+nextButton.textContent=
+currentLevel===levels.length-1
+?"🏆 پایان ماجراجویی"
+:"مرحله بعد 🚀";
+
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+nextButton.addEventListener("click",()=>{
+
+if(currentLevel<levels.length-1){
+
+currentLevel++;
+
+startLevel();
+
+}
+
+else{
+
+finishGame();
+
+}
+
+});
+
+
+/* =====================================================
+   MAP
+===================================================== */
+
+function updateMap(){
+
+for(let i=1;i<=10;i++){
+
+const el=
+document.getElementById("s"+i);
+
+el.classList.remove("active");
+
+el.classList.remove("done");
+
+
+if(i-1<currentLevel){
+
+el.classList.add("done");
+
+}
+
+if(i-1===currentLevel){
+
+el.classList.add("active");
+
+}
+
+}
+
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function updateStats(){
+
+document.getElementById("score")
+.textContent=score;
+
+document.getElementById("xp")
+.textContent=xp;
+
+document.getElementById("combo")
+.textContent=combo;
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function updateProgress(){
+
+let percent=0;
+
+if(attempts>0){
+
+percent=
+Math.round((correct/attempts)*100);
+
+}
+
+document.getElementById("progressFill")
+.style.width=percent+"%";
+
+
+let text="";
+
+
+if(percent>=90){
+
+text="🌟 فوق‌العاده! دقتت عالی است.";
+
+}
+
+else if(percent>=70){
+
+text="👏 خیلی خوب پیش می‌روی!";
+
+}
+
+else if(percent>=50){
+
+text="💪 خوبه! با کمی تمرین بهتر می‌شوی.";
+
+}
+
+else{
+
+text="🌱 داری یاد می‌گیری؛ ادامه بده!";
+
+}
+
+
+document.getElementById("progressText")
+.textContent=
+text+
+" دقت فعلی تو: "+
+percent+"%";
+
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+function getGoodMessage(){
+
+const messages=[
+
+"🎉 آفرین!",
+"⭐ انتخاب عالی!",
+"👏 باریکلا!",
+"🧠 خیلی خوب فکر کردی!",
+"💪 قهرمانانه بود!",
+"🌟 درست انتخاب کردی!"
+
+];
+
+return messages[
+Math.floor(Math.random()*messages.length)
+];
+
+}
+
+
+function getLevelMessage(){
+
+const messages=[
+
+"🎉 مأموریت انجام شد! آماده مرحله بعدی هستی؟",
+
+"🥳 عالی بود! شهر خوراکی‌ها به تو افتخار می‌کند!",
+
+"⭐ فوق‌العاده! یک قدم دیگر جلو رفتی.",
+
+"🚀 عالی! حالا چالش بعدی را امتحان کنیم."
+
+];
+
+return messages[
+Math.floor(Math.random()*messages.length)
+];
+
+}
+
+
+/* =====================================================
+   FINISH GAME
+===================================================== */
+
+function finishGame(){
+
+clearInterval(timer);
+
+
+let accuracy=0;
+
+if(attempts>0){
+
+accuracy=
+Math.round((correct/attempts)*100);
+
+}
+
+
+document.getElementById("finalScore")
+.textContent=score;
+
+document.getElementById("finalXP")
+.textContent=xp;
+
+document.getElementById("finalAccuracy")
+.textContent=accuracy+"%";
+
+
+let message;
+
+
+if(accuracy>=90){
+
+message=
+"🌟 فوق‌العاده! امروز عملکرد بسیار خوبی داشتی.";
+
+document.getElementById("badge")
+.style.display="block";
+
+}
+
+else if(accuracy>=70){
+
+message=
+"👏 خیلی خوب بود! تو قدم‌به‌قدم پیشرفت کردی.";
+
+}
+
+else if(accuracy>=50){
+
+message=
+"💪 خوب تلاش کردی! با تمرین بیشتر قوی‌تر می‌شوی.";
+
+}
+
+else{
+
+message=
+"🌱 مهم این است که تلاش کردی. دوباره امتحان کن!";
+
+}
+
+
+document.getElementById("endMessage")
+.textContent=message;
+
+
+document.getElementById("endScreen")
+.style.display="flex";
+
+}
+
+
+/* =====================================================
+   RESTART
+===================================================== */
+
+function restartGame(){
+
+currentLevel=0;
+
+score=0;
+
+xp=0;
+
+combo=0;
+
+correct=0;
+
+attempts=0;
+
+document.getElementById("endScreen")
+.style.display="none";
+
+document.getElementById("badge")
+.style.display="none";
+
+speech.textContent=
+"سلام قهرمان! 👋 آماده‌ای دوباره شهر خوراکی‌ها را نجات بدهیم؟";
+
+character.textContent="🧒";
+
+updateStats();
+
+updateProgress();
+
+startLevel();
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+restartGame();
+
+</script>
+
+</body>
+</html>
